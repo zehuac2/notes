@@ -1,0 +1,39 @@
+\documentclass[11pt]{report}
+\usepackage{import}
+\import{../../../shared/config/}{packages}
+\usepackage{listings}
+\usepackage{glossaries}
+\usepackage{algorithm2e}
+\usepackage{float}
+
+\title{Robotics - Planning}
+\author{Zehua Chen}
+
+\DeclareMathOperator{\SE}{SE}
+\DeclareMathOperator{\E}{E}
+
+\setlength{\parindent}{0pt}
+
+\lstdefinestyle{pseudo}{
+  language=python,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  frame=single
+}
+
+\makeglossaries
+\import{glossaries/}{overview}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \import{topics/overview/}{index}
+  \import{topics/}{bugs}
+  \import{topics/}{potential}
+  \import{topics/}{graph-search}
+  \input{topics/others}
+
+  \newpage
+  \printglossaries
+\end{document}

@@ -1,0 +1,54 @@
+\chapter{Overview}
+
+\begin{itemize}
+  \item \emph{\Gls{network}}: \glsdesc{network}
+\end{itemize}
+
+\section{Random Graph}
+
+  \begin{itemize}
+    \item Edge exists independdently
+    \item Choose a subset of $ m $ edges
+    \item Choose for each node $ d $ random neighbors
+  \end{itemize}
+
+\section{Assertion}
+
+  \begin{align}
+    \lim_{n \to \infty} \frac{p\left( n \right)}{t\left( n \right)} &= 0 &
+    \lim_{n \to \infty}\mathbb{P}\left[ G_{n} \satisfies A \right] &= 0 \\
+    \lim_{n \to \infty} \frac{p\left( n \right)}{t\left( n \right)} &= \infty &
+    \lim_{n \to \infty}\mathbb{P}\left[ G_{n} \satisfies A \right] &= 1
+  \end{align}
+
+  \begin{itemize}
+    \item $ A $: an assertion
+    \item $ t\left( n \right) $: a threshold function; \emph{used to see
+    if $ p $ is very large or very small}
+    \item $ p\left( n \right) $: probability an edge; \emph{$ n $ is the size
+    of the graph}
+    \item $ \mathbb{P}\left[ G_{n} \satisfies A \right] $: probability that
+    the graph $ G_{n} $ satisfies $ A $
+  \end{itemize}
+
+  \begin{figure}[H]
+    \centering
+    \caption{$ p $ values and their meanings}
+    \begin{tabu} to \textwidth{| X[l, 1] | X[l, 1] |}
+      \hline
+      $ \left( 0, 1/n \right) $ & connected component $ < \ln\left( n \right) $ \\ \hline
+      $ \ln\left( n \right) / n $ & sparse graph \\ \hline
+      $ \left( 1/n, \left( \ln(n) + \omega(1) \right) / n \right) $ & isolated nodes \\ \hline
+      $ \left( \left( \ln(n) + \omega(1) \right), 1 \right) $ & graph is connected \\ \hline
+      $ \left( \omega\left( \ln(n) \right) / n, 1 \right) $ & diameter $ O\left( \ln(n) \right) $ \\ \hline
+    \end{tabu}
+  \end{figure}
+
+\section{Ties}
+
+  \begin{itemize}
+    \item \emph{\Gls{strong-ties}}: \glsdesc{strong-ties};
+    cohesion, resists innovation and danger (eg. reduce risk of teen suicide)
+    \item \emph{\Gls{weak-ties}}: \glsdesc{weak-ties}
+    diversity, connect faraway groups (eg. who to ask when looking for a job)
+  \end{itemize}

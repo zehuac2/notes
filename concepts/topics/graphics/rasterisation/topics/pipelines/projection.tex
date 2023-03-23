@@ -1,0 +1,311 @@
+\section{Stage - Projection}
+
+Projection refers to the process of reducing dimensionality. There are two
+modes of projection
+
+\begin{itemize}
+  \item \textbf{Ortho}: transform view volume
+  \begin{itemize}
+    \item The orthograhpic matrix only zero-out the z-axis; the ortho matrix
+    transform view volume;
+    \item Does not actually perform any projection
+    \item The actual orthograhpic projection is left for grahpics APIs
+  \end{itemize}
+
+  \item \textbf{Perspective}: scale decreases as distance increases
+  \item At this stage, everything is already in the context of the camera;
+  the view coordinates
+  \item \textbf{Foreshortening}: an illusion that cause an object or distance
+  to appear shorter than it actually is
+  \begin{itemize}
+    \item Occur in both orthographic and perspective projection
+  \end{itemize}
+
+  \item When \textbf{window resizes}, adjust the projection matrix so that the
+  models don't get stretched. For example, instead of using $ w / h $ as the
+  aspect, use $ \frac{1}{ w / h} $ as the aspect
+\end{itemize}
+
+\subsection{Ortho Projection}
+
+  \paragraph{Matrix}
+  \begin{align}
+    P_{orthographic} &=
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 0 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    P_{ortho} &=
+    \begin{bmatrix}
+      \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+      0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
+      0 & 0 & \frac{-2}{f - n} & -\frac{f + n}{f - n} \\
+      0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+  \end{align}
+
+  This is a combination of a translation (\say{near} might not be at 0)
+  and scale matrix
+
+  \begin{itemize}
+    \item $ r $: right
+    \item $ l $: left
+    \item $ t $: top
+    \item $ b $: bottom
+    \item $ f $: far
+    \item $ n $: near
+    \item Some WebGL libraries assumes right-handed system cooridnates as
+    inputs, despite itself being left-handed, so its ortho matrix also
+    inverses the coordinates along z-axis
+  \end{itemize}
+
+\subsection{Perspective Projection}
+
+  \subsubsection{Matrix}
+
+    DirectX, Metal (Asymmetrical)
+
+    \begin{align*}
+      \begin{bmatrix}
+        \frac{2 z_{near}}{r - l} & 0 & -\frac{r + l}{r - l} & 0 \\
+        0 & \frac{2 z_{near}}{t - b} & -\frac{t + b}{t - b} & 0 \\
+        0 & 0 & \frac{z_{far}}{z_{far} - z_{near}} & \frac{- z_{far} z_{near}}{z_{far} - z_{near}} & 0 \\
+        0 & 0 & 1 & 0
+      \end{bmatrix} \\
+    \end{align*}
+
+    DirectX, Metal (Symmetrical): when $ \left| l \right| = \left| r \right| $,
+    $ \left| t \right| = \left| b \right| $, $ w = r - l, h = t - b $
+
+    \begin{align*}
+      \begin{bmatrix}
+        \frac{1}{w} & 0 & 0 & 0 \\
+        0 & \frac{1}{h} & 0 & 0 \\
+        0 & 0 & \frac{z_{far}}{z_{far} - z_{near}} & \frac{- z_{far} z_{near}}{z_{far} - z_{near}} & 0 \\
+        0 & 0 & 1 & 0
+      \end{bmatrix}
+    \end{align*}
+
+    OpenGL (Asymmetrical)
+
+    \begin{align*}
+      \begin{bmatrix}
+        \frac{2 z_{near}}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+        0 & \frac{2 z_{near}}{t - b} & \frac{t + b}{t - b} & 0 \\
+        0 & 0 & - \frac{z_{far} + z_{near}}{z_{far} - z_{near}} & \frac{- 2 z_{far} z_{near}}{z_{far} - z_{near}} & 0 \\
+        0 & 0 & -1 & 0
+      \end{bmatrix}
+    \end{align*}
+
+    OpenGL (Symmetrical)
+
+    \begin{align*}
+      \begin{bmatrix}
+        \frac{1}{w} & 0 & 0 & 0 \\
+        0 & \frac{1}{h} & 0 & 0 \\
+        0 & 0 & - \frac{z_{far} + z_{near}}{z_{far} - z_{near}} & \frac{- 2 z_{far} z_{near}}{z_{far} - z_{near}} & 0 \\
+        0 & 0 & -1 & 0
+      \end{bmatrix}
+    \end{align*}
+
+    \begin{itemize}
+      \item $ l $: the left edge of clip space; \textbf{smallest world x value
+      to be included into the clip space}
+      \item $ r $: right edge of clip space; \textbf{biggest world x value
+      to be included into the clip space}
+      \item $ t $: top edge of clip space; \textbf{smallest world y value
+      to be included into the clip space}
+      \item $ b $: bottom edge of clip space; \textbf{biggest world y value
+      to be included into the clip space}
+      \item $ z_{near} $ the distance from the screen to the eye; \textbf{
+      smallest world z value to be included into the clip space}
+      \begin{itemize}
+        \item Increasing $ z_{near} $; would reduce the size of the image; changing
+        $ z_{near} $ distort the image
+      \end{itemize}
+    \end{itemize}
+
+  \subsubsection{Deriving Matrix}
+
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}
+        \filldraw (0, 0) circle (1pt) node[label={[yshift=-1cm]Eye}] (eye) {};
+        \filldraw (4, 0) circle (1pt) node[label={[yshift=-1cm]$ z_{p} $}] (z_p) {};
+        \filldraw (8, 0) circle (1pt) node[label={[yshift=-1cm]$ z_{world} $}] (z_world) {};
+        \filldraw (8, 4) circle (1pt) node[label={$ y_{world} $}] (y_world) {};
+        \filldraw (4, 2) circle (1pt) node[label={[yshift=-1cm]$ y_{p} $}] (y_p) {};
+
+        \draw (eye) -- (z_p) -- (z_world);
+        \draw (z_world) -- (y_world) -- (y_p) -- (eye);
+      \end{tikzpicture}
+    \end{figure}
+
+    \begin{align}
+      \frac{y_{p}}{y_{world}} &= \frac{z_{p}}{z_{world}} \\
+      y_{clip} &= \frac{z_{p} y_{world}}{z_{world}}
+    \end{align}
+
+    This equation also applies to $ x $
+
+    \begin{itemize}
+      \item $ z_{p} $ is the plane where everything is projected onto.
+      \begin{itemize}
+        \item $ z_{p} = -1 $ in OpenGL, WebGL
+        \item $ z_{p} = 1 $ in Metal, DirectX
+      \end{itemize}
+      \item Not invertible
+      \item Not an affine transformation (does not preserve the ratio of
+      distances)
+    \end{itemize}
+
+    The steps below assume \acrshort{ndc} like the ones in Metal, DirectX
+
+    \begin{align*}
+      &\begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 1 & 0
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        x \\
+        y \\
+        z \\
+        w
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        x \\
+        y \\
+        z \\
+        z
+      \end{bmatrix}
+    \end{align*}
+
+    When graphics APIs convert from \gls{clip-space} to \acrshort{ndc} by
+    dividing every component by $ w $ (now $ z $), we have
+
+    \begin{align*}
+      \begin{bmatrix}
+        x / z \\
+        y / z \\
+        z / z \\
+        z / z
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        x / z \\
+        y / z \\
+        1 \\
+        1
+      \end{bmatrix}
+    \end{align*}
+
+    At this stage, the overall shape of objects will appear projected, but
+    all the $ z $ are now $ 1 $. As a result, we can no longer perform depth
+    testing.
+
+    To solve this, we want to map all $ z_{world} $ in the range
+    $ \left[z_{near}, z_{far} \right] $ into $ z_{ndc} $ in
+    the range $ \left[0, 1\right] $.
+
+    \begin{align*}
+      \begin{bmatrix}
+        x_{clip} \\
+        y_{clip} \\
+        z_{clip} \\
+        w_{clip}
+      \end{bmatrix}
+      &=
+      \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & A & B \\
+        0 & 0 & 1 & 0
+      \end{bmatrix}
+      \times
+      \begin{bmatrix}
+        x_{world} \\
+        y_{world} \\
+        z_{world} \\
+        w_{world}
+      \end{bmatrix} \\
+      z_{ndc} &= \frac{z_{clip}}{w_{clip}} = \frac{A z_{world} + B w_{world}}{z_{world}}
+    \end{align*}
+
+    We know that $ w_{world} = 1 $
+
+    \begin{align*}
+      z_{ndc} &= \frac{z_{clip}}{w_{clip}} = \frac{A z_{world} + B}{z_{world}}
+    \end{align*}
+
+    Using the relationships
+
+    \begin{enumerate}
+      \item When $ z_{world} = z_{near} $, $ z_{ndc} = 0 $
+      \item When $ z_{world} = z_{far} $, $ z_{ndc} = 1 $
+    \end{enumerate}
+
+    \begin{align*}
+      \begin{cases}
+        \frac{A z_{near} + B}{z_{near}} = 0 \\
+        \frac{A z_{far} + B}{z_{far}} = 1
+      \end{cases}
+      &\to
+      \begin{cases}
+        A z_{near} + B = 0 \\
+        A z_{far} + B = z_{far}
+      \end{cases} \\
+      A &= \frac{z_{far}}{z_{far} - z_{near}} \\
+      B &= \frac{- z_{far} z_{near}}{z_{far} - z_{near}}
+    \end{align*}
+
+    We must also twist $ x, y $ to compensate for the scaling that results
+    from when \acrshort{ndc} is scaled to viewport size.
+
+    The following can be used across graphics APIs, as their \acrshort{ndc}
+    are only different in $ z $ axis. The steps of $ x, y $ are the same.
+
+    $ x, y $ transforms goes through two steps of transformations.
+    They are first transformed into $ x_{p}, y_{p} $, which are points they
+    will be projected on the $ z_{near} $ plane.
+
+    \begin{align*}
+      x_{p} &= \frac{z_{near}}{z_{world}} x_{world} & y_{p} &= \frac{z_{near}}{z_{world}} y_{world}
+    \end{align*}
+
+    Then these points are transformed into NDC. When $ x_{p} $ is $ r $,
+    $ x_{ndc} = 1 $
+
+    \begin{align*}
+      x_{ndc} &= \frac{1 - \left( -1 \right)}{r - l} x_{p} + \beta \\
+      1 &= \frac{2r}{r - l} + \beta \\
+      \beta &= - \frac{r + l}{r - l} \\
+      x_{ndc} &= \frac{2}{r - l} x_{p} - \frac{r + l}{r - l}
+    \end{align*}
+
+    Substituting $ x_{p} $ gives us
+
+    \begin{align*}
+      x_{ndc}
+        &= \frac{2}{r - l} \frac{z_{near}}{z_{world}} x_{world} - \frac{r + l}{r - l} \\
+        &= \frac{\frac{2 z_{near}}{r - l} x_{world}}{z_{world}} - \frac{r + l}{r - l} \\
+        &= \frac{\frac{2 z_{near}}{r - l} x_{world}}{z_{world}} - \frac{\frac{r + l}{r - l} z_{world}}{z_{world}} \\
+        &= \frac{\frac{2 z_{near}}{r - l} x_{world} - \frac{r + l}{r - l} z_{world} }{z_{world}}
+    \end{align*}
+
+    Putting this into matrix, we have
+
+    \begin{align*}
+      \begin{bmatrix}
+        \frac{2 z_{near}}{r - l} & 0 & -\frac{r + l}{r - l} & 0 \\
+        0 & \frac{2 z_{near}}{t - b} & -\frac{t + b}{t - b} & 0 \\
+        ...
+      \end{bmatrix}
+    \end{align*}
+
+    \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Original Answer}

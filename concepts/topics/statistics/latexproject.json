@@ -1,0 +1,6 @@
+{
+  "bin": "bin",
+  "glossary": true,
+  "entry": "index.tex",
+  "includes": ["chapters/", "resources/", "config/"]
+}

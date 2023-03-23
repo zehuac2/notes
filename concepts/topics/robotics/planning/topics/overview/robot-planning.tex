@@ -1,0 +1,54 @@
+\section{Robot Planning}
+
+\subsection{Planning Tasks}
+
+  \begin{itemize}
+    \item \textbf{Navigation}
+    \item \textbf{Coverage}
+    \item \textbf{\Gls{localizaiton}}: \glsdesc{localizaiton}
+    \item \textbf{Mapping}
+  \end{itemize}
+
+\subsection{Algorithm Properties}
+
+  \begin{itemize}
+    \item \textbf{Completeness}: guarantee of finding a solution or reporting a
+    failure
+    \item \textbf{Optimality}: path length, execution time, energy consumption...
+    \item \textbf{Computational complexity}
+    \item \textbf{Weaker notions}: resolution completeness, probabilistic completeness
+    \item \textbf{Offline vs online}: can computation and action be interleaved with
+    sensor data
+    \item Less obstacles
+    \begin{itemize}
+      \item Clearance from obstacles
+    \end{itemize}
+
+    \item Smooth (sharp paths are hard to do and damaging to the robots)
+  \end{itemize}
+
+\subsection{Visibility Graph}
+
+  \begin{itemize}
+    \item States/Way points are vertices of objects
+    \item Edges are straight line connecting vertices
+    \item Not very safe
+  \end{itemize}
+
+\subsection{Generalized Voronoi Diagram}
+
+  Creating paths that are at the center of the free space
+
+  \begin{itemize}
+    \item Safe paths
+    \item A bit long
+    \item Does not work with higher dimensions
+  \end{itemize}
+
+  \subsubsection{Implementation}
+
+    \begin{itemize}
+      \item Create vertical cuts along the map
+      \item Use the center point of each vertical line segment
+      (segment created by obstacles)
+    \end{itemize}

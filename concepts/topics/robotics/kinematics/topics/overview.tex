@@ -1,0 +1,259 @@
+\chapter{Overview}
+
+\begin{itemize}
+  \item Space, i.e. type, of inputs are not always the same
+  \item \emph{\Gls{kinematics}}: \glsdesc{kinematics}
+  \begin{itemize}
+    \item \Gls{kinematics} for \emph{manipulator} robots tend to be
+    \emph{complicated and non-linear}
+  \end{itemize}
+\end{itemize}
+
+\section{Manipulators}
+
+  \begin{itemize}
+    \item Linkes are connected by joints
+    \item \emph{Each joint is a single degree of freedom (DOF)}, described by a
+    \emph{joint variable}
+    \begin{enumerate}
+      \item \emph{Joint variables}: $ q = \left( q_{1}, q_{2} ... \right)^{T} $
+      \item \emph{Link constants}: $ l_{1}, l_{2} ... $, i.e. link lengths
+      \item Joint $ i $ moves link $ i $; link $ 0 $ does not move
+    \end{enumerate}
+  \end{itemize}
+
+\section{Joint Types}
+
+  \begin{align}
+    q_{i} &=
+    \begin{cases}
+      \theta_{i} & \text{if joint is revolute} \\
+      d_{i} & \text{if joint is prismatic}
+    \end{cases}
+  \end{align}
+
+  \begin{enumerate}
+    \item \emph{\Gls{revolute-joints}}: \glsdesc{revolute-joints}
+    \item \emph{\Gls{prismatic-joints}}: \glsdesc{prismatic-joints}
+  \end{enumerate}
+
+\section{Coordinate Frames}
+
+  \begin{align*}
+    o_{i} x_{i} y_{i} z_{i}
+  \end{align*}
+
+  \begin{itemize}
+    \item $ i $: coordinate frame $ i $
+    \item $ o_{i} $: origin of coordinate frame $ i $
+    \item $ x_{i} $: x-axis of coordinate frame $ i $
+    \item $ y_{i} $: y-axis of coordinate frame $ i $
+    \item \emph{Positions in space are defined relative to coordinate frames}
+    \begin{itemize}
+      \item Positions are fixed
+      \item \emph{Coordinates of positions change for different coordinate frames}
+      \item $ p^{i} $: coordinate of point $ p $ relative to frame $ i $
+    \end{itemize}
+
+    \item \emph{Vectors are not tied to coordinate origins}
+    \begin{itemize}
+      \item $ v^{0}_{1} $: vector $ v_{i} $ relative to frame $ 0 $
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Rotation}
+
+    \begin{align}
+      R_{1}^{0}
+        &=
+        \begin{bmatrix}
+          x_{1}^{0} & y_{1}^{0}
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          x_{1} \cdot x_{0} & y_{1} x_{0} \\
+          x_{1} \cdot y_{0} & y_{1} y_{0} \\
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          \cos \theta & - \sin \theta \\
+          \sin \theta & \cos \theta
+        \end{bmatrix}
+    \end{align}
+
+    \begin{align}
+      R_{1}^{0}
+        &=
+        \begin{bmatrix}
+          x_{1}^{0} & y_{1}^{0} & z_{1}^{0}
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          x_{1} \cdot x_{0} & y_{1} \cdot x_{0} & z_{1} \cdot x_{0}  \\
+          x_{1} \cdot y_{0} & y_{1} \cdot x_{0} & z_{1} \cdot y_{0}  \\
+          x_{1} \cdot z_{0} & y_{1} \cdot x_{0} & z_{1} \cdot z_{0}  \\
+        \end{bmatrix} \\
+      R_{z}\left( \alpha \right)
+        &=
+        \begin{bmatrix}
+          \cos \alpha & - \sin \alpha & 0 \\
+          \sin \alpha & \cos \alpha & 0 \\
+          0 & 0 & 1 \\
+        \end{bmatrix} \\
+      R_{y}\left( \beta \right)
+        &=
+        \begin{bmatrix}
+          \cos \beta & 0 & \sin \beta \\
+          0 & 1 & 0 \\
+          - \sin \beta & 0 & \cos \beta  \\
+        \end{bmatrix} \\
+      R_{z}\left( \gamma \right)
+        &=
+        \begin{bmatrix}
+          1 & 0 & 0 \\
+          0 & \cos \gamma & - \sin \gamma \\
+          0 & \sin \gamma & \cos \gamma  \\
+        \end{bmatrix}
+    \end{align}
+
+    \begin{align}
+      R_{0}^{1}
+        &=
+        \begin{bmatrix}
+          x_{0}^{1} & y_{0}^{1}
+        \end{bmatrix} \\
+        &= \left( R_{1}^{0} \right)^{T} \\
+        &= \left( R_{1}^{0} \right)^{-1}
+    \end{align}
+
+    \begin{itemize}
+      \item $ R_{1}^{0} $: rotate of coordinate frame $ 1 $, relative to that of
+      coordinate frame $ 0 $
+      \item Set of all $ n \times n $ matrices form the \emph{special orthogonal group}
+      $ \SO\left( n \right) $
+      \item $ \SO\left( 3 \right) $
+      \begin{itemize}
+        \item Columns of each matrix are \emph{orthonormal}
+        \item Determinants all equal to $ +1 $
+        \item $ \left( R\left( \theta \right) \right)^{-1} = \left( R\left( \theta \right) \right)^{T} = R\left( - \theta \right) $
+      \end{itemize}
+    \end{itemize}
+
+    \begin{align}
+      p_{x} &= R_{y}^{x} p^{y}
+    \end{align}
+
+    Changes the coordinate of a point from frame $ y $ to frame $ x $
+
+    \begin{align}
+      p_{b} &= R_{z}\left( \pi \right) p_{a}
+    \end{align}
+
+    Transform $ p_{a} $ to point $ b $ around $ z $ axis by $ \pi $,
+    \emph{within the frame}
+
+    \begin{align}
+      R_{2}^{0} &= R_{1}^{0} R_{2}^{1} \\
+      p^{0} &= R_{1}^{0} R_{2}^{1} p^{2}
+    \end{align}
+
+    Rotation composition
+
+    \subsubsection{Orthonormal}
+
+      A matrix is orthonormal means columns of a matrix are orthogonal:
+
+      \begin{itemize}
+        \item $ c_{i} $: a column
+        \item $ c_{i} \cdot c_{j} = 0, i \ne j $
+        \item Norm of $ c_{i} $ is 1
+      \end{itemize}
+
+    \subsubsection{Commutativity}
+
+      \begin{itemize}
+        \item \emph{2D rotation commute} because there is only one axis of rotation
+        \item \emph{3D rotation do not commute around different axis}
+      \end{itemize}
+
+  \subsection{Translation}
+
+    \begin{align}
+      p^{1} &= o^{0}_{1} + R^{0}_{1} p^{1}
+    \end{align}
+
+    \begin{itemize}
+      \item A rigid motion is the pair $ \left( d, R \right) $
+      \begin{itemize}
+        \item $ d \in \mathbb{R}^{3} $
+        \item $ R \in \SO\left( 3 \right) $
+      \end{itemize}
+
+      \item The group of all rigid motion is the special euclidean group
+      $ \SE\left( 3 \right) $
+      \begin{align}
+        \SE\left( 3 \right) &= \mathbb{R}^{3} \times \SO\left( 3 \right)
+      \end{align}
+    \end{itemize}
+
+  \subsection{Homogeneous Transformation}
+
+    \begin{align}
+      P^{i} &=
+        \begin{bmatrix}
+          p^{i} \\
+          1
+        \end{bmatrix} \\
+      H^{0}_{1} &=
+        \begin{bmatrix}
+          R^{0}_{1} & o^{0}_{1} \\
+          0^{T} & 1 \\
+        \end{bmatrix} \\
+      P^{0} &= H^{0}_{1} P^{1}
+    \end{align}
+
+    \begin{itemize}
+      \item $ P $ is the homogeneous representation of $ p $
+      \item $ H^{0}_{1} $ is $ 4 \times 4 $
+      \item \emph{Pure rotation}: $o^{0}_{1} = 0 $
+      \item \emph{Pure translation}: $ R^{0}_{1} = I $
+    \end{itemize}
+
+    \begin{align}
+      p^{0} &= R^{0}_{1} p^{1} + o^{0}_{1} \\
+      p^{1} &= R^{1}_{0} \left( p^{0} - o^{0}_{1} \right) \\
+      \left( H^{0}_{1} \right)^{-1}
+        &= H^{1}_{0} \\
+        &=
+        \begin{bmatrix}
+          R^{1}_{0} & -R^{1}_{0} o^{0}_{1} \\
+          0^{T} & 1 \\
+        \end{bmatrix} \\
+    \end{align}
+
+    \begin{itemize}
+      \item Homogeneous transformation first rotate then translate
+    \end{itemize}
+
+    \begin{align}
+      H^{0}_{2} &= H^{0}_{1} H^{1}_{2} \\
+      H^{0}_{1} H^{1}_{2}
+        &=
+        \begin{bmatrix}
+          R^{0}_{1} & o^{0}_{1} \\
+          0^{T} & 1 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+          R^{1}_{2} & o^{1}_{2} \\
+          0^{T} & 1 \\
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          R^{0}_{1} R^{1}_{2} & R^{0}_{1} o^{1}_{2} + o^{0}_{1} \\
+          O^{T} & 1 \\
+        \end{bmatrix}
+    \end{align}
+
+    \subsubsection{Commutativity}
+
+      \emph{Generally not commutative in 2D and 3D}

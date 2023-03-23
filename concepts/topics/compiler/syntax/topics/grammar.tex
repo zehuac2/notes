@@ -1,0 +1,219 @@
+\chapter{Grammar}
+
+\section{Context Free Grammar}
+
+  A context free grammar has four components
+
+  \begin{itemize}
+    \item A set of \textbf{terminal symbols} representing individual tokens
+    \begin{equation*}
+      prep
+    \end{equation*}
+    \begin{itemize}
+      \item Lower case
+    \end{itemize}
+
+    \item A set of \textbf{non-terminal symbols} representing sytnax trees
+    \begin{equation*}
+      N
+    \end{equation*}
+    \begin{itemize}
+      \item Upper case
+    \end{itemize}
+
+    \item A set of \textbf{productions}, each mapping a non terminal symbol
+    to string of terminal and non-terminal symbols
+    \begin{align*}
+      N &\to prep \text{ } N \\
+      &\left| N \text{ } prep \right.
+    \end{align*}
+
+    \item A designated non terminal symbol called the \textbf{start symbol}
+    \begin{equation}
+      S \to N
+    \end{equation}
+  \end{itemize}
+
+  \subsection{Properties of Grammar}
+
+    \begin{itemize}
+      \item \textbf{Epsilon Production}: a production of the form
+      \begin{equation*}
+        E \to \epsilon
+      \end{equation*}
+      where $ \epsilon $ represents the empty string
+
+      \begin{itemize}
+        \item A symbol \textbf{can be nothing, or optional (represented using
+        $ \epsilon $)}
+      \end{itemize}
+
+      \item \textbf{Right Linear}: grammars where all the productions have the
+      form
+      \begin{align*}
+        E &\to x F \\
+        E &\to x
+      \end{align*}
+
+      \begin{itemize}
+        \item Corresponds to \textbf{regular languages}
+      \end{itemize}
+
+      This is not a right linear grammar
+      \begin{align*}
+        S_{0} &\to c S_{1} c S_{2} c
+      \end{align*}
+
+      \item \textbf{Left Recursive}: a production like
+      \begin{equation*}
+        E \to E + X
+      \end{equation*}
+
+      \item \textbf{Ambiguous}: more than one parse tree is possible for a
+      specific sentence
+    \end{itemize}
+
+  \subsection{Dangling Else Problem}
+
+    \begin{align*}
+      E &\to \text{ if } E \text{ then } E \text{ else } E \\
+      E &\to \text{ if } E \text{ then } E \\
+      E &\to \text{ whatever}
+    \end{align*}
+
+    \paragraph{Solution}
+    \begin{enumerate}
+      \item Use recursion only one one side; ex. left-recursive
+      \item Divide the grammar into multiple rules, and then put highest
+      precedence rules lower in the new grammar
+    \end{enumerate}
+
+\section{LL Grammar}
+
+  \begin{definition}
+    A $ \LL $ grammar is a context-free grammar that can be used by a LL parser
+  \end{definition}
+
+  \subsection{LL(k) Grammar}
+
+    \begin{definition}
+      A $ \LL\left( k \right) $ grammar is a LL grammar where the parser can
+      peek at most $ k $ tokens; the parser can use the peeks to make a
+      deterministic decision, without context (aka. backtracking)
+    \end{definition}
+
+\section{Sets}
+  \subsection{FIRST Set}
+
+    \begin{definition}
+      \textbf{FIRST Set}: the set of terminal symbols that we are going to see
+      first
+    \end{definition}
+
+    \subsection{Finding FIRST}
+
+      For each symbol $ X $
+
+      \begin{enumerate}
+        \item If $ X $ is a terminal, then $ \FIRST\left( X \right) = { X } $
+        \item If there is a production $ X \to \epsilon $, then add $ \epsilon $
+        to $ \FIRST\left( X \right) $
+        \item If there is a production $ X \to Y_{1} ... Y_{n} $, then add
+        $ \FIRST\left( Y_{1} ... Y_{n} \right) $ to $ \FIRST\left( X \right) $
+        \begin{enumerate}
+          \item If $ \FIRST\left( Y_{1} \right) $ does not contain $ \epsilon $,
+          then:
+          \begin{equation}
+            \FIRST\left( Y_{1} ... Y_{n} \right) = \FIRST\left( Y_{1} \right)
+          \end{equation}
+
+          \item Otherwise
+          \begin{equation}
+            \FIRST\left( Y_{1} ... Y_{n} \right) =
+              \frac{\FIRST\left( Y_{1} \right)}{\epsilon} \cup
+              \FIRST\left( Y_{2} ... Y_{n} \right)
+          \end{equation}
+
+          \item If all of $ Y_{1} ... Y_{n} $ have $ \epsilon $, then add
+          $ \epsilon $ to $ \FIRST\left( X \right) $
+        \end{enumerate}
+      \end{enumerate}
+
+  \subsection{FOLLOW Set}
+
+    \begin{definition}
+      \textbf{FOLLOW Set}: A list of symbols that can occur after parsing
+      non-terminals
+    \end{definition}
+
+    \subsection{Finding FOLLOW}
+
+      $ \alpha, \beta $ represents terminal and nonterminal symbols
+
+      \begin{enumerate}
+        \item Put $ \$ $ in $ \FOLLOW\left( S \right) $, where $ S $ is the start
+        symbol; $ \$ $ represents end of input
+        \item If there is a production $ X \to \alpha Y \beta $, then add
+        $ \FIRST\left( \beta \right) $ to $ \FOLLOW\left( Y \right) $
+        \item If there is a production $ X \to \alpha Y $, or if there is \ul{a
+        production $ X \to \alpha Y \beta $, where
+        $ \epsilon \in \FIRST\left( \beta \right) $} then add
+        $ \FOLLOW\left( X \right) $ to $ \FOLLOW\left( Y \right) $
+      \end{enumerate}
+
+  \subsection{Epsilon Productions}
+
+    Epsilon productions introduces ambiguity in the FOLLOW set
+
+    \begin{align*}
+      A &\to Bc | x \\
+      B &\to c | \epsilon
+    \end{align*}
+
+    Solution, substitute certain productions
+
+    \begin{align*}
+      A &\to c A' | x \\
+      A' &\to c | \epsilon
+    \end{align*}
+
+    Make sure to not introduce common prefixes
+
+\section{Eliminate Left Recursion}
+\label{section: grammar/eliminate left recursion}
+
+  \begin{align*}
+    E &\to Ea \\
+    &\to i
+  \end{align*}
+
+  \begin{enumerate}
+    \item Production of the form $ S \to \beta $ becomes $ S \to \beta S' $
+    \item Production of the form $ S \to S \alpha $ becomes $ S' \to \alpha S' $
+    \item Add $ S' \to \epsilon $
+  \end{enumerate}
+
+  \subsection{Mutual Recursion}
+
+    \begin{align*}
+      A &\to Ax | Bx \\
+      B &\to Bx | Ax
+    \end{align*}
+
+    Inline either $ A $ or $ B $
+
+\section{Eliminate Common Prefix}
+\label{section: grammar/eliminate common prefix}
+
+  Common prefixes introduce ambiguity in the FIRST set
+
+  \begin{align*}
+    A &\to \alpha \beta_{1} | \alpha \beta_{2}
+  \end{align*}
+
+  Extract the common part to get a new production
+
+  \begin{align*}
+    A &\to \alpha A' \\
+    A' &\to \beta_{1} | \beta_{2}
+  \end{align*}

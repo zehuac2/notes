@@ -1,0 +1,302 @@
+\chapter{Overview}
+
+The reinforcement learner does not have any knowledge of $ P $ and
+$ R $ at the beginning. The learner must figure out
+
+\begin{itemize}
+  \item $ P $
+  \item $ R $
+  \item $ U $
+  \item $ \pi $
+\end{itemize}
+
+through taking actions and see what's happening.
+
+\section{Types of Learners}
+
+  \begin{itemize}
+    \item \textbf{Online}: interacting directly with the world
+    \item \textbf{Offline}: interacting with the simulation of some sort
+    \begin{itemize}
+      \item Better for sitautions with real-life hazards
+    \end{itemize}
+
+    \item \textbf{Experience Replay}: a type of learner in which
+    \begin{itemize}
+      \item The old experiences of interacting with the real world
+      is not forgotten
+      \item Spend some time replaying old experiences rather than taking new
+      actions
+    \end{itemize}
+  \end{itemize}
+
+\section{Markov Decision Process}
+
+  Sequential decision problems are commonly modeled as \emph{Markov decision process}.
+
+  Different actions would result in differnet scores, and the
+  \emph{goal of the agent is to accumulate the most points}.
+
+  \begin{itemize}
+    \item \textbf{Set of states}: $ s \in S $
+    \item \textbf{Set of actions}: $ a \in A $
+    \item \textbf{Reward function}: $ R\left( s \right) $
+    \item \textbf{Transition function}: $ P\left( s' | s, a \right) $;
+    the transition function gives us the \ul{probability that
+    given a state $ s $, and an action $ a $, we moving into state $ s' $}
+    \begin{itemize}
+      \item Sometimes noted as $ T $
+    \end{itemize}
+
+    \item \textbf{Policy function / solution}: $ \pi\left( s \right) $;
+    \ul{commands the agent what to do given a state $ s $}
+  \end{itemize}
+
+\section{Solving Markov Decision Process}
+
+  There is a variety of ways to solve Markov Decision Process:
+
+  \begin{itemize}
+    \item Value iteration
+    \item Policy iteration
+    \item Dynamic methods that looks like perceptron training
+  \end{itemize}
+
+  \subsection{Value Iteration}
+
+    Repeatedly applies the Bellman equation to update utility values for
+    each state. The policy will be based of the final utility values:
+    \ul{move toward the highest utility values}
+
+    Suppose $ U_{k}\left( s \right) $ is the utility value
+    for $ s $ in iteration $ k $, then
+
+    \begin{enumerate}
+      \item Initialize $ U_{1}\left( s \right) $ for all states $ s $
+      \item Loop for $ k = 1 $ until the values converge
+      \begin{equation}
+        U_{k + 1}\left( s \right)
+          = R\left( s \right)
+          + \gamma \max_{a \in A} \sum_{s' \in S}
+          P\left( s' | s, \pi\left( s \right) \right)
+          U_{k}\left( s' \right)
+      \end{equation}
+    \end{enumerate}
+
+  \subsection{Policy Iteration}
+
+    Policy iteration is faster than value iteration, but similar to value
+    iteration
+
+    \begin{enumerate}
+      \item Start with an initial guess for policy $ \pi $
+      \item Alternate two steps
+      \begin{enumerate}
+        \item \textbf{Policy evaluation}: use the policy $ \pi $ to estimate
+        utility values $ U $
+        \item \textbf{Policy improvement}: use utility values $ U $ to
+        calculate a new policy $ \pi $
+      \end{enumerate}
+    \end{enumerate}
+
+    \subsubsection{Utility from Esimated Policy}
+
+      \begin{equation}
+        U\left( s \right)
+          = R\left( s \right)
+          + \gamma \sum_{s' \in S}
+          P\left( s' | s, \pi\left( s \right) \right)
+          U\left( s' \right)
+      \end{equation}
+
+      There are two solutions to finding a solution to the above equation:
+
+      \begin{itemize}
+        \item Linear algebra
+        \item A few iterations of value iteration
+        \begin{itemize}
+          \item Faster
+          \item We don't need exact values
+        \end{itemize}
+      \end{itemize}
+
+    \subsubsection{Async Dynamic Programming}
+
+      We don't need to update all the states; we may select only a few states
+      for updating
+
+      \begin{itemize}
+        \item States frequently seen in some applications
+        \item States for which the Bellman equation has a large error
+      \end{itemize}
+
+\section{Policy}
+
+  The policy function \emph{maps from states to actions}. Alternatively solve
+  for a \emph{value function} that completely describes a policy.
+
+  The policy function is supposed to maximize the reward over time.
+  In another word, we want optimize the following
+
+  \begin{equation}
+    P\left( \text{sequence} \right) R\left( \text{sequence} \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item $ R $: the total reward for the sequence of states
+    \item $ P $: how often this sequence of states happen
+    \item \textbf{Problem with the sequence of states}
+    \begin{itemize}
+      \item The sequence might be infinitely long
+      \item The values might not converge to finite values, even with the
+      probabilities taken into account
+    \end{itemize}
+
+    \item \textbf{Solution}:
+    \begin{itemize}
+      \item Make the assumption that the sonner the rewards occr the
+      better
+      \item Define a utility function
+    \end{itemize}
+  \end{itemize}
+
+  % TODO: state value function: Dec 7, video: 22:00
+
+  \subsubsection{Utility Function}
+
+    The utility of each state is based on
+
+    \begin{itemize}
+      \item its own reward
+      \item rewards that can be obtained from nearby states
+    \end{itemize}
+
+    \begin{equation}
+      U\left( \text{sequence} \right)
+    \end{equation}
+
+    $ U $ is the sum of the utilities of of the states in the
+    \say{sequence}
+
+    \begin{equation}
+      P\left( \text{sequence} \right) U\left( \text{sequence} \right)
+    \end{equation}
+
+    Therefore, what we actually want to optimize is the above
+
+\section{Bellman Equation}
+
+  Bellman equations provide a way to calcualte the utility function
+
+  \begin{equation}
+    U\left( s \right)
+      = R\left( s \right)
+      + \gamma \max_{a \in A} \sum_{s' \in S}
+      P\left( s' | s, a \right)
+      U\left( s' \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item $ s' $: the next state
+    \item $ \gamma $: the delay multiplier, decreases the contribution of
+    neighboring states causes rewards of farther states to be less important
+    than the reward of immediate states.
+    \begin{itemize}
+      \item This \ul{causes the system of equation to converge}
+    \end{itemize}
+
+    \item Only in primitive version, $ \move\left( a, s \right) $:
+    \ul{assuming the agent always picks the best move}, the function
+    $ \move $ is the state that result if we perform action $ a $ in state $ s $
+  \end{itemize}
+
+  \paragraph{Why this converges}
+
+  Since our MDP is finite, our rewards all have absolute value $ \le $
+  some bound $ M $. If we repeatedly apply the Bellman equation to write out
+  the utility of an extended sequence of actions, the $ k $th action in
+  the sequence will have a discounted reward $ \le \gamma kM $.
+  So the sum is a geometric series and thus converges if $ 0 \le \gamma < 1 $.
+
+  \subsection{Bellman Equation for a Fixed Policy}
+
+    \begin{equation}
+      U\left( s \right)
+        = R\left( s \right)
+        + \gamma \max_{a \in A} \sum_{s' \in S}
+        P\left( s' | s, \pi\left( s \right) \right)
+        U\left( s' \right)
+    \end{equation}
+
+\section{Reward Function}
+
+  \begin{itemize}
+    \item Can have any pattern of positive or negative values
+    \item A few states has big rewards or negative consequences
+    \item The rest of the states have some background reward (ex.
+    constant across all of these background states)
+  \end{itemize}
+
+  \subsection{Impact of Reward Function}
+
+    \begin{itemize}
+      \item If background reward is high, \ul{agent has no motivation
+      for high reward states}
+      \item If background reward is low (more negative), \ul{agent
+      has more motivation for high reward states}
+    \end{itemize}
+
+\section{Paradigms}
+
+  \begin{itemize}
+    \item \emph{From experience data} $ D = \left( s_{t}, a_{t}, r_{t} \right) $
+    \begin{itemize}
+      \item \emph{Model-based}: learn transition and reward models,
+      get value function, extract policy (See \ref{chapter-model-based})
+      \item \emph{Model free}: learn value function directly, extract policy
+      (See \ref{chapter-model-free})
+    \end{itemize}
+
+    \item \emph{From demonstration data} $ D = \left( s_{0:T}, a_{0:T} \right) $
+    \begin{itemize}
+      \item Learning from demonstration (LfD)
+      \item Inverse RL
+    \end{itemize}
+
+    \item \emph{Tempoeral difference methods}: don't keep track of observations,
+    making updates to ongoing value function estimate with each transition
+  \end{itemize}
+
+\section{Exploration vs Exploitation}
+
+  \begin{itemize}
+    \item Greedy methods \emph{exploit} current value to select the best action;
+    \emph{but we won't learn anything new}
+    \item $ \epsilon $-greedy, select greedy most of the time, but with small
+    probability $ \epsilon $, pick a random action to explore instead.
+    \begin{itemize}
+      \item Controlling $ \epsilon $ comes down to controlling the trade off
+    \end{itemize}
+  \end{itemize}
+
+\section{Training Loop}
+
+  \begin{enumerate}
+    \item Take an action
+    \item Observe the outcome
+    \begin{itemize}
+      \item State
+      \item Reward
+    \end{itemize}
+
+    \item Update internal representation
+  \end{enumerate}
+
+  \subsection{Choices of Internal Representation}
+
+    \begin{itemize}
+      \item \textbf{Model-based}: explicitly estimate values for
+      $ P\left( s' | s, a \right) $ and $ R\left( s \right) $
+      \item \textbf{Model-free}: estimate $ Q $ values, which, sidesteps the
+      need to estimate $ P $ and $ R $
+    \end{itemize}

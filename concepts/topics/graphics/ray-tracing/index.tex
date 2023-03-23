@@ -1,0 +1,39 @@
+\documentclass[letterpaper, 11pt]{report}
+\usepackage{import}
+\import{../../../shared/config/}{packages}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{glossaries}
+\usepackage[ruled, linesnumbered]{algorithm2e}
+
+\import{../../../shared/config/}{styles}
+\import{../../../shared/config/}{macros}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\area}{A}
+
+\makeglossaries
+
+\import{./glossaries/}{index}
+
+\title{Computer Graphics - Ray Tracing}
+\author{Zehua Chen}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \import{topics/}{overview}
+  \import{topics/}{camera}
+  \import{topics/}{intersection}
+  \import{topics/}{sampling}
+  \import{topics/}{shadow}
+  \import{topics/}{shading}
+  \import{topics/}{effects}
+  \import{topics/}{accelerations}
+
+  \newpage
+  \printglossary
+\end{document}

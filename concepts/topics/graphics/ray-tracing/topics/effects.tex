@@ -1,0 +1,118 @@
+\chapter{Effects}
+
+\section{Depth of Field}
+
+  \textbf{\Gls{depth of field}}: \glsdesc{depth of field}
+
+  \begin{itemize}
+    \item Aka. defocus blur
+    \item Pinhole camera has a infinite \gls{depth of field}
+    \item Objects are only in focus at a single distance called
+    \textbf{focal distance}
+  \end{itemize}
+
+  \subsection{Thin Lens Theory}
+
+    \textbf{\Gls{thin lens theory}}: \glsdesc{thin lens theory}
+
+    \begin{itemize}
+      \item \textbf{\Gls{image plane}}: \glsdesc{image plane}
+      \item \textbf{\Gls{focal plane}}: \glsdesc{focal plane}
+      \item \Gls{image plane} and \gls{focal plane} exist in pairs
+      \begin{itemize}
+        \item Moving the \gls{image plane} forward will move the
+        \gls{focal plane} forward
+      \end{itemize}
+
+      \item Points not on the focal plane will generate a
+      \textbf{circle of confusion} on the \gls{image plane}
+      \begin{itemize}
+        \item The further a point $ q $ gets from the \gls{focal plane}, the
+        more larger the circle of confusion
+      \end{itemize}
+
+      \item Thins lens camera has zero \gls{depth of field}
+      \begin{itemize}
+        \item We have a \gls{focal plane}, which is a specific depth value
+        \item Traditional camera has a finite grain size which allows a range of
+        distances to be in focus
+        \item Digital camera is in focus when hte \textbf{circle of confusion}
+        is smaller than a pixel
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Simulating Thin Lens}
+
+    \begin{enumerate}
+      \item Add a disc centered at the eye point, parallel to the view plane
+      \begin{itemize}
+        \item No thickness
+      \end{itemize}
+
+      \item Add a focal plane behind the view plane
+      \begin{itemize}
+        \item The distance betwenen the disc and the \gls{focal plane} is $ f $,
+        focal distance
+        \item $ d $, distance from eye to view is decoupled
+      \end{itemize}
+    \end{enumerate}
+
+    \begin{algorithm}
+      \caption{Simulating Thin Lens}
+      \ForEach{pixel} {
+        Shoot a center ray from through the eye point and hit $ p $ on
+        focal plane\;
+        Choose a random point on lens as $ O $\;
+        Shoot primary rays from $ O $ through $ p $\;
+        Average samples to get the final colors\;
+      }
+    \end{algorithm}
+
+    \begin{itemize}
+      \item If multiple primary rays ar eshot through a single $ p $, then
+      objects not on the focal plane are anti-aliased, but objects on the focal
+      plane are not anti-aliased
+      \item To handle the latter case, use sampling to create a different
+      center rays for each primary rays
+      \item Obtaining $ p $ can be optimized using similar triangles
+      \begin{align}
+        p &= \left( p_{x}, p_{y}, -f \right) \\
+        p_{s} &= \left( p_{sx}, p_{sy}, -d \right) \\
+        l_{s} &= \left( l_{sx}, l_{sy}, 0 \right) \\
+        p &= \left( p_{sx} \frac{f}{d}, p_{sy} \frac{f}{d}, -f \right) \\
+        d_{r} &= p - l_{s} \\
+        &= \left( p_{x} - l_{sx} \right) u
+          - \left( p_{y} - l_{sy} \right) v
+          - fw
+      \end{align}
+      \begin{itemize}
+        \item $ p_{s} $ is a point on the view plane
+        \item $ f $ focal length
+        \item $ d $ view plane distance
+        \item $ l_{s} $: randomly generated point on the disk at eye point
+        \item $ d_{r} $: direction of primary ray
+        \item $ u, v, w $ are vectors used in camera frame transformation
+        from chapter \ref{chapter: camera} on page \pageref{chapter: camera}
+      \end{itemize}
+
+    \end{itemize}
+
+    \begin{algorithm}
+      \caption{Random Position in Unit Disk}
+      \ForEach{pixel} {
+        \While{true} {
+          Generate a random point $ p $ with $ x, y \in \left[ -1, 1 \right] $\;
+          \If{$ p $'s length squared is bigger than $ 1 $} {
+            continue\;
+          }
+
+          \Return{$ p $}
+        }
+      }
+    \end{algorithm}
+
+    \begin{itemize}
+      \item The larger the lens radius, the greather amount of space to choose
+      from, the more pixels a point in world would contribute to, the blurrier
+      the image will be, the more samples will be required for quality image
+    \end{itemize}

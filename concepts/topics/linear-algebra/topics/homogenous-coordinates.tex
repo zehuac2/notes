@@ -1,0 +1,90 @@
+\chapter{Homogenous Coordinates}
+
+\section{Positions and Displacements}
+
+  \begin{align}
+    \position - \position &= \displacement \\
+    \position + \displacement &= \position \\
+    \displacement + \displacement &= \displacement \\
+    \position + \position &= ?
+  \end{align}
+
+  \begin{itemize}
+    \item Positions and displacements are not the same thing
+  \end{itemize}
+
+\section{The W}
+
+  \begin{itemize}
+    \item $ w $ is \textbf{how grounded something is in real space}
+    \begin{itemize}
+      \item Directions ($ w = 0 $) are not grounded
+      \item Positions ($ w = 1 $) are grounded
+    \end{itemize}
+
+    \item It's Ok to add positions, so long as the result is divided by its
+    own $ w $. This gives $ w = 1 $, which is the average position of teh two
+    positions
+
+    \item $ w = 0 $: things that are not translated
+    \begin{itemize}
+      \item Translation matrix has no effect on directions ($ w = 0 $);
+      translation should not change displacement
+    \end{itemize}
+
+    \item $ w = 1 $: things that are translated
+    \item Enables division in matrix
+  \end{itemize}
+
+\subsection{Adding and Removing W}
+
+  \begin{align}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      wx \\
+      wy \\
+      wz \\
+      w
+    \end{bmatrix} \\
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      w
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      \frac{x}{w} \\
+      \frac{y}{w} \\
+      \frac{z}{w} \\
+      1
+    \end{bmatrix}
+  \end{align}
+
+\begin{align}
+  \begin{bmatrix}
+    x \\
+    y \\
+    z \\
+    0
+  \end{bmatrix}
+  &=
+  \begin{bmatrix}
+    1 & & & a \\
+    & 1 & & b \\
+    & & 1 & c \\
+    & & & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    x \\
+    y \\
+    z \\
+    0
+  \end{bmatrix}
+\end{align}

@@ -1,0 +1,98 @@
+\section{A Star Search}
+
+  \begin{align*}
+    f(s) &= g(s) + h(s) \\
+    g(s) &= \text{cost so far} \\
+    h(s) &= \text{guess at cost remains to reach goal "heuristic"}
+  \end{align*}
+
+  \begin{itemize}
+    \item Implementation is same as Uniform Cost Search,
+    \ul{except $ g(s) $ is replaced with $ f(s) $} to
+    order the priority queue
+    \item $ h(s) $ needs to be:
+    \begin{itemize}
+      \item Fast to compute
+      \item Underestimate, aka \textbf{admissible heuristic} (lower bond),
+      ex. take straight line
+      \item As large as possible without overestimating
+    \end{itemize}
+
+    \item Simplfy problems:
+    \begin{itemize}
+      \item Remove walls
+      \item Straighten out the roads
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Update Length}
+
+    \begin{itemize}
+      \item If we read a seen state via better path , update s even if s is done. Pus s back into the frontier
+      \item Will priority queue get me update costs for X?
+      \begin{itemize}
+        \item Workaround: put x into queue a second time with the new cost
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Heuristic Functions}
+
+    \begin{itemize}
+      \item \textbf{Manhatten distance}: $\left| \Delta x \right| + \left| \Delta y \right|$;
+      \item \textbf{Straight line}
+      \item \ul{Manhatten distance is a better solution when we can't
+      move diagnally; if we can this is no longer an underestimate}
+    \end{itemize}
+
+  \subsection{Admissible and Consistency}
+
+    \begin{itemize}
+      \item \textbf{Admissible}: underestimate the true distance of the goal,
+      i.e. lower than the theoretical  lower limit
+      \item \textbf{Consistent}: if we can get from $ s $ to $ s' $ with cost
+      $ c(s,s') $, we must have
+      \begin{equation}
+        h\left( s \right) \le c\left( s, s' \right) + h\left( s' \right)
+      \end{equation}
+
+      \item The higher (still admissible) the heuristic function is, the
+      better the function is as the function \ul{would better reflect the
+      actual path}
+      \item \textbf{Weighted A Start}: some weighted heuristic occasionaly
+      estimates, leading to suboptimal performnace; Weighted A Start is one
+      of these;
+    \end{itemize}
+
+  \subsection{Why Admissible?}
+
+    \begin{itemize}
+      \item Let $ c $ be the cost of the solution,
+      $ c' $ be an estimated cost of a state, $ s' $ be a non-solution state
+      \item Get optimal solution (shortest path)
+      \item Don't return solution until its at the front of hte priority
+      queue (inherited from uniform cost search);
+      \begin{itemize}
+        \item $ c' \le $ true cost for $ s' $
+        \item $ c $ at front $ c \le c' $
+        \item $ c \le $ true cost for any $ s' $ in priority queue
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{A Star vs Uniform Cost}
+
+    \begin{itemize}
+      \item \textbf{UCS}: updates to distances all involve state on frontier
+      \item \textbf{A star}: updates may invovle closed states
+    \end{itemize}
+
+  \subsection{A Star Variants}
+
+    \begin{itemize}
+      \item \textbf{Beam search}: like A* but only keeps best k in the frontier
+      \begin{itemize}
+        \item Consumption of extensive resources
+      \end{itemize}
+
+      \item \textbf{Suboptimal A Star}: hueristic
+      \item \textbf{Database}: just look at 4 squares
+    \end{itemize}

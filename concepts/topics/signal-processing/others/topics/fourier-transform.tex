@@ -1,0 +1,97 @@
+\chapter{Fourier Transform}
+\label{sec: fourier transform}
+
+Given a soup, fourier transform finds the recipe by running the soup through
+filters.
+
+\begin{itemize}
+  \item Fourier transform translates from time domain to frequency domain
+  \item Inverted Fourier transform translates from frequency domain to time
+  domain
+\end{itemize}
+
+\section{Fourier Series}
+
+  \begin{equation}
+    x\left( t \right) = A_{0}
+      + \sum_{p = 1}^{\infty} A_{p} \cos\left( p w_{0} t - \phi_{p} \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item $ A_{0} $: direct current
+    \item $ p w_{0} $: harmonics of $ w_{0} $ when $ p \ge 2 $
+    \item The output of fourier transform stretches from 0 to $ fs $ Hz
+    \begin{itemize}
+      \item Each point on the x-axis reprsent a distance of $ \frac{fs}{N} $ Hz
+      from $ 0 $
+      \item Frequency resolution is porportional to $ \frac{1}{N} $
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Finite Fourier Series Approximation}
+
+    \begin{equation}
+      x\left( t \right) = A_{0}
+        + \sum_{p = 1}^{P} A_{p} \cos\left( p w_{0} t - \phi_{p} \right)
+    \end{equation}
+
+  \subsection{General Form}
+
+    \begin{align}
+      A_{p} &= \sqrt{a_{p}^{2} + b_{p}^{2}} \\
+      \phi_{p} &= \tan^{-1} \left( \frac{b_{p}}{a_{p}} \right)
+    \end{align}
+
+    \begin{equation}
+      x\left( t \right) = a_{0}
+        + \sum_{p = 1}^{\infty}
+        \left(
+          a_{p} \cos\left( p w_{0} t \right)
+          + b_{p} \sin\left( p w_{0} t \right)
+        \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item Fourier coefficients
+    \end{itemize}
+
+\section{Discrete Fourier Transform}
+
+  \begin{align}
+    X\left( k \right) &=
+      \frac{1}{N} \sum_{n = 0}^{N - 1} x\left( n \right)
+      \cdot e^{-i \varphi} \\
+    \varphi &= \frac{2 \pi k n}{N} \\
+    X\left( k \right) &=
+      \frac{1}{N} \sum_{n = 0}^{N - 1} x\left( n \right)
+      \cdot \left( \cos\left( \phi \right) - i \sin\left( \phi \right) \right) \\
+  \end{align}
+
+  \begin{itemize}
+    \item $ x\left( n \right) $: time domain signal of length $ N $
+    \item $ X\left( k \right) $: amplitude and phase info at frequency bin $ k $
+    \begin{itemize}
+      \item For $ k = 0 $, $ X\left( 0 \right) $ is simply the mean of signal
+      samples
+    \end{itemize}
+
+    \item \textbf{Input}: array of time domain samples
+    \item \textbf{Output}: array of frequency domain samples
+  \end{itemize}
+
+\section{Fast Fourier Transform}
+
+  \begin{itemize}
+    \item FFT is an algorithm for the efficient calculation of DFT
+    \item Fast Fourier Transform is an implementation of Fourier Transform
+  \end{itemize}
+
+\section{Spectogram}
+
+  \begin{itemize}
+    \item x-axis: time
+    \item y-axis: frequency
+    \item z-axis, values at $ \left( x, y \right) $: the amplitude of a
+    particular frequency at a particular time is represented by the intensity
+    or color of each point in the image
+  \end{itemize}

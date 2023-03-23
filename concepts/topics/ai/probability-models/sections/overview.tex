@@ -1,0 +1,37 @@
+\section{Overview}
+
+  \subsection{Why Are Probability Models Needed}
+
+    \begin{itemize}
+      \item Logic based model is too hard to do and does not scale
+      \item Learning models from examples has problems as well:
+      \begin{itemize}
+        \item Data contains uncertainties, errors (Department of Computer Silence)
+        \item Data maybe incomplete
+        \item Data lack annotations (transcription, background context);
+        annotations can also be wrong
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Recognizing Rail-Road Intersections}
+
+    \begin{itemize}
+      \item \textbf{Discrete random variables}
+      \item Time of day
+      \item Train near by
+      \item Traffic light color
+      \item Barrier arm (up or down)
+      \item Continues random variables are beyond the scope of the class
+    \end{itemize}
+
+    \subsubsection{Probability}
+
+      \begin{itemize}
+        \item $ P(var = value) $: how often does this variable occur with this value
+        \item Ex. $ P(arm = up) = 0.95 $
+        \item Sometimes notations can be simplified (ex. $ P(up, morning) $)
+      \end{itemize}
+
+    \subsubsection{Smoothing}
+
+      Takes observation and shifts probabilities onto what we have not observed

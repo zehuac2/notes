@@ -1,0 +1,38 @@
+\documentclass[letterpaper, 11pt]{report}
+\usepackage{import}
+\import{../../shared/config/}{packages}
+\usepackage[utf8]{inputenc}
+\usepackage{inconsolata}
+\usepackage{glossaries}
+
+\import{../../shared/config/}{styles}
+\import{../../shared/config/}{macros}
+
+\title{Digital Signal Processing}
+\author{Zehua Chen}
+
+\makeglossaries
+
+\import{glossaries/}{index}
+
+\DeclareMathOperator{\rms}{rms}
+\DeclareMathOperator{\reference}{ref}
+\DeclareMathOperator{\dB}{dB}
+\DeclareMathOperator{\SPL}{SPL}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \import{topics/}{math}
+  \import{topics/}{signal}
+  \import{topics/}{sound-level}
+  \import{topics/}{systems}
+  \import{topics/}{fourier-transform}
+  \import{topics/}{uncategorized}
+
+  \newpage
+  \printglossary
+\end{document}

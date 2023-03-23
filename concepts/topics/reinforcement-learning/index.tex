@@ -1,0 +1,26 @@
+\documentclass{../../shared/latex/notes}
+
+\usepackage{listings}
+
+\lstdefinestyle{pseudo}{
+  language=python,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  frame=single
+}
+
+\DeclareMathOperator{\move}{move}
+
+\title{Reinforcement Learning}
+\author{Artificial Intelligence (CS 440)}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \import{topics/}{overview}
+  \import{topics/}{model-based}
+  \import{topics/}{model-free}
+  \import{topics/}{temporal-difference}
+
+\end{document}

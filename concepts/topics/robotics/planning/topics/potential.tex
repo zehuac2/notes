@@ -1,0 +1,48 @@
+\chapter{Potential Planning}
+
+  \begin{align}
+    U_{t}\left( q \right)
+      &= U_{a}\left( q \right) + \sum_{i} U_{r, i}\left( a \right) \\
+    \nabla U_{t}\left( q \right)
+      &= \nabla U_{a}\left( q \right) + \sum_{i} \nabla U_{r, i}\left( q \right) \\
+  \end{align}
+
+  \begin{itemize}
+    \item $ U_{t} $: total potential
+    \item $ U_{a} $: attractive potential (of the goal)
+    \item $ U_{r} $: repulsive potential (of obstacles)
+  \end{itemize}
+
+  \section{Attractive Potential}
+
+    \begin{align}
+      U_{a}\left( q \right) &=
+      \begin{cases}
+        \frac{1}{2} \zeta d^{2}\left( q, q_{g} \right)
+          & d\left( q, q_{g} \right) \le d^{*} \\
+        d^{*} \zeta d\left( q, q_{g} \right) - \frac{1}{2} \zeta \left( d^{*} \right)^{2}
+          & d\left( q, q_{g} \right) \le d^{*}
+      \end{cases}  \\
+      \nabla U_{a}\left( q \right) &=
+      \begin{cases}
+        \zeta\left( q - q_{g} \right) & d\left( q, q_{g} \right) \le d^{*} \\
+        \frac{d^{*} \zeta \left( q - q_{g} \right)}{d\left( q, q_{g} \right)}
+          & d\left( q, q_{g} \right) > d^{*}
+      \end{cases}
+    \end{align}
+
+    \begin{itemize}
+      \item $ q_{g} $: goal point
+      \item $ \zeta $: ({\ttfamily \textbackslash zeta}) a constant
+      \item $ U\left( q \right) = \frac{1}{2} \zeta d^{2}\left( q, q_{g} \right) $:
+      quadratic
+      \item $ U\left( q \right) = \zeta d\left( q, q_{g} \right) $: conic
+      \item $ d^{*} $: a distance at which we switch between quadratic and conic
+      potential
+    \end{itemize}
+
+  \section{Repulsive Potential}
+
+    \begin{itemize}
+      \item $ Q_{*} $: range of influence of the obstacle
+    \end{itemize}

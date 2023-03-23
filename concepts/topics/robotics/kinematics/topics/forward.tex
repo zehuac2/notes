@@ -1,0 +1,125 @@
+\chapter{Forward Kinematics}
+
+\begin{itemize}
+  \item \emph{\Gls{forward-kinematics}}: \glsdesc{forward-kinematics}
+  \begin{itemize}
+    \item \emph{\Gls{pose}}: \glsdesc{pose}; $ \left( x, y, \phi \right) $
+    \item \emph{Input}: $ \left( q... \right) $
+    \item \emph{Output}: $ \left( x, y, ..., \phi \right) $
+  \end{itemize}
+
+  \begin{align}
+    \phi &= \theta_{1} + \theta_{2} + ... \\
+    x &= l_{1} \cos \theta_{1} + l_{2} \cos \left( \theta_{1} + \theta_{2} \right) + ... \\
+    y &= l_{1} \sin \theta_{1} + l_{2} \sin \left( \theta_{1} + \theta_{2} \right) + ...
+  \end{align}
+
+  \item $ o_{0} x_{0} y_{0} z_{0} $: \emph{the fixed inertial frame
+  \footnote{inertial frame does not move}}, other frames are functions of
+  $ q $ and may move rigidly
+\end{itemize}
+
+\section{Coordinate Transformations}
+
+  \begin{equation}
+    T^{0}_{n} = A_{1} ... A_{n}
+  \end{equation}
+
+  \begin{itemize}
+    \item $ T^{0}_{n} $: \emph{\gls{forward-kinematics}} map of the frame of
+    end effector relative to the inertial frame
+    \item $ A_{i} $ is the homogeneous transformation of frame $ i $ relative to
+    frame $ i - 1 $
+    \begin{itemize}
+      \item $ A_{i} $ is only a function of $ q_{i} $
+    \end{itemize}
+  \end{itemize}
+
+\section{Denavit Hartenberg Convention}
+
+  \Gls{forward-kinematics} only depend on the base and end effector frames,
+  independently of how intermediate frames are defined
+
+  \begin{itemize}
+    \item \emph{\Gls{denavit-hartenberg-convention}}: \glsdesc{denavit-hartenberg-convention}
+    \item Frames are defined iteratively
+    \item $ o_{0} x_{0} y_{0} z_{0} $
+    \begin{itemize}
+      \item Centered at joint $ 1 $, i.e. $ o_{0} $ at joint 1
+      \item $ z_{0} $ along axis of rotation or axis of translation (prismatic)
+      \item $ x_{0}, y_{0} $ may be chosen arbitrarily
+    \end{itemize}
+
+    \item Given frame $ i - 1 $, assign $ o_{i} $ to minimize distance between
+    $ o_{i - 1}, o_{i} $ such that
+    \begin{itemize}
+      \item $ z_{i} $ points along axis of joint $ i + 1 $
+      \item $ x_{i} $ intersects $ z_{i - 1} $ at right angle
+      \item $ y_{i} $ satisfies right hand rule\footnote{thumb along z, palm
+      rotates from $ x $ to $ y $}
+    \end{itemize}
+
+    \item Frame $ n $
+    \begin{itemize}
+      \item Centered at the end effector
+      \item $ z_{n} $ parallel to $ z_{n - 1} $
+    \end{itemize}
+  \end{itemize}
+
+\section{Denavit Hartenberg Parameters}
+
+  \begin{itemize}
+    \item Rotate about $ z_{i - 1} $ by $ \theta_{i} $ (\emph{joint angle})
+    \item Translate along $ z_{i - 1} $ by $ d_{i} $ (\emph{link offset})
+    \item Translate along $ x_{i} $ by $ a_{i} $ (\emph{link length})
+    \item Rotate about $ x_{i} $ by $ \alpha_{i} $ (\emph{link twist})
+    \item Each $ A_{i} $ is defined by DH parameters
+    \item $ a_{i}, \alpha_{i} $ are constant in all transformations
+    \item Revolute joints: $ \theta_{i} $ is variable, $ d_{i} $ is constant
+    \item Prismatic joint: $ d_{i} $ is variable, $ \theta $ is constant
+  \end{itemize}
+
+  \subsection{Frame Transformation}
+
+    \begin{align}
+      A_{i}\left( q_{i} \right)
+        &=
+        \begin{bmatrix}
+          c_{\theta_{i}} & -s_{\theta_{i}} & 0 & 0 \\
+          s_{\theta_{i}} & c_{\theta_{i}} & 0 & 0 \\
+          0 & 0 & 1 & d_{i} \\
+          0 & 0 & 0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+          1 & 0 & 0 & a_{i} \\
+          0 & c_{\alpha{i}} & -s_{\alpha{i}} & 0 \\
+          0 & s_{\alpha{i}} & c_{\alpha{i}} & 0 \\
+          0 & 0 & 0 & 1
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          c_{\theta_{i}} & -s_{\theta_{i}} c_{\alpha_{i}} & s_{\theta_{i}} s_{\alpha_{i}} & a_{i} c_{\theta_{i}} \\
+          s_{\theta_{i}} & c_{\theta_{i}} c_{\alpha_{i}} & -c_{\theta_{i}} s_{\alpha_{i}} & a_{i} s_{\theta_{i}} \\
+          0 & s_{\alpha_{i}} & c_{\alpha_{i}} & d_{i} \\
+          0 & 0 & 0 & 1
+        \end{bmatrix}
+    \end{align}
+
+    \begin{itemize}
+      \item $ c_{x} = \cos x $
+      \item $ s_{x} = \sin x $
+    \end{itemize}
+
+  \subsection{Forward Kinematic Map}
+
+    \begin{align}
+      T^{0}_{n}
+        &= A_{1}\left( q_{1} \right) ... A_{n}\left( q_{n} \right) \\
+        &=
+        \begin{bmatrix}
+          R^{0}_{n} & o^{0}_{n} \\
+          0^{T} & 1
+        \end{bmatrix}
+    \end{align}
+
+    Position $ o^{0}_{n} $ and orientation $ R^{0}_{n} $ of end effector

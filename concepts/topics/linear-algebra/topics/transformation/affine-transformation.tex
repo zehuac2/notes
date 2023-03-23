@@ -1,0 +1,227 @@
+\section{Affine Transformations}
+
+\textbf{An affine transformation is the sum of a linear transformation and a
+constant vector};
+
+\begin{itemize}
+  \item Linear transformation preserves the origin; affine transformation do
+  not need to preserve the origin
+  \item Affine transformation map the origin to a new position
+  \item Most affine transformations do not commute
+  \item Some (combinations of) transformations commute
+  \footnote{if you change the order of transformation, the result remains the
+  same}
+  \begin{itemize}
+    \item A rotation and a uniform scaling
+    \item Two translations
+    \item Two rotations around the same axis
+  \end{itemize}
+
+  \item All the transformations here are done using \textbf{homogeneous
+  coordinates}
+  \begin{equation}
+    \left( x, y, z, w \right) \Leftrightarrow
+    \left( \frac{x}{w}, \frac{y}{w}, \frac{z}{w} \right)
+  \end{equation}
+  \begin{itemize}
+    \item Cartesian coordinates ($ \left( \frac{x}{w}, \frac{y}{w}, \frac{z}{w} \right) $)
+    are used in Euclidean Geometry
+    \item Homogeneous coordinates ($ \left( x, y, z, w \right) $) are used in
+    Projective Geometry; $ w = 0 $ corresponds to a point at infinity or a
+    direction, instead of a position
+    \item Exists to make most operations doable as affine transformations
+  \end{itemize}
+\end{itemize}
+
+\subsection{Translation}
+
+  \begin{align}
+    T\left( x, y, z \right) &=
+    \begin{bmatrix}
+      1 & 0 & 0 & x \\
+      0 & 1 & 0 & y \\
+      0 & 0 & 1 & z \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix} \\
+    T\left( x, y, z \right)^{-1} &=
+    \begin{bmatrix}
+      1 & 0 & 0 & -x \\
+      0 & 1 & 0 & -y \\
+      0 & 0 & 1 & -z \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix}
+  \end{align}
+
+\subsection{Scaling}
+
+  \begin{align}
+    S\left( x, y, z \right) &=
+    \begin{bmatrix}
+      x & 0 & 0 & 0 \\
+      0 & y & 0 & 0 \\
+      0 & 0 & z & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix} \label{eq: affine-transformation-scale-bigger} \\
+    S\left( x, y, z \right)^{-1} &=
+    \begin{bmatrix}
+      \frac{1}{x} & 0 & 0 & 0 \\
+      0 & \frac{1}{y} & 0 & 0 \\
+      0 & 0 & \frac{1}{z} & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix}
+  \end{align}
+
+  Use $ -1 $ in any of $ x, y, z $ in equation
+  \ref{eq: affine-transformation-scale-bigger} would give an inversion matrix
+  around a certian axis
+
+\subsection{Shear}
+
+  \begin{equation}
+    H_{xz}\left( s \right) =
+    \begin{bmatrix}
+      1 & 0 & s & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+  \end{equation}
+
+  \begin{itemize}
+    \item Affine transformation
+  \end{itemize}
+
+\subsubsection{Rotation}
+
+  \begin{align}
+    R_{x}\left( \theta \right) &=
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & \cos\theta & -\sin\theta & 0 \\
+      0 & \sin\theta & \cos\theta & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix} \\
+    R_{y}\left( \theta \right) &=
+    \begin{bmatrix}
+      \cos\theta & 0 & \sin\theta & 0 \\
+      0 & 1 & 0 & 0 \\
+      -\sin\theta & 0 & \cos\theta & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix} \\
+    R_{z}\left( \theta \right) &=
+    \begin{bmatrix}
+      \cos\theta & -\sin\theta & 0 & 0 \\
+      \sin\theta & \cos\theta & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix} \\
+    R^{-1} &= R^{T}
+  \end{align}
+
+  \begin{align*}
+    R_{u}\left( u, \theta \right) &=
+    \begin{bmatrix}
+      % row 1
+      \cos\theta + u_{x}^{2}\left( 1 - \cos\theta \right)
+      & u_{x} u_{y} \left( 1 - \cos\theta \right) - u_{z} \sin\theta
+      & u_{x} u_{z} \left( 1 - \cos\theta \right) + u_{y} \sin\theta \\
+      % row 2
+      u_{y} u_{x} \left( 1 - \cos\theta \right) + u_{z} \sin\theta
+      & \cos\theta + u_{y}^{2}\left( 1 - \cos\theta \right)
+      & u_{y} u_{z} \left( 1 - \cos\theta \right) - u_{x} \sin\theta \\
+      % row 3
+      u_{z} u_{x} \left( 1 - \cos\theta \right) - u_{y} \sin\theta
+      & u_{z} u_{y} \left( 1 - \cos\theta \right) + u_{x} \sin\theta
+      & \cos\theta + u_{z}^{2}\left( 1 - \cos\theta \right)
+    \end{bmatrix} \\
+    &\times
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix}
+  \end{align*}
+
+  \subsubsection{Rotation Around an Object's Center}
+
+    \begin{enumerate}
+      \item Translate to the origin
+      \item Rotate
+      \item Translate back using the inverse
+    \end{enumerate}
+
+\subsection{Composing Transformations}
+
+  \begin{itemize}
+    \item Transformations are applied \textbf{right to left}
+    \begin{equation*}
+      O = A \times B \times M
+    \end{equation*}
+    Given a coordinate $ M $, $ B $ is applied first, followed by $ A $. Note
+    that matrix multiplications still works from \textbf{left to right}
+  \end{itemize}
+
+  \subsubsection{Inverse}
+
+    \begin{equation}
+      \left( T_{1} T_{2} T_{3} ... \right) ^{-1}
+      = \left( ... T_{3}^{-1} T_{2}^{-1} T_{1}^{-1} \right) ^{-1}
+    \end{equation}
+
+    \begin{itemize}
+      \item Given a transformation $ t $ on an object, applying the inverse of
+      $ t $ on the origin would produce the same result
+    \end{itemize}
+
+\subsection{Rigid Body Transformations}
+
+  \begin{itemize}
+    \item Non rigidbody transformations
+    \begin{itemize}
+      \item Scale
+      \item Shear
+    \end{itemize}
+  \end{itemize}

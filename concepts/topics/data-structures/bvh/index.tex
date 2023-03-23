@@ -1,0 +1,111 @@
+\documentclass[letterpaper, 11pt]{article}
+\usepackage{import}
+\import{../../../shared/config/}{packages}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[ruled, linesnumbered]{algorithm2e}
+\usepackage{inconsolata}
+
+\import{../../../shared/config/}{styles}
+\import{../../../shared/config/}{macros}
+
+\title{Data Structures - Bounding Volume Hierarchy}
+\author{Zehua Chen}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \section{Overview}
+
+    \begin{itemize}
+      \item BVH partition elements, not space
+      \item Primitives appear at leaf nodes only once;
+      \begin{itemize}
+        \item In spatial partition, like regular grids, the objects might
+        appear in multiple places
+      \end{itemize}
+      \item Non-leaf nodes only record bounding volume information
+    \end{itemize}
+
+    \subsection{Nodes}
+
+      A BVH node is made of
+
+      \begin{itemize}
+        \item A left child node
+        \item A right child node
+        \item A AABB bounding box
+      \end{itemize}
+
+      Assuming a binary tree with $ N $ objects:
+
+      \begin{itemize}
+        \item $ N $ leaf nodes
+        \item $ N - 1 $ interior nodes
+      \end{itemize}
+
+    \subsection{Comparison to KD tree}
+
+      \begin{itemize}
+        \item BVH is faster to build
+        \item BVH is more numerically robust
+        \begin{itemize}
+          \item Less prone to missed intersections due to round-off errors
+        \end{itemize}
+
+        \item KD tree has faster intersection tests
+        \item KD tree is a \textbf{spatial partiion}
+      \end{itemize}
+
+  \section{Construction}
+
+    \subsection{Median Method}
+
+      \begin{itemize}
+        \item Put $ n / 2 $ smallest element to the left
+        \item Put $ n / 2 $ biggest element to the right
+        \item Done in $ O\left( n \right) $ time
+        \begin{itemize}
+          \item Median can be found in $ O\left( n \right) $ time
+          \item C++: \texttt{std::nth\_element}
+        \end{itemize}
+      \end{itemize}
+
+    \subsection{Safe Area Method}
+
+      \begin{itemize}
+        \item As a \textbf{leaf node}:
+        At any time, we make a leaf node of the region that we have;
+        any ray will have to test with all objects in the region
+        \begin{equation}
+          \sum_{i = 1}^{N} t\left( i \right)
+        \end{equation}
+
+        $ t\left( i \right) $ is the time to compute a ray intersection with
+        the $ i $th primitive; $ N $ is how many primitives are there in the
+        node
+
+        \item As an \textbf{interior node}
+        \begin{equation}
+          c\left( A, B \right) = t_{trav}
+            + p_{A} \sum_{i = 1}^{N_{A}} t_{isect} \left( a_{i} \right)
+            + p_{B} \sum_{i = 1}^{N_{B}} t_{isect} \left( b_{i} \right)
+        \end{equation}
+
+        \begin{itemize}
+          \item Assume $ t_{isect} $ is the same for all objects
+          \item \textbf{Surface Area Heuristic}: if $ A $ is a parent bounding
+          box, and $ B $ is a child bounding box, then the probability of
+          a ray hits $ B $, given that it has hit $ A $ is
+          \begin{equation}
+            P\left( B | A \right) = \frac{s_{B}}{s_{A}}
+          \end{equation}
+        \end{itemize}
+
+        \item Select the best option
+      \end{itemize}
+
+\end{document}

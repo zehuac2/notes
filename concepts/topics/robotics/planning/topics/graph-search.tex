@@ -1,0 +1,16 @@
+\chapter{Graph Search}
+
+\section{A* Search}
+
+  \begin{align}
+    f\left( n \right) = g\left( n \right) + h\left( n \right)
+  \end{align}
+
+  \begin{itemize}
+    \item $ g\left( n \right) $: accumulative path to node $ n $
+    \item $ h\left( n \right) $: heuristic at $ n $
+    \item In each iteration, choose the node with the smallest $ f $
+    \item Implemented using priority queue using $ f $ as the key.
+  \end{itemize}
+
+\section{D* Lite}

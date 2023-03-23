@@ -1,0 +1,5 @@
+# String
+
+## Format
+
+- `%b`: boolean

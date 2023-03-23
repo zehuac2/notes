@@ -1,0 +1,174 @@
+\chapter{Transaction}
+
+\begin{itemize}
+  \item DBMS is only concerned with read and writes
+  \item A transactino is the DBMS's abstract view of a user program, a series
+  of read and writes
+  \item Two transactions $ T1, T2 $ submitted in order:
+  \begin{enumerate}
+    \item No guarantee that $ T1 $ run before $ T2 $
+    \item Result should be as if $ T1 $ run before $ T2 $
+  \end{enumerate}
+\end{itemize}
+
+\section{Concurrency}
+
+  \begin{itemize}
+    \item DBMS interleave read and writes of various transactions
+    \item Each transaction leave the database in a consistent state if DB is
+    consistent when the transaction begins
+  \end{itemize}
+
+  \subsection{Atomicity}
+
+    \begin{itemize}
+      \item \emph{Commit}: a transaction becomes permanent in the system
+      \item \emph{Abort}: a transaction does not become permanent in the system
+      \item \emph{Atomicity}: user can think of acts in a transaction as always
+      executing its actions in one step or not executing at all
+      \begin{itemize}
+        \item A log is kept for redo
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{ACID Properties}
+
+    \begin{itemize}
+      \item \emph{Atomicity}: all actions happen or none happen
+      \item \emph{Consistency}: if each Xact is consistent and DB starts consistent,
+      then DB ends consistent
+      \item \emph{Isolation}: execution of one Xact is isolated from that of
+      other Xacts
+      \item \emph{Durability}: if a Xact commits, its effects persist
+    \end{itemize}
+
+    \emph{Concurrency Control Manager} guarantees C, I; \emph{Recovery manager}
+    guarantees A, D
+
+\section{Schedules}
+
+  \begin{itemize}
+    \item A \emph{concurrent (interleaved) execution} of two or more
+    transactions is \emph{correct if their execution is serializable}
+    \begin{itemize}
+      \item Ex. Given $ T1, T2 $. So long as the result is the same as if $ T1 \to T2 $,
+      or $ T2 \to T1 $, then the the result is correct
+    \end{itemize}
+    \item \emph{Equivalent schedule} the result of executing two schedules
+    are the same
+  \end{itemize}
+
+  \subsection{Serial Schedule}
+
+    \emph{Serial schedule}: Schedule that does not interleave the actions of
+    different transactions
+
+    \begin{itemize}
+      \item Correct by definition
+    \end{itemize}
+
+  \subsection{Serializable Schedule}
+
+    \emph{Serializable schedule}: a schedule that is equivalent to \emph{some
+    serial execution of the transactions}
+
+\section{Anomolies with Interleaved Operations}
+
+  \begin{itemize}
+    \item \emph{Reading uncommited (aborted) data}: WR conflicts, dirty reads;
+    transaction 1 abort write operation, transaction 2 read aborted, i.e. dirty data
+    \item \emph{Unrepeatable reads}: RW conflicts; one transaction reads twice,
+    expecting the same value, but a write is interleaved, causing the second read
+    to have different value
+  \end{itemize}
+
+  \subsection{Conflicting Operations}
+
+    Two operations conflict if the order in which they are performed matters
+
+    \begin{itemize}
+      \item $ \R\left( x \right), \W\left( x \right) $
+      \begin{itemize}
+        \item $ \R $ conflicts with $ \W $
+        \item $ \W $ conflicts with both $ \R, \W $
+      \end{itemize}
+
+      \item \emph{Commits and aborts are not conflicting operations}
+    \end{itemize}
+
+  \subsection{Test for Serializability}
+
+    \begin{itemize}
+      \item Build the precedence graph (PG) of schedule S
+      \item PG is a \emph{directed graph}
+      \begin{itemize}
+        \item Nodes represents transactions in S
+        \item Edge between $ T_{i}, T_{j} $ means that one of $ T_{i} $'s
+        operation precedes and conflicts one of $ T_{j} $'s operations
+      \end{itemize}
+
+      \item A schedule \emph{is serializable if its PG has no cycles}
+    \end{itemize}
+
+    \subsubsection{Building PG}
+
+      \begin{itemize}
+        \item $ \R_{i} (x), ..., \W_{j} (x), i \ne j $: edge from $ i $ to $ j $
+        \item $ \W_{i} (x), ..., \W_{j} (x), i \ne j $: edge from $ i $ to $ j $
+        \item $ \W_{i} (x), ..., \R_{j} (x), i \ne j $: edge from $ i $ to $ j $
+      \end{itemize}
+
+  \subsection{Finding Equivalent Serial Schedule}
+
+    \begin{itemize}
+      \item \emph{If there is no cycle}, make a topological sorting of PG
+      \item \emph{Algorithm}: start with an empty sorted list and repeat
+      until you can no longer do this
+      \begin{itemize}
+        \item Find a node N with no incoming edges, remove N, and all N's
+        outgoing edges from the graph. Append N to the sorted list
+      \end{itemize}
+
+      \item Several linear orders can be obtained
+    \end{itemize}
+
+  \subsection{Lock-Based Concurrency Control}
+
+    \begin{itemize}
+      \item \emph{Strict Two-phase Locking (Strict 2PL) Protocol}:
+      \begin{itemize}
+        \item Each Xact must obtain a S(shared) lock on object before reading,
+        and an X(exclusive) lock on object before writing
+        \item All locks held by a transaction are released when the transaction
+        completes
+        \begin{itemize}
+          \item Non strict 2PL: release lock anytime, but cannot acquiare locks
+          after releasing any locks
+        \end{itemize}
+
+        \item If an Xact holds an X lock on an object, no other Xact
+        can get a lock (S or X) on that object
+        \item If an Xact holds a S lock on an object, no other Xact can get a
+        X lock on that object
+      \end{itemize}
+
+      \item \emph{Allows only serializable schedules}
+      \begin{itemize}
+        \item Simplifies transaction aborts
+        \item Non-strict 2PL \emph{also} allows only serializable schedules,
+        but involes \emph{more complex abort processing}
+      \end{itemize}
+
+      \item DB lock guarantee the correctness of entire set of operations, i.e.
+      transactions, OS lock guarantee the correctness of a single operation
+    \end{itemize}
+
+    \subsubsection{Deadlocks}
+
+      \begin{itemize}
+        \item Various mechanism exists (timeout, WFG)
+        \item Scheduler must abort some transaction to resolve the deadlock,
+        and the aborted transaction must be restarted
+      \end{itemize}
+
+    \subsection{Recovery}

@@ -1,0 +1,125 @@
+\section{Representation}
+
+\begin{itemize}
+  \item \textbf{\Gls{configuration}}: \glsdesc{configuration}
+  \begin{itemize}
+    \item To completely describe a configuration, we need
+    \begin{itemize}
+      \item \textbf{\Gls{reference-point}}: usually a point on the robot
+      \item A description of its \textbf{\gls{degrees-freedom}}
+    \end{itemize}
+  \end{itemize}
+
+  \item \textbf{\Gls{workspace}}: \glsdesc{workspace}
+  \begin{itemize}
+    \item $ q = \left( x, y \right) $: $ q $ is a point
+    \item Part of the \gls{workspace} occupied by a robot in \gls{configuration}
+    $ q $ as $ R\left( q \right) $
+    \item $ WO_{i} $: workspace obstacle $ i $
+  \end{itemize}
+
+  \item \textbf{\Gls{configuration-space}}: \glsdesc{configuration-space}
+  \begin{itemize}
+    \item $ Q = \mathbb{R}^{2} $: $ Q $ is configuration space
+    \item $ Q O_{i} = \left\{ q \in Q | R\left( q \right) \cap WO_{i} \ne \emptyset \right\} $:
+    configuration space obstacle
+    \item Free space: $ Q_{free} = Q \backslash \left( U_{i} QO_{i} \right) $
+    \item A robot will have size in workspace, but will be a point in configuration
+    space
+  \end{itemize}
+
+  \item \textbf{\Gls{degrees-freedom}}: \glsdesc{degrees-freedom}
+  \item \textbf{\Gls{rigidbody}}: \glsdesc{rigidbody}
+  \item \textbf{\Gls{euclidean-group}}: \glsdesc{euclidean-group}
+  \begin{itemize}
+    \item $ \E\left( n \right) $: operation in $ n $-D space
+  \end{itemize}
+
+  \item \textbf{\Gls{special-euclidean-group}}: \glsdesc{special-euclidean-group}
+  \begin{itemize}
+    \item $ \SE\left( n \right) $: operation in $ n $-D space
+  \end{itemize}
+\end{itemize}
+
+\subsection{State}
+
+  \begin{equation}
+    \text{open}\left( \text{fridge} \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item States are represented using predicates chained together with operator.
+    \item Predicates take states as objects
+  \end{itemize}
+
+\subsection{Action}
+
+  \begin{equation}
+    \text{Take-out}\left( \text{butter}, \text{fridge} \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item Actions takes objects are arguments
+    \item \textbf{Preconditions}: logical conditions required for an action
+    to happen
+    \item \textbf{Effects (postconditions)}: changes the action makes to the
+    state of the world
+    \item Pre/Post condition determines how actions can be fitted into the
+    plan and encode some limited knowledge about the meaning of each action
+  \end{itemize}
+
+\subsection{Minkowski Sum}
+
+  Given an obstacle and a robot of polygon shape in workspace, in order to
+  figure out the configuration space obstacle, we find the \gls{minkowski-sum}
+  of the two entities.
+
+  \begin{align}
+    P \oplus Q &= \left\{ p + q | p \in P, q \in Q \right\}
+    O_{c} &= O_{w} \oplus \left( -R \right)
+  \end{align}
+
+  C-space obstacle is the convex hull of $ O_{c} $
+
+  \begin{algorithm}[H]
+    \caption{Minkowski Sum}
+    \KwIn{$ V_{o} $: vertices of an obstacle}
+    \KwIn{$ V_{p} $: vertices of a polygon}
+    \KwOut{$ V_{s} $: vertices in minkowski sum}
+
+    \Begin{
+      \ForEach{$ v_{o} \in V_{o} $} {
+        \ForEach{$ v_{p} \in V_{p} $} {
+          $ V_{s} += v_{p} + v_{o} $\;
+        }
+      }
+    }
+  \end{algorithm}
+
+  \begin{itemize}
+    \item $ O_{w} $: workspace obstacle
+    \item $ O_{c} $: configuration space obstacle
+    \item $ R $: the reference point
+    \item Convex hull, i.e. shell of \Gls{minkowski-sum} of two convex polygons
+    with $ m $ and $ n $ vertices is a convex polygon with $ m + n $ vertices
+    \item \textbf{In configuration space with orientation ($ \SE\left( 2 \right) $)}:
+    stack together cartesian c-space at different orientations gives us a
+    complete C-space
+  \end{itemize}
+
+\subsection{Manipulators}
+
+  \begin{itemize}
+    \item Fixed at a base, end-effector at the end
+    \item Series of links connected by joints
+    \item Each joint is a single DOF, described by a \textbf{joint variable}
+    \item \textbf{C-space of manipulators}
+    \begin{itemize}
+      \item No joint limits: $ S^{1} \times S^{1} = T^{2} $; $ S $ is angle
+      \item $ T $ is a fundamental torus group, \textbf{can be flattend (with losses)
+      into a cartesian representation}; cartesian space cannot model continuity
+      from $ 0, 2\pi $
+    \end{itemize}
+
+    \item \textbf{Workspace}: all reachable locations in the environment
+  \end{itemize}

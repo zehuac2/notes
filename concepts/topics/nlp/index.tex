@@ -1,0 +1,34 @@
+\documentclass[letterpaper, 11pt]{report}
+\usepackage{import}
+\import{../../shared/config/}{packages}
+\usepackage[utf8]{inputenc}
+\usepackage{inconsolata}
+\usepackage{glossaries}
+
+\import{../../shared/config/}{styles}
+\import{../../shared/config/}{macros}
+
+\title{Natural Language Processing}
+\author{Zehua Chen}
+
+% \makeglossaries
+
+\import{glossaries/}{index}
+
+\DeclareMathOperator{\Prob}{P}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \import{topics/}{overview}
+  \import{topics/regex/}{index}
+  \import{topics/}{syntax}
+  \import{topics/corpus}{index.tex}
+  \import{topics/}{implementation.tex}
+
+  % \newpage
+  % \printglossary
+\end{document}

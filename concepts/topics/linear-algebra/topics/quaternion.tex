@@ -1,0 +1,131 @@
+\chapter{Quaternion}
+
+Quaternions are made up of four numbers
+
+\begin{align}
+  q &= q_{0} + i q_{1} + j q_{2} + k q_{e} \\
+  &= \left< s, v \right>
+\end{align}
+
+Given a rotation by angle $ \theta $ around an axis $ a $, the quaternion $ q $
+can be formed by
+
+\begin{equation}
+  q =
+  \left<
+    \cos\frac{\theta}{2},
+    a_{x} \sin\frac{\theta}{2},
+    a_{y} \sin\frac{\theta}{2},
+    a_{z} \sin\frac{\theta}{2}
+  \right>
+\end{equation}
+
+\begin{itemize}
+  \item This can be thought as a rotation around a certain axis
+  \item Combining the two variables make it easier to convert to matrices
+  \item All quaternions formed this way are unit length
+\end{itemize}
+
+\section{Properties}
+
+  \begin{itemize}
+    \item For every rotation other than identity, there are two quaternions
+    \begin{itemize}
+      \item Directions can point in both ways
+    \end{itemize}
+
+    \item Multiplying unit quaternions give you unit quaternions
+    \item Quaternion multiplications are associative
+    \item Quaternion multiplications are not associative
+  \end{itemize}
+
+\section{Operations}
+
+  \begin{itemize}
+    \item \textbf{Identity}
+    \begin{equation}
+      q_{i} = \left< 1, 0, 0, 0 \right>
+    \end{equation}
+
+    \item \textbf{Unit Quaternion}
+    \begin{equation}
+      \left| q \right| = \sqrt{a^{2} + b^{2} + c^{2} + d^{2}} = 1
+    \end{equation}
+
+    \item \textbf{Multiplication}: $ q q' $, $ q $ rotated by $ q' $
+    \begin{align}
+      qq' &= \left< s s' - v \cdot v', s v' + s' v + v \times v' \right>
+    \end{align}
+
+    \item \textbf{Dot Product}
+    \begin{equation}
+      p \cdot q = p_{0} q_{0} + p_{1} q_{1} + p_{2} q_{2} + p_{3} q_{3}
+      = \left| p \right| \left| q \right| \cos \theta
+    \end{equation}
+
+    \begin{itemize}
+      \item If the two quaternions are unit quaternions, this would be the
+      angle between the quaternions
+    \end{itemize}
+
+    \item \textbf{Inverse}
+    \begin{align}
+      q^{-1}
+      &= \left( \cos\left( \theta / 2 \right) + \sin\left( \theta / 2 \right) u \right)^{-1} \\
+      &= \cos\left( - \theta / 2 \right) + \sin\left( - \theta / 2 \right) u \\
+      &= \cos\left( \theta / 2 \right) - \sin\left( \theta / 2 \right) u \\
+      &= \left< a, -b, -c, -d \right>
+    \end{align}
+
+    \item \textbf{Rotating Point}: given a point $ p = \left< 0, x, y, z \right> $,
+    and a quaternion $ q $, the rotated point $ p' $ is
+    \begin{equation}
+      p' = q p q^{-1}
+    \end{equation}
+
+    \item \textbf{Rotation Matrix}
+    \begin{equation}
+      \begin{bmatrix}
+        2\left( a^{2} + b^{2} \right) - 1 & 2\left( bc - ad \right) & 2\left( bd + ac \right) \\
+        2\left( bc + ad \right) & 2\left( a^{2} + c^{2} \right) - 1 & 2\left( cd - ab \right) \\
+        2\left( bd - ac \right) & 2\left( cd + ab \right) & 2\left( a^{2} + d^{2} \right) - 1
+      \end{bmatrix}
+    \end{equation}
+
+    \item \textbf{Quaternion to Angle Axis}
+    \begin{align}
+      \theta &= 2 \cos^{-1} a \\
+      v &= \frac{1}{\sqrt{1 - a^{2}}} \left( b, c, d \right)
+    \end{align}
+
+    \item \textbf{Linear Interpolation}: $ a, b $ are quaternions, $ t $ is time
+    \begin{equation}
+      \begin{split}
+        \theta &= \cos^{-1}\left( a, b \right) \\
+        \text{slerp} &= \frac{\sin\left( \left( 1 - t \right) \theta \right)}{\sin\theta} a
+        + \frac{\sin\left( t \theta \right)}{\sin\theta} b
+      \end{split}
+    \end{equation}
+
+  \end{itemize}
+
+\section{Game Engines}
+
+  \subsection{Unity}
+
+    \begin{itemize}
+      \item Unity implements quaternion as follows
+      \begin{equation}
+        q =
+        \left<
+          a_{x} \sin\frac{\theta}{2},
+          a_{y} \sin\frac{\theta}{2},
+          a_{z} \sin\frac{\theta}{2},
+          \cos\frac{\theta}{2}
+        \right>
+      \end{equation}
+    \end{itemize}
+
+\section{Quaternions in 4D Space}
+
+  The angle between quaternions in 4D space is half of that in 3D space

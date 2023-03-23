@@ -1,0 +1,54 @@
+\chapter{Others}
+
+\section{Singular Value Decomposition}
+
+  Given that for matrices $ A, B $ must be of sizes
+  $ \left( ?, a \right), \left( a, ? \right) $. We can derive that the
+  sizes of the matrices $ U, \sum, V $ must have the pattern
+  \begin{align*}
+    \left( m, n \right)
+      &= \left( m, a \right) \times \left( a, b \right) \times \left( b, n \right) \\
+      &= \left( m, a \right) \times \left( a, b \right) \times \left( n, b \right)^{T}
+  \end{align*}
+
+  Since we know that $ U, V $ are orthogonal matrices, we know that they
+  are square matrices.
+
+  \begin{align*}
+    \left( m, n \right)
+      &= \left( m, m \right) \times \left( a, b \right) \times \left( n, n \right)^{T}
+  \end{align*}
+
+  From this, we can know that $ \sum $ must be of $ \left( m, n \right) $.
+
+  In conclusion, $ U $ has size $ \left( m, m \right) $, $ \sum $
+  has size $ \left( m, n \right) $ and $ V $ has size $ \left( n, n \right) $.
+
+  \subsection{Inverse}
+
+    Let $ M^{-1} = A B C $
+    \begin{align*}
+      M \times M^{-1} &= \left( A B C \right) U \Sigma V^{T} \\
+      I &= A B \left( C U \right) \Sigma V^{T} \\
+    \end{align*}
+
+    If $ C = U^{T} $, then $ C U^{T} = I $, as $ U $ is an orthogonal matrix.
+
+    \begin{align*}
+      I &= A \left( B \Sigma \right) V^{T}
+    \end{align*}
+
+    Since $ \Sigma $ is not an orthogonal matrix, $ B $ must be $ \Sigma^{-1} $
+    for $ B \Sigma = I $.
+
+    \begin{align*}
+      I &= A V^{T}
+    \end{align*}
+
+    If $ A = V $, then $ A V^{T} = I $, as $ V $ is an orthogonal matrix.
+
+    In conclusion,
+
+    \begin{align*}
+      M^{-1} = V \Sigma^{-1} U^{T}
+    \end{align*}

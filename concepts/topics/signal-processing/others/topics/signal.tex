@@ -1,0 +1,236 @@
+\chapter{Signals}
+
+\section{Signals}
+
+  \begin{itemize}
+    \item \textbf{\Gls{signal}}: \glsdesc{signal}
+    \begin{itemize}
+      \item Some signals can be described mathmetically
+      \item Some signals are too complicated to be described mathmetically
+      \item Signals can be 1D (audio), 2D (image), 3D (movie)
+    \end{itemize}
+
+    \item \textbf{\Gls{continuous-signal}}: \glsdesc{continuous-signal}
+    \begin{itemize}
+      \item We need to be able to convert analogue signals to continuous signals
+      for processing
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Analogue vs Digital Signal}
+
+    \begin{itemize}
+      \item \textbf{Analogue Signal}
+      \begin{enumerate}
+        \item \textbf{Pro}: fast, well-behaved and degrades gracefully
+        \item \textbf{Con}: incompatible with computers
+        \item \textbf{Con}: needs special hardware
+        \item \textbf{Con}: practical limits to signal processing
+      \end{enumerate}
+
+      \item \textbf{Digital Signal}
+      \begin{enumerate}
+        \item \textbf{Pro}: unlimited processing without specialized hardware
+        \item \textbf{Pro}: can employ error correcting codes
+        \item \textbf{Con}: needs care in acquisition
+        \item \textbf{Con}: slow to process and potential loss of information
+      \end{enumerate}
+    \end{itemize}
+
+  \subsection{Workflow of DSP Systems}
+
+    \begin{enumerate}
+      \item \textbf{A/D Converter}: convert analogue signal to digital signal
+      \item \textbf{Disgital Signal Processor}: take in digital input and
+      produce digital output
+      \item \textbf{D/A Converter}: convert digital signal to analogue signal
+    \end{enumerate}
+
+  \subsection{Types of Operations}
+
+    \begin{enumerate}
+      \item \textbf{Time-domain}: scaling, shifting, addition
+      \item \textbf{Correlation}: comparing one reference signal with others
+      to determine similarity
+      \item \textbf{Digital filtering}: let certain band of specific frequencies
+      pass while blocking others
+      \item \textbf{Modulation and demodulation}: amplitude modulation,
+      frequency modulation, phase modulation
+      \item \textbf{Discrete transformation}: represent a discrete-time signal
+      in frequency domain
+    \end{enumerate}
+
+  \subsection{Three Fundamental Ideas of DSP}
+
+    \begin{enumerate}
+      \item Any signal can be represented using a finite number of discrete
+      data points over time
+      \item Any signal can be broken down into a stream of bits that can
+      be stored, generated and manipulated by a computer
+      \item Any practical signals can be represented as sums of sinusoids
+      (or complex exponentials)
+    \end{enumerate}
+
+\section{Properties of Signals}
+
+  \begin{itemize}
+    \item \textbf{\Gls{period}} ($ T $): \glsdesc{period}
+    \begin{itemize}
+      \item Speech waveforms are not periodic
+    \end{itemize}
+
+    \item \textbf{\Gls{frequency}} ($ f $): \glsdesc{frequency}
+    \begin{align}
+      f &= \frac{1}{T} \\
+      \omega &= 2 \pi f \\
+    \end{align}
+    \begin{align*}
+      y\left( t \right) &= A \sin\left( 2\pi f t + \phi \right) \\
+      y\left( t \right) &= A \sin\left( w t + \phi \right) \\
+    \end{align*}
+    \begin{itemize}
+      \item $ \omega $: angular frequency; (rad/s)
+      \item $ f $: linear frequency; (Hz)
+    \end{itemize}
+
+    \item \textbf{\Gls{phase}} ($ \phi $): \glsdesc{phase}
+    \begin{align}
+      d &= \frac{360 \phi}{2 \pi} \\
+      \phi &= \frac{2 \pi d}{360}
+    \end{align}
+    \begin{itemize}
+      \item $ \phi $: phase in radians
+      \item $ d $: phase in angle
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Properties of Continuous Signal}
+
+    \begin{equation*}
+      x\left( t \right) = A \sin\left( 2\pi f t + \phi \right)
+    \end{equation*}
+
+    \begin{enumerate}
+      \item Inputs to discrete signals are floating points
+      \begin{itemize}
+        \item Ex. if $ x \in \left[-1, 1\right] $, then
+        there are infinite number of $ x $
+      \end{itemize}
+
+      \item For every fixed value of $ f $, $ x\left( t \right) $ is periodic
+      with period being $ T = \frac{1}{f} $
+      \item Continuous signals with distinct equations are themselves distinct
+      \item Increasing $ f $ results in an increase in the rate of oscillation,
+      as $ t $ is continuous, we can increase $ f $ without limit
+    \end{enumerate}
+
+  \subsection{Properties of Discrete Signal}
+
+    \begin{equation*}
+      x\left( n \right) = A \sin\left( \omega' n + \phi \right)
+    \end{equation*}
+
+    \begin{align}
+      \omega' &= 2\pi f' \\
+      f' &= \frac{f}{f_{s}}
+    \end{align}
+
+    $ f' $ is cycles per sample and $ f_{s} $ is the sampling frequency
+
+    \begin{enumerate}
+      \item Inputs to discrete signals are integers
+      \begin{itemize}
+        \item Ex. if $ n \in \left[-1, 1\right] $, then
+        $ n = \left\{ -1, 0, 1 \right\} $
+      \end{itemize}
+
+      \item A discrete time signal is periodic if $ f' $ is a rational number
+      \begin{itemize}
+        \item Fundamental period $ N $
+      \end{itemize}
+
+      \item Discrete time signals whose frequencies are separated by an
+      integer multiple of $ 2 \pi $ are identical
+      \item The highest rate of oscillation is when $ \omega = \pi $ or
+      $ f = \frac{1}{2} $
+      \item \textbf{Aliasing}: if the angular frequency of a discrete time
+      signal increases from $ \pi $ to $ 2\pi $, its rate of oscillation
+      will decrease
+    \end{enumerate}
+
+\section{Digitalisation}
+
+  DSP requires a signal to be \textbf{sampled} in time and \textbf{quantised}
+  in amplitude.
+
+  \begin{itemize}
+    \item \textbf{\Gls{sampling}}: \glsdesc{sampling}
+    \item \textbf{\Gls{quantisation}}: \glsdesc{quantisation}
+  \end{itemize}
+
+  \subsection{Sampling}
+
+    \begin{equation}
+      t = n \Delta_{s} = \frac{n}{f_{s}}
+    \end{equation}
+
+    \begin{itemize}
+      \item $ t $: continuous time in seconds
+      \item $ f_{s} $: sampling frequency
+      \item $ n $: number of seconds
+      \item $ \Delta_{s} $: the sampling period
+    \end{itemize}
+
+  \subsection{Quantisation}
+
+    \begin{itemize}
+      \item \textbf{\Gls{quantisation-level}}: \glsdesc{quantisation-level}
+      \begin{itemize}
+        \item The number of bits determines the number of levels; given $ n $
+        bits, there will be $ 2^{n} $ quantisation levels
+        \item 16 bits is typically used
+      \end{itemize}
+
+      \item \textbf{\Gls{quantisation-step}}: \glsdesc{quantisation-step}
+      \item \textbf{\Gls{quantisation-error}}: \glsdesc{quantisation-error}
+      \begin{equation}
+        e_{q}\left( n \right) = x_{q}\left( n \right) - x\left( n \right)
+      \end{equation}
+      \begin{itemize}
+        \item There will alwyas be \gls{quantisation-error}
+        \item It is always possible to talk about the signal to noise ratio
+        (SNR) of a clean digital signal
+        \item Distortion, i.e. clipping, makes \gls{quantisation-error}
+        difficult to handle
+      \end{itemize}
+    \end{itemize}
+
+    \begin{equation}
+      \rms_{e} = \sqrt{\frac{\sum_{1}{N} e_{q}^{2}\left( n \right)}{N}}
+    \end{equation}
+
+\section{Nyquist Frequency/Limit}
+
+  A signal can only be recovered from a sampled signal if the signal is
+  sampled at $ f_{s} $ where
+
+  \begin{align}
+    f_{s} &> 2 f \\
+    \frac{f_{s}}{2} &> f
+  \end{align}
+
+  $ \frac{f_{s}}{2} $ is called the \textbf{Nyquist frequency/limit}
+
+  \paragraph{Example}
+  To sample a 100 Hz sine wave, an $ f_{s} > 200 $ is required
+
+  \subsection{Aliasing}
+
+    \begin{enumerate}
+      \item Given a $ f_{s} $ a sine wave at $ f $ is indistinguishable
+      from a sine wave at frequency $ f - f_{s} $
+      \item Given a $ f_{s} $ and an integer $ k $, a sine wave at
+      $ f $, where $ 0 < f < \frac{f_{s}}{2} $ is indistinguishable
+      from a sine wave at frequency $ f + k \times f_{s} $ after being sampled
+      by $ f_{s} $
+    \end{enumerate}

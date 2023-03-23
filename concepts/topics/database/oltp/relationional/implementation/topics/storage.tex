@@ -1,0 +1,176 @@
+\chapter{Storage}
+
+\begin{itemize}
+  \item \emph{Disk Block}: data on disk is read and written in disk blocks
+  \item \emph{Page}: made of multiple blocks
+  \item \emph{READ}: fetch data from disk to main memory
+  \item \emph{WRITE}: flush data from main memory to disk
+  \item \emph{Time to access a disk block}: $ seek + rotation + transfer $
+  \begin{itemize}
+    \item Seek and rotation dominiate
+  \end{itemize}
+\end{itemize}
+
+\section{Disk Space Management}
+
+  Lowest layer of DMBS manages disk space
+
+  \begin{enumerate}
+    \item \code{allocate(int n)}: allocate n pages, returns the pid of the
+    first page of the sequence of n pages
+    \item \code{deallocate(int pid, int n)}: free n consecutive pages starting
+    from pid.
+  \end{enumerate}
+
+\section{Buffer Management}
+
+  \begin{enumerate}
+    \item If requested page is not in pool
+    \begin{enumerate}
+      \item Choose a frame to be replaced
+      \item If the frame is dirty, write it to disk
+      \item Read request page into chosen frame
+    \end{enumerate}
+
+    \item Pin the page and returns its address
+    \item If requests can be predicted, pages can be \emph{pre-fetched}
+  \end{enumerate}
+
+  \subsection{DBMS vs OS File System}
+
+    \begin{itemize}
+      \item Portability
+      \item OS files cannot span disks
+      \item DMBS needs to
+      \begin{itemize}
+        \item Pin page in a buffer pool, force a page to disk
+        \item Adjust replacement policy, and pre-fetch pages
+      \end{itemize}
+    \end{itemize}
+
+\section{Page Formats}
+
+  \begin{equation}
+    R = (p, n)
+  \end{equation}
+
+  \begin{itemize}
+    \item Record ID composes of page id $ p $, and the index of the record in
+    page $ n $
+    \item Page composes of
+    \begin{itemize}
+      \item \emph{Pointer to start of free space}
+      \item A number $ N $, \emph{number of slots}
+      \item \emph{Slot directory}: an array where element is the pointer to
+      a record and index of the element is $ n $
+      \item \emph{Records}
+    \end{itemize}
+  \end{itemize}
+
+\section{Files}
+
+  \begin{itemize}
+    \item Higher levels of DBMS operate on records and files of records
+    \item \emph{File}: a collection of pages, each containing a collection
+    of records. Must support
+    \begin{itemize}
+      \item Insert, delete and modify command
+      \item Read a particular record using record id
+      \item Scan all records
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Heap}
+
+    \begin{itemize}
+      \item Contain records with no particular order
+      \item As files grow and shrink, disk space are allocated and deallocated
+    \end{itemize}
+
+    \subsubsection{Poissible Implementations}
+
+      \begin{itemize}
+        \item \emph{List}: a header page contains link to two doubly linked list,
+        one for full pages and one for pages with free space
+        \item \emph{Page directory}: header pages contains records to data pages
+        and how many space are available on these data pages
+      \end{itemize}
+
+\section{Index}
+
+  \begin{itemize}
+    \item An \emph{index} on a \emph{file} speeds up selectino on the search key fields
+    for the index
+    \begin{itemize}
+      \item Any subset of the fields of a relation can be the search key for
+      an index on the relation
+      \item Search key is not the same as key\footnote{minimal set of
+      fields that uniquely identify a record in a relation}
+    \end{itemize}
+
+    \item A index contains a collection of data entries.
+    \item A index supports efficient retrieval of all data entries $ k* $
+    with the given key $ k $
+  \end{itemize}
+
+  \subsection{Hash}
+
+    \begin{itemize}
+      \item Good for equality selections
+      \item Index is a collection of \emph{buckets}
+      \item A \emph{bucket} is \emph{primary page plus zero or more overflow pages}
+      \item \emph{Hashing function}:
+      \begin{itemize}
+        \item $ h(r) $ bucket in which record $ r $ belongs.
+        $ h $ looks at the search key fields on $ r $
+        \item $ N = \#\text{ of buckets}, h(k) \% N = $ buckets to which data
+        entry with key $ k $ belongs
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{BTree}
+
+    \begin{itemize}
+      \item \emph{Leaf} page \emph{contain data entries} and \emph{are chained}
+      \item \emph{Non-leaf} pages contain \emph{index entries}, facilitating navigation
+      to lower level node and eventually the leaf node
+      \item Tree is always height balanced
+      \item \emph{Nodes are at least 50\% full (except for root)}
+      \item Supports both \emph{equality and range search}
+    \end{itemize}
+
+  \subsection{Primary vs Secondary Index}
+
+    Primary vs secondary index is \emph{orthogonal to the indexing used}
+
+    \begin{itemize}
+      \item \emph{Primary index}: the data entry k* in the index contains
+      the data record with search key value k
+      \begin{itemize}
+        \item \emph{Pro}: fast, avoids an extra IO access
+        \item \emph{Con}: at most one primary index on a given collection of
+        data records (otherwise, records are duplicated)
+        \item \emph{Con}: large data entries, more pages for data, size of
+        index is too large
+      \end{itemize}
+
+      \item \emph{Secondary index}: the data entry k* in the index is of the form
+      \begin{equation}
+        <k, \text{RID of data record with search key value k}>
+      \end{equation}
+      \begin{itemize}
+        \item \emph{Pro}: any number of secondary indices
+        \item \emph{Pro}: data entry smaller than data records, fewer leaf pages,
+        smaller index
+        \item \emph{Con}: an extra IO to fetch data record
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Clustering}
+
+    If order of data records is the same as or close to order of data
+    entries, then it is called a clustered indx
+
+    \begin{itemize}
+      \item Primary index is clustered
+    \end{itemize}

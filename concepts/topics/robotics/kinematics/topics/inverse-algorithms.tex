@@ -1,0 +1,42 @@
+\chapter{Inverse Kinematics Algorithms}
+
+\section{Cyclic Coordinate Descent}
+
+  Solve 1-DOF IK problem is easier. Iteratively cycle through each joint
+  one at a time until full convergence.
+
+  \subsection{Revolute Joint}
+
+    \begin{itemize}
+      \item $ v_{in} $: vector between the joint and the end effector normalized
+      \item $ v_{it} $: vector between target position and end effector and joint
+      \item $ o_{t}, o_{n} $ change as the robot moves
+      normalized
+      \item If $ \sign\left( v_{in} \times v_{it} \right) $ is positive, then
+      $ \Delta \theta_{i} $ is positive, and vice versa
+    \end{itemize}
+
+  \subsection{Prismatic Joint}
+
+  \subsection{Considerations}
+
+    \begin{itemize}
+      \item Joint ordering does not affect convergence
+      \item Start near the base: similar to human leg movement (start at hip)
+      \begin{itemize}
+        \item All links end up moving, links near end effector will move the most
+      \end{itemize}
+
+      \item Start near end effector: similar to human hand and arm
+      \begin{itemize}
+        \item Less disruption to the links closer to the base
+      \end{itemize}
+
+      \item Motions not guaranteed to be smooth
+      \item Convergence difficult to targets that require singular or near-signular
+      configurations
+    \end{itemize}
+
+\section{FK Approximation}
+
+\section{Newton's Method}

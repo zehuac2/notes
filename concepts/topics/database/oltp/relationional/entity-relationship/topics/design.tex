@@ -1,0 +1,78 @@
+\chapter{Database Design}
+
+\begin{itemize}
+  \item \emph{Conceptual design} (entity relationship model is used at this
+  stage)
+  \begin{itemize}
+    \item Identify entites and relationships and what information to store about
+    them should we store
+    \item Identify integrity constraints or business rules
+    \item A schema in the ER model can be represented pictorially
+    (ER diagrams)
+    \item Can map ER diagram into relational schema
+  \end{itemize}
+  \item \emph{Physical database design and turning}
+\end{itemize}
+
+\section{Entity and Relationships}
+
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}
+      \node[circle, draw] (attribute) {Attribute};
+      \node[rectangle, below = of attribute, draw] (entity) {Entity};
+      \node[diamond, below = of entity, draw] (relationship) {Relationship};
+
+      \draw (attribute) -- (entity);
+      \draw (entity) -- (relationship);
+    \end{tikzpicture}
+  \end{figure}
+
+  \begin{itemize}
+    \item \emph{Entity} real-world objects distinguishable from other objects;
+    described using a set of attributes
+    \begin{itemize}
+      \item \emph{Attribute}: holds \emph{a single value} of some
+      domtain/type (no arrays, structures, subsets, ...)
+      \item Represented using rectangles
+    \end{itemize}
+
+    \item \emph{Entity set}: a collection of similar entities
+    \begin{itemize}
+      \item Share the same set of attributes
+      \item Each entity set has \emph{a unique key}
+    \end{itemize}
+
+    \item \emph{Relationship}: association among entities ($ > 1 $)
+    \begin{itemize}
+      \item Attributes are optional
+      \item Types
+      \begin{enumerate}
+        \item 1 to 1
+        \item 1 to many
+        \item Many to 1
+        \item Many to many
+      \end{enumerate}
+    \end{itemize}
+
+    \item \textbf{Relationship set}: a collection of similar entities
+    \begin{itemize}
+      \item A $ n $-nary relationship set $ R $ relates $ n $ entity set
+      $ E_{1}, ..., E_{n} $
+      \item Same entity set can participates in different relationship set,
+      or in different roles in the same set
+    \end{itemize}
+  \end{itemize}
+
+\section{Constraints}
+
+  \begin{itemize}
+    \item \emph{Key and Participation Constraints}
+    \begin{itemize}
+      \item Many to 1
+      \item Many to many
+    \end{itemize}
+
+    \item \emph{Key constraints}
+    \item \emph{Participation constraints}
+  \end{itemize}

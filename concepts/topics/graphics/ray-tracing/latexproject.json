@@ -1,0 +1,10 @@
+{
+  "entry": "index.tex",
+  "glossary": true,
+  "includes": [
+    "../../../shared/config/",
+    "../../../shared/packages/",
+    "./topics",
+    "./glossaries"
+  ]
+}

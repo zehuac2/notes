@@ -1,0 +1,46 @@
+\section{Normals}
+
+Normals is an important part of shading
+
+\subsection{Compute Normals}
+
+  \begin{itemize}
+    \item \textbf{CCW}: counter clock wise positioning of triangle vertices
+    \begin{itemize}
+      \item $ v_{0} $ is at the lower left
+      \item $ v_{1} $ is at the lower right
+      \item $ v_{2} $ is at the upper center
+    \end{itemize}
+  \end{itemize}
+
+  \subsubsection{Per Face}
+
+    \begin{equation}
+      n = \left( v_{1} - v_{0} \right) \times \left( v_{2} - v_{0} \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item $ n $ should face out of the page, assuming CCW positioning
+      \item Not smooth
+    \end{itemize}
+
+  \subsubsection{Per Vertex}
+
+    Sum of the normals of neighboring faces and normalized
+
+    \begin{itemize}
+      \item Smooth
+      \item Use a normal array that is as long as the vertex array; keep
+      accumulating value when going over faces
+    \end{itemize}
+
+\subsection{Transform}
+
+  \begin{equation}
+    n' = \left( T^{-1} \right)^{T} n
+  \end{equation}
+
+  $ T $ is the transformation applied to an object; $ X^{T} $ is the transpose
+  of $ X $
+
+  $ n' $ needs to be normalized

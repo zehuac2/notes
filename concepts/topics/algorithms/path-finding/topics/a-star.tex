@@ -1,0 +1,72 @@
+\chapter{A Star}
+
+A star algorithm find the path with the smallest $ f $. A possible $ f $
+can be:
+
+\begin{align}
+  f\left( n \right) &= g\left( n \right) + h\left( n \right) \\
+  g\left( n \right) &= \text{cost of path from start to node $ n $} \\
+  h\left( n \right) &= \text{heuristics of estimate of cost from $ n $ to goal}
+\end{align}
+
+If $ h $ is \emph{admissible}, meaning if it never overestimate the cost to get to
+goal, \emph{A star returns the least cost path}
+
+\begin{algorithm}
+  \Begin{
+    $ openSet = \left\{ start \right\} $\;
+    $ cameFrom = \left\{ \right\} $\;
+
+    \BlankLine
+
+    $ g\left( every node \right) = \infty $\;
+    $ g\left( start \right) = 0 $\;
+
+    \BlankLine
+
+    $ f\left( every node \right) = \infty $\;
+    $ f\left( start \right) = h\left( start \right) $\;
+
+    \BlankLine
+
+    \While{$ openSet $ is not emtpy}{
+      $ current = \text{item with smallest $ f $ in $ openSet $} $\;
+
+      \BlankLine
+
+      \If{$ current $ is $ goal $}{
+        \Return{Reconstruct path from using $ cameFrom, current $}\;
+      }
+
+      \BlankLine
+
+      Remove $ current $ from $ openSet $\;
+
+      \BlankLine
+
+      \ForEach{$ neighbor $ of $ current $}{
+        \tcp{g' is the tentative g score}
+        \tcp{d is the weight from current to neighbor}
+        $ g'\left( neighbor \right) = g\left( current \right) + d\left( current, neighbor \right) $\;
+
+        \BlankLine
+
+        \If{$ g'\left( neighbor \right) < g\left( neighbor \right) $}{
+          $ cameFrom\left[ neighbor \right] = current $\;
+          $ g\left( neighbor \right)  = g'\left( neighbor \right) $\;
+          $ f\left( neighbor \right)  = g'\left( neighbor \right) + h\left( neighbor \right) $\;
+
+          \BlankLine
+
+          \If{$ neighbor $ not in $ openSet $}{
+            Add $ neighbor $ to $ openSet $\;
+          }
+        }
+      }
+    }
+
+    \BlankLine
+
+    \Return{Failure}\;
+  }
+\end{algorithm}

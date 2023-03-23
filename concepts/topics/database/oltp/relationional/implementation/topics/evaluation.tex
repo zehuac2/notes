@@ -1,0 +1,203 @@
+\chapter{Query Evaluation}
+
+  \begin{itemize}
+    \item \emph{Cluster}
+    \begin{itemize}
+      \item Data stored on a heap is not clustered
+    \end{itemize}
+  \end{itemize}
+
+\section{Catalogs}
+
+  \begin{figure}
+    \centering
+    \caption{Attribute\_Cat Table}
+    \begin{tabu} to \columnwidth{| X[1, l] | X[1, l] | X[1, l] | X[1, l] |}
+      \hline
+      \bfseries{attr\_name} & \bfseries{rel\_name} & \bfseries{type} & \bfseries{position} \\ \hline \hline
+      attr\_name & Attribute\_Cat & string & 1 \\ \hline
+      rel\_name & Attribute\_Cat & string & 2 \\ \hline
+      type & Attribute\_Cat & string & 2 \\ \hline
+      sid & Students & string & 1 \\ \hline
+      name & Students & string & 2 \\ \hline
+    \end{tabu}
+  \end{figure}
+
+  \begin{itemize}
+    \item \emph{Catalogs are tables}; attributes of the catalog table is also
+    stored in the catalog
+    \item Catalogs contain at least
+    \begin{itemize}
+      \item \emph{Number of tuples and pages} for reach \emph{relation}
+      \item \emph{Number of distinct key values and pages} for each \emph{index}
+      \item \emph{Index height, low and high key values} for each tree \emph{index}
+    \end{itemize}
+
+    \item Catalogs are updated periodically
+  \end{itemize}
+
+\section{Access Paths}
+
+  \begin{itemize}
+    \item An \emph{access path is a method of retrieving tuples}: file scan or
+    index that matches a selection (in the query)
+    \item A tree index matches (a conjunction of) terms \emph{involve only attributes
+    in a prefix of the search key}
+    \begin{itemize}
+      \item Ex. a tree index on $ <a, b, c> $ matches the selection
+      $ a = 5 \AND b = 3 $, and $ a = 5 \AND b > 6 $, but
+      not $ b = 3 $; b is not in the prefix;
+      \item $ a = 5 \AND b = 3 $ is \emph{the search key}
+    \end{itemize}
+
+    \item A hash index matches (a conjunction of) terms that \emph{has a term
+    $ attribute = value $ for every attribute in the search key} of the index
+    \begin{itemize}
+      \item Ex. hash index on $ <a, b, c> $ matches the
+      \begin{itemize}
+        \item $ a = 5 \AND b = 3 \AND c = 5 $
+      \end{itemize}
+      but not
+      \begin{itemize}
+        \item $ b = 3 $: not every attribute is included
+        \item $ a = 5 \AND b = 3 $: not every attribute is included
+        \item $ a > 5 \AND b = 3 \AND c = 5 $: $ a > 5 $
+      \end{itemize}
+    \end{itemize}
+
+    \item Selection conditions are first converted to \emph{conjunctive normal form (CNF)};
+    CNF: terms connected by $ \AND $
+    \begin{itemize}
+      \item Every boolean expression can be converted to CNF
+    \end{itemize}
+  \end{itemize}
+
+\section{Selection}
+
+  \begin{itemize}
+    \item Find \emph{the most selective access path}, retrieve tuples using it and apply
+    any remaining terms that don't match the index
+    \item \emph{The most selective access path}: an index or file scan that
+    we estimate would require the fewest page $ I/Os $
+    \item \emph{Terms that match the index reduce} the number of \emph{tuples retrieved};
+    \emph{other terms} are used to \emph{discard retrieved tuples}, \emph{but do not
+    affect the number of tuples/pages fetched};
+    \begin{itemize}
+      \item Given $ day < 8/9/94 \AND bid = 5 \AND sid = 3 $, a B+ tree index
+      on day would be used and $ bid = 5 \AND sid = 3 $ must be used against
+      each retrieved tuple; Or a hash index on $ <bid, sid> $ can be used
+      and $ day < 8/9/94 $ can be used
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Using an Index for Selections}
+
+    \begin{itemize}
+      \item Cost depends on
+      \begin{align*}
+        \#\text{ qualifying tuples and clustering }
+          &= \#\text{ qualifying data entries } \\
+          &+ \text{ cost of retrieving actual records }
+      \end{align*}
+    \end{itemize}
+
+\section{Projection}
+
+  \begin{lstlisting}
+SELECT DISTINCT R.sid, R.bid FROM Reserves R
+  \end{lstlisting}
+
+  \begin{itemize}
+    \item Expensive part is removing duplicates
+    \item \emph{Sorting approach}: sort on $ <sid, bid> $ and remove duplicates
+    \begin{itemize}
+      \item If there is an index on both $ sid, bid $, cheaper to sort data
+      entries
+    \end{itemize}
+    \item \emph{Hasing approach}: hash on $ <sid, bid> $ to create partitions.
+    Load partitions one at a time and create in memory hash structure
+  \end{itemize}
+
+\section{Join}
+
+  \subsection{Block Nested Loop}
+
+    \begin{equation*}
+      R \Join_{i = j} S
+    \end{equation*}
+
+    \begin{lstlisting}
+foreach tuple r in R do
+  foreach tuple s in S where ri == sj do
+    add <r, s> to result
+    \end{lstlisting}
+
+    \begin{itemize}
+      \item If there is an index on the joined column of one relation, make it inner
+      and exploit the index
+      \begin{itemize}
+        \item \emph{Cost}: $ M + \left( \left( M * p_{R} \right) * \text{ cost of finding matching S tuples} \right) $
+        \item $ M = \# \text{ pages of R } $
+        \item $ p_{R} = \# \text{ R tuples per page} $
+      \end{itemize}
+
+      \item For each $ R $ tuple, cost of probing S is
+      \begin{itemize}
+        \item 1 for hash index
+        \item 3 for B+ tree
+        \item Clustered index: 1 IO typical, unclustered: upto 1 IO per matching
+        S tuple
+      \end{itemize}
+
+      \item $ R \Join S, S \Join R $ gives the same result, at different performance
+      \begin{itemize}
+        \item Better to have smaller table on the left of $ \Join $
+        \item Performed by query optimizer
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Sort Merge}
+
+    \begin{align}
+      cost &= N \log N + M \log M + \left( N + M \right) \\
+      cost &= 3 N + 3 M + \left( N + M \right)
+    \end{align}
+
+    \begin{itemize}
+      \item Cost of \emph{scanning (aka. merging)} $ N + M $, could be $ N \times M $
+      \item In practice, the \emph{cost of sorting} can be $ 3 N $
+      \item Sort $ R, S $ on the join column, then scan them to do a merge
+      and output the result tuples
+      \item $ R $ is scanned once, each $ S $ group is scanned per matching
+      $ R $ tuple. (Multiple scans of an S group are likely to find needed pages in buffer.)
+      \item Preferred algorithm when tree or hash index is already available
+    \end{itemize}
+
+\section{System R Optimizer}
+
+  \begin{itemize}
+    \item Most widely used
+  \end{itemize}
+
+  \subsection{Cost Estimation}
+
+    \begin{lstlisting}
+SELECT attribute list FROM relation list WHERE term1 AND ... AND termk;
+    \end{lstlisting}
+
+    \begin{align}
+      \text{result cardinality } &= \max \# tuples * \text{ product of all RFs}
+    \end{align}
+
+    \begin{itemize}
+      \item \emph{Estimate the cost of each operation} in plan tree
+      \item \emph{Estimate size of result} for each operation in plan tree
+      \item \emph{Reduction factor (RF)}: associated with each term reflects
+      the impact of the term in reducing result size
+      \begin{itemize}
+        \item Assume terms are independent
+        \item $ col = value $ has RF $ 1 / \text{ number of possible values} $
+        \item $ col > value $ has RF
+        $ \left( \high(I) - value \right) / \left( \high(I) - \low(I)  \right) $
+      \end{itemize}
+    \end{itemize}

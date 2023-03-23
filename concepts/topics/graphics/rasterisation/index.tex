@@ -1,0 +1,36 @@
+\documentclass[letterpaper, 11pt]{report}
+\usepackage{../../../shared/packages/import}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\import{../../../shared/config/}{packages}
+\usepackage{glossaries}
+
+\usetikzlibrary{positioning}
+
+\title{Computer Graphics - Rendering}
+\author{Zehua Chen}
+
+\import{../../../shared/config/}{styles}
+\import{../../../shared/config/}{macros}
+
+\DeclareMathOperator{\round}{round}
+\DeclareMathOperator{\lerp}{lerp}
+
+\makeglossaries
+\import{glossaries/}{index}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \import{topics/}{overview}
+  \import{topics/pipelines}{index}
+  \import{topics/shading/}{index}
+  \import{topics/textures}{index}
+
+  \newpage
+  \printglossaries
+\end{document}

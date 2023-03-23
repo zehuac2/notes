@@ -1,0 +1,79 @@
+\chapter{Overview}
+
+\begin{itemize}
+  \item \textbf{\Gls{ray}}: \Glsdesc{ray}
+  \item \textbf{\Gls{ray casting}}: \Glsdesc{ray casting}
+  \item Camera shoots rays into the screen.
+  \item In naive ray tracing, if ray hits light, then a pixel is lit.
+  \item In more complex ray tracing, multiple rays, each is slightly different
+  from others, are shot. The result of all the rays lead to the values of one
+  pixel. This can also be used to perform anti-aliasing
+  \item Using \acrfull{bvh} leads to $ O\left( \log n \right) $ runtime
+\end{itemize}
+
+\section{Rays}
+
+  \begin{equation}
+    P\left( t \right) = O + td
+  \end{equation}
+
+  $ P\left( t \right) $ is a point on the ray; $ t $ is the time; $ O $ is
+  the origin, and $ d $ is the direction
+
+  \begin{itemize}
+    \item Rays travel in straight lines
+    \item Rays do not interfere with other rays
+    \item Rays travel from light source to eyes; \textbf{physics is the same under
+    path reversal (reciprocity)}
+  \end{itemize}
+
+  \subsection{Types of Rays}
+
+    \begin{enumerate}
+      \item Primary rays: rays shot from pixels
+      \item Secondary rays
+      \item Shadow rays
+      \item Light rays
+    \end{enumerate}
+
+  \subsection{Transformation}
+
+    \begin{equation}
+      T O + t T d
+    \end{equation}
+
+    $ T $ is the transformation
+
+    \begin{itemize}
+      \item Since d is a vector, it should not be influenced by translation.
+      Use $ w = 0 $
+      \begin{equation*}
+        \begin{bmatrix}
+          x \\
+          y \\
+          z \\
+          0
+        \end{bmatrix}
+      \end{equation*}
+    \end{itemize}
+
+\section{Basic Ray Tracing}
+
+  \begin{algorithm}[H]
+    \caption{Basic Ray Tracing}
+    define objects\;
+    define materials for objects\;
+    define light sources\;
+    define window\;
+    \ForEach{pixel}{
+      construct ray through the pixel\;
+      compute the intersection of the ray with each object\;
+      find the closest intersection\;
+      \If{there is an intersection} {
+        use lights and materials to compute pixel color\;
+      }
+      \Else{
+        pixel is set to background color\;
+      }
+    }
+  \end{algorithm}

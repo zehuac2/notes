@@ -1,0 +1,111 @@
+\chapter{Interpolation}
+
+\section{Linear Interpolation}
+
+  \begin{align}
+    \lerp\left( A, B, t \right)
+    &= \left( 1 - t \right) A + tB \\
+    &= A + t\left( B - A \right)
+  \end{align}
+
+  \begin{itemize}
+    \item $ A $: start
+    \item $ B $: target
+    \item $ t $: time
+  \end{itemize}
+
+\section{Spherical Interpolation}
+
+  Spherical interpolation interpolate quaternions on a sphere
+
+  \begin{align}
+    \theta &= \cos^{-1}\left( a \cdot b \right) \\
+    \slerp\left( t, a, b \right) &=
+      \frac{\sin\left( \left( 1 - t \right) \theta \right)}{\sin \theta} a
+      + \frac{\sin\left( t \theta \right)}{\sin \theta} b
+  \end{align}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\columnwidth]{images/interpolation/slerp-jerk.png}
+  \end{figure}
+
+  Spherical interpolation, $ \vec{q_{1}} \to \vec{q_{2}} \to \vec{q_{3}} $,
+  would experience a jerk during midpoint $ \vec{q_{2}} $
+
+\section{Squad Interpolation}
+
+  Squad interpolation is slerp with control points ($ a $) to pull the path
+  away from jerk points
+
+  \begin{equation}
+    a_{i} =
+      q_{i} \exp
+      \left(
+        - \frac{\log\left( q_{i}^{-1} q_{i - 1} \right)
+        + \log\left( q_{i}^{-1} q_{i + 1} \right)}{4}
+      \right)
+  \end{equation}
+
+  \begin{multline}
+    \squad\left( q_{i}, q_{i + 1}, a_{i}, a_{i + 1}, t \right) = \\
+      \slerp\left(
+        \slerp\left( q_{i}, q_{i + 1}, t \right),
+        \slerp\left( a_{i}, a_{i + 1}, t \right),
+        2t \left( 1 - t \right)
+      \right)
+  \end{multline}
+
+  Won’t actually overlap the control points; the control points pull the
+  interpolation to avoid the jerk
+
+
+\section{Bilinear Interpolation}
+
+  Bilinear interpolation is used to derive the value at a position within
+  a rectangle using the values at the four corners of the rectangle
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\columnwidth]{images/interpolation/bilinear.png}
+  \end{figure}
+
+  \begin{align}
+    f\left( R_{1} \right) = f\left( x, y_{1} \right) &=
+      \frac{x_{2} - x}{x_{2} - x_{1}} f\left( Q_{11} \right) + \frac{x - x_{1}}{x_{2} - x_{1}} f\left( Q_{21} \right) \\
+    f\left( R_{2} \right) = f\left( x, y_{2} \right) &=
+      \frac{x_{2} - x}{x_{2} - x_{1}} f\left( Q_{12} \right) + \frac{x - x_{1}}{x_{2} - x_{1}} f\left( Q_{22} \right) \\
+    f\left( P \right) = f\left( x, y \right) &=
+      \frac{y_{2} - y}{y_{2} - y_{1}} f\left( R_{1} \right) + \frac{y - y_{1}}{y_{2} - y_{1}} f\left( R_{2} \right) \\
+  \end{align}
+
+  \begin{itemize}
+    \item $ f\left( X \right) $: value at point $ X $
+    \item $ f\left( x, y \right) $: value at position $ x, y $
+  \end{itemize}
+
+  \subsubsection{Using slerp}
+
+    If bilinear filtering is implemented using $ \lerp $, three would be needed;
+    two horizontal, one vertical
+
+\section{Nearest Neighbor Interpolation}
+
+  Bilinear interpolation is used to derive the value at a position within
+  a rectangle using the one of the value at the corner of the rectangle
+
+  Given the $ u, v $ of a fragment, the width $ w $ and height $ h $ of the
+  pixel, nearest neighbor gives us the pixel in texel $ s, t $ to use for
+  the fragment
+
+  \begin{align}
+    s &= \round\left( u \times w - \frac{1}{2} \right) \\
+    t &= \round\left( v \times h - \frac{1}{2} \right)
+  \end{align}
+
+  \begin{itemize}
+    \item This algorithm comes up with the texture coordinate on the
+    fragments
+    \item For pixels between fragments, we use linear interpolation to come
+    up with their \textbf{texture coordiantes}
+  \end{itemize}

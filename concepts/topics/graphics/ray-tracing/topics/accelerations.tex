@@ -1,0 +1,30 @@
+\chapter{Accelerations}
+
+\section{Data Structures}
+
+  Building these structures can be expensive, but is relatively cheap
+  comparing to the tracing operation.
+
+  \begin{itemize}
+    \item Regular Grids
+    \begin{itemize}
+      \item Poor performance for non-uniform complexity in the scene
+      \item Cannot nest grid in a grid structure
+    \end{itemize}
+
+    \item \acrfull{bvh}
+    \item Regular grids and BVH tree are faster to construct than other choices
+  \end{itemize}
+
+  \subsection{Axis Aligned Bounding Boxes (AABB)}
+
+    \begin{align}
+      p_{0} &= \left( x_{0}, y_{0}, z_{0} \right) \\
+      p_{1} &= \left( x_{1}, y_{1}, z_{1} \right)
+    \end{align}
+
+    \begin{itemize}
+      \item $ p_{0} $ is the min point; $ p_{1} $ is the max point
+      \item Fast to test
+      \item Can be used as a quick rejection test
+    \end{itemize}

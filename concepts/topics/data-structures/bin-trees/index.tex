@@ -1,0 +1,53 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{import}
+\import{../../../shared/config/}{packages}
+
+% Has to be put before geometry include, otherwise cause compiler error.
+\usepackage[english]{babel}
+\usepackage{amsthm}
+
+% For math utils
+\usepackage{amsmath}
+\usepackage{amsbsy}
+
+% For colored texts
+\usepackage{xcolor}
+
+% For command \enquote{}
+\usepackage[autostyle]{csquotes}
+
+\import{../../../shared/config/}{macros}
+\import{../../../shared/config/}{styles}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+
+\DeclareMathOperator{\nil}{null}
+\DeclareMathOperator{\maximum}{max}
+\DeclareMathOperator{\minimum}{min}
+\DeclareMathOperator{\height}{h}
+\DeclareMathOperator{\balance}{b}
+\DeclareMathOperator{\numof}{N}
+
+% Apple's Blue Color Under Aqua Theme
+% R = 0, % G = 122, B = 255
+\definecolor{appleblue}{rgb}{1, 0.231, 0.188}
+\newcommand{\highlight}[1]{{\textcolor{appleblue}{#1}}}
+
+\setlength{\parindent}{0pt}
+
+\title{Binary Trees}
+\author{Zehua Chen}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \input{topics/definitions}
+  \input{topics/traversals}
+  \input{topics/theorems}
+  \input{topics/operations}
+\end{document}

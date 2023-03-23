@@ -1,0 +1,28 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{../../../shared/packages/import}
+\import{../../../shared/config/}{packages}
+\import{../../../shared/config/}{styles}
+\import{../../../shared/config/}{macros}
+
+\title{Syntax}
+\author{Zehua Chen}
+\date{Updated on \today}
+
+\DeclareMathOperator{\FIRST}{FIRST}
+\DeclareMathOperator{\FOLLOW}{FOLLOW}
+\DeclareMathOperator{\Tree}{Tree}
+\DeclareMathOperator{\LL}{LL}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \setmainstyles
+
+  \import{topics/}{grammar}
+  \import{topics/}{parse}
+  \import{topics/}{implementations}
+  \import{topics/}{resources}
+
+\end{document}

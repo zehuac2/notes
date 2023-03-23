@@ -1,0 +1,201 @@
+\chapter{Systems}
+
+\begin{itemize}
+  \item \textbf{\Gls{system}}: \glsdesc{system}
+  \item A system with no memory only needs to know its input at one time
+  $ t $ to produce the output of $ t $
+  \item A system with memory need inputs at more than one moment in the past
+  to produce its outputs
+  \item \textbf{Parallel System}: the input is processed by two systems
+  concurrently. The output is the the sum of the outputs by two filters
+  \item \textbf{Chain System}: the output of one system is the input
+  of another system
+  \item \textbf{FIR}: finite impulse response
+  \item \textbf{IIR}: infinite impulse response
+\end{itemize}
+
+\section{Causality}
+
+  A system is causal if output at time $ n $ only depends on input and output
+  up to time $ n $
+
+\section{Linear Systems}
+
+  \begin{equation}
+    y\left( t \right) =
+      \sum_{j = 0}^{M} b_{j} x\left( t - j \right)
+      - \sum_{i = 1}^{N} a_{i} y\left( t - i \right)
+  \end{equation}
+
+  The output of a linear system is the sum of scaled inputs and
+  scaled previous outputs.
+
+  \begin{itemize}
+    \item $ b_{x} $ scale of inputs
+    \item $ a_{x} $ scale of outputs
+    \item $ i $ starts from $ 1 $ because $ y\left( t \right) $ is on the left
+    of the equation
+    \item A linear system may only be linear over a limited range of input;
+    ex. auditory system
+    \item Techniques developed for linear systems can help understand
+    non-linear system; ex. filter
+  \end{itemize}
+
+  \subsection{Linearity}
+
+    Linearity is \gls{homogeneity} and \gls{additivity} combined
+
+    \begin{itemize}
+      \item \textbf{\Gls{homogeneity}}: \glsdesc{homogeneity}
+      \item \textbf{\Gls{additivity}}: \glsdesc{additivity}
+    \end{itemize}
+
+\section{Linear Time Invariant}
+
+  \textbf{\Gls{linear-time-invariant}}: \glsdesc{linear-time-invariant}
+
+  \begin{itemize}
+    \item LTI system is an ideal model of a subset of systems; it is an
+    approximation to real situation
+    \item Some parts of a non-linear system can be modeled as a LTI system,
+    ex. vocal tract
+    \item A time-variant system may be treated as a LTI system in a short
+    period of time
+    \item \textbf{Homogeneity and time invariance}: sinusoids are only changed
+    in amplitude and phase as they are processed through LTI systems
+    \item \textbf{Additivity and fourier theorem}: if the responses of an
+    LTI system to sinusoids of all frequencies are known, the system outupt
+    to any input signal can be expressed as a sum of sinusoids with different
+    frequencies, amplitudes and phases
+    \begin{itemize}
+      \item Fourier transform can break signals into sinusoid signals
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Pre-Emphasis}
+
+    \begin{equation}
+      y\left( t \right) = x\left( t \right) - \alpha x\left( t - 1\right)
+    \end{equation}
+
+    \begin{itemize}
+      \item Pre-emphasis is an example of a filter
+    \end{itemize}
+
+\section{Impulse Response}
+
+  IR tells how a system reacts to \textbf{any stimulus}
+
+  \begin{itemize}
+    \item Impulse response is time domain
+  \end{itemize}
+
+\section{Convolution}
+
+  \begin{equation}
+    y\left( t \right)
+      = x\left( t \right) \otimes h\left( t \right)
+      = h\left( t \right) \otimes x\left( t \right)
+  \end{equation}
+
+  The output of any linear system is given by the convolution between
+  the \textbf{input} with the \textbf{response of the system to an impulse,
+  aka. impulse response}.
+
+  \begin{itemize}
+    \item Convolution is hard to visualize
+    \item The convolution of a signal can be visualized in frequency domain
+    using the fourier transform (section \ref{sec: fourier transform}) of the
+    signal and the impulse response
+    \item Convolution is the standard model of speech production
+    \item Convolution is the backbone of many types of signal processing
+    \begin{enumerate}
+      \item Image processing
+      \item Signal filtering
+      \item Audio processing
+      \item Machine learning/AI
+    \end{enumerate}
+  \end{itemize}
+
+\section{Response}
+
+  \subsection{Frequency Response}
+
+    A frequency response is a quantitative measure of the output spectrum
+    of a system or a device in response to a stimulus
+
+    \begin{itemize}
+      \item Composed of complex numbers
+      \item Frequency domain
+    \end{itemize}
+
+  \subsection{Amplitude Response}
+
+    The magnitude of a frequency response is amplitude response and gives
+    the filter gain at each frequency
+
+    \begin{equation}
+      \dB = 20 \log_{10} \left( A \right)
+    \end{equation}
+
+    Where $ A $ is the amplitude response
+
+  \subsection{Impulse Response}
+
+    \begin{itemize}
+      \item Frequency response in time domain
+    \end{itemize}
+
+\section{Filters}
+
+  \begin{itemize}
+    \item Low-pass filters attenuate high-frequency sinusoids more tahn
+    low-frequency sinusoids
+    \item \textbf{Cutoff frequency}: the frequency location above, below which
+    the filter passes all sinusoids
+    \item \textbf{Pass-band}: the frequency region over which the
+    sinusoids can pass the system
+    \begin{itemize}
+      \item $ > 0 dB $
+    \end{itemize}
+    \item \textbf{Stop-band}: the frequency region over which the
+    sinusoids are attenuated
+    \begin{itemize}
+      \item $ < 0 dB $
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Chain System}
+
+    \begin{align}
+      c\left( x \right) &= b \left( a\left( x\right) \right) \\
+      R^{c}\left( f \right) &= R^{b}\left( f \right) \cdot R^{a}\left( f \right) \\
+      H^{c}\left( t \right) &= H^{b}\left( t \right) \cdot H^{a}\left( t \right)
+    \end{align}
+
+    \begin{itemize}
+      \item In time-domain: C can be produced by performing convolution on
+      $ a, b $
+      \item In frequency-domain: C can be produced by $ a \times b $
+      \item $ R $: frequency response
+      \item $ H $: impulse response
+    \end{itemize}
+
+  \subsection{Parallel System}
+
+    \begin{align}
+      c\left( x \right) &= b \left( x \right) + a\left( x\right) \\
+      R^{c}\left( f \right) &= R^{b}\left( f \right) + R^{a}\left( f \right) \\
+      H^{c}\left( t \right) &= H^{b}\left( t \right) \otimes H^{a}\left( t \right)
+    \end{align}
+
+  \subsection{Band Pass}
+
+    A band-pass filter can be generated from a low-pass and a high-pass filter
+    by multipling the frequency responses of those two filters,
+    which can also be done by convolving the two filters in time domain.
+
+    \begin{itemize}
+      \item Make sure the size of the result of convolution is the same as
+      the size of each of the two child filters
+    \end{itemize}

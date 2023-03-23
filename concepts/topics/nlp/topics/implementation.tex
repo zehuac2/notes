@@ -1,0 +1,9 @@
+\chapter{Implementation}
+
+\section{N-Grams}
+
+\begin{itemize}
+  \item Don't use \say{word-word} as a way to build signature for n-grams.
+  \say{a b c} and \say{a b-c} would have the same signature,
+  \textbf{but they should not}
+\end{itemize}

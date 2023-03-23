@@ -1,0 +1,169 @@
+\chapter{Velocity Kinematics}
+
+\begin{itemize}
+  \item End effector exhibits \emph{both linear and angular velocities}
+  \item Sum of velocity contributions frmo individual joints
+  \item Rotate induces translation of points on the rigid body
+\end{itemize}
+
+\section{Joints}
+
+  \begin{itemize}
+    \item \emph{Prismatic joints}
+    \begin{itemize}
+      \item Translate alongs $ z_{i - 1} $ axis with velocity $ \dot{d_{i}} $
+      \item Contributes \emph{zero angular velocity}
+    \end{itemize}
+
+    \item \emph{Revolute joints}
+    \begin{itemize}
+      \item Rotate about $ z_{i - 1} $ with velocity $ \theta $
+      \item Translate end effector
+    \end{itemize}
+  \end{itemize}
+
+\section{Velocity}
+
+  \subsection{Angular}
+
+    \begin{align}
+      \vec{\omega} &= \dot{\theta} k \\
+      \vec{\omega}^{0}_{n}
+        &= \sum_{i = 1}^{n} \vec{\omega}^{0}_{i} \\
+        &= \sum_{i = 1}^{n} p_{i} \dot{q_{i}} z^{0}_{i - 1} \\
+    \end{align}
+
+    \begin{align}
+      J_{\omega} &=
+        \begin{bmatrix}
+          J_{\omega 1} & ... & J_{\omega n}
+        \end{bmatrix}  \\
+      \omega
+        &=
+        \begin{bmatrix}
+          \omega_{x} \\
+          \omega_{y} \\
+          \omega_{z}
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          p_{1} z^{0}_{0} ... p_{n} z^{0}_{n - 1}
+        \end{bmatrix}
+        \begin{bmatrix}
+          \dot{q_{1}} \\
+          \vdots \\
+          \dot{q_{n}}
+        \end{bmatrix} \\
+        &= J_{w} \dot{q}
+    \end{align}
+
+    $ k $ is a unit vector, $ J_{w} $ is angular velocity jacobian,
+    $ p_{1} z^{0}_{0} $ has a size of $ 3 \times $
+
+    \begin{itemize}
+      \item Angular velocity of a rotating body is the vector $ \vec{\omega} $
+      \begin{itemize}
+        \item \emph{Magnitude} is the rate of rotation
+        \item \emph{Direction} is the axis of rotation
+      \end{itemize}
+
+      \item $ p_{i} = 1 $ if joint is revolute
+      \item $ p_{i} = 0 $ if joint is prismatic
+    \end{itemize}
+
+  \subsection{Linear Velocity}
+
+    \begin{align}
+      \vec{v}
+        &= \omega \times \vec{r} \\
+        &= \dot{\theta_{i}} z_{i - 1} \times \left( o_{n} - o_{i - 1} \right)
+    \end{align}
+
+    \begin{align}
+      J_{v}
+        &=
+        \begin{bmatrix}
+          J_{v1} & ... & J_{vn}
+        \end{bmatrix} \\
+      v &=
+        \begin{bmatrix}
+          v_{x} \\
+          v_{y} \\
+          v_{z}
+        \end{bmatrix} \\
+        &=
+        \begin{bmatrix}
+          J_{v1} & ... & J_{vn}
+        \end{bmatrix}
+        \begin{bmatrix}
+          \dot{q_{1}} \\
+          \vdots \\
+          \dot{q_{n}}
+        \end{bmatrix} \\
+        &= J_{v} \dot{q}
+    \end{align}
+
+    $ o_{n} $ is origin of end effector frame.
+
+    \begin{itemize}
+      \item $ \vec{v} $: linear velocity
+      \item $ \vec{r} $ is a vector from a frame origin to the point
+    \end{itemize}
+
+\section{Jacobian Matrix}
+
+  \begin{align}
+    \xi
+      &=
+      \begin{bmatrix}
+        v \\
+        \omega
+      \end{bmatrix} \\
+      &=
+      \begin{bmatrix}
+        J_{v} \left( q \right) \\
+        J_{\omega} \left( q \right)
+      \end{bmatrix}
+      \dot{q} \\
+      &= J\left( q \right) \dot{q}
+  \end{align}
+
+  \begin{itemize}
+    \item Jacobian matrix is a linear mapping between joint velocities
+    $ \dot{q} $ and the end effector velocities $ \xi = (v, w)^{T} $
+    \item \emph{Configuration dependent}, i.e. a function of $ q $
+    \item Prismatic joint: $ J_{v, i} = z_{i - 1}, J_{\omega, i} = 0 $
+    \item Revolute joint:
+    $ J_{v, i} = z_{i - 1} \times \left( o_{n} - o_{i - 1} \right), J_{\omega, i} = z_{i - 1} $
+    \item Generally
+    \begin{itemize}
+      \item $ J_{v} $ is $ 3 \times n $
+      \item $ J_{w} $ is $ 3 \times n $
+      \item $ J $ is $ 6 \times n $
+    \end{itemize}
+
+    \item To compute these quantities, we require the transformation from
+    forward kinematics
+    \begin{itemize}
+      \item Derive linear velocities by directly differentiating the FK
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Rank and Singularities}
+
+    \begin{itemize}
+      \item Each column of $ J $ indicates the instantaneous direction of end
+      effector movement due to unit velocity at the corresponding joint (and 0 at the others)
+      \item Column rank of $ J $ = number of independent degrees of freedom $ \le min(6, n ) $
+      \item Configurations at which $ J, J_{v}, J_{\omega} $ lose rank are singular configurations
+    \end{itemize}
+
+  \subsection{Subspace}
+
+    \begin{itemize}
+      \item Column space is the set of all possible end effector velocities
+      \item Null space is hte set of all joint velocities producing 0 end effector movement
+      \begin{itemize}
+        \item Only nontrivial when $ J $ is not full column rank (linearly dependent columns)
+      \end{itemize}
+    \end{itemize}

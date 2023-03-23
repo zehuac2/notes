@@ -1,0 +1,97 @@
+\chapter{Small World and Big World}
+
+  Social network follows a structure with random perturbation.
+
+  \begin{itemize}
+    \item \emph{Small world}:
+    \begin{itemize}
+      \item Each of us maintains a set of acquaintances
+      \item Fast expansion implies that we reach anyone through a few hops
+      \item We are all pals
+    \end{itemize}
+
+    \item \emph{Big-World}:
+    \begin{itemize}
+      \item Friends are a graph with limiting expansion
+      \item We are biased, factors increase in distance
+    \end{itemize}
+  \end{itemize}
+
+\section{Arguments Arond Small World}
+
+  \subsection{Skeptics}
+
+    \begin{itemize}
+      \item Small world assumes acquaintance set are disjoint
+      \item Social acquaintances are \emph{biased against geography, occupation
+      and social status} and \emph{favors clusters, inbreeding}
+    \end{itemize}
+
+\section{Experiments}
+
+  \subsection{Milgram's Experiment}
+
+    \begin{itemize}
+      \item Edges\footnote{edges are connections} are formed
+      \begin{itemize}
+        \item \emph{Locally}: gender, family/friends
+        \item \emph{Globally}: hometown/job
+      \end{itemize}
+
+      \item Some people have multiple edges
+      \item \emph{Short chains connect us (small world)}
+    \end{itemize}
+
+  \subsection{Erdos Number}
+
+    \begin{itemize}
+      \item 94\% within distance 6
+      \item Median 5
+      \item Small number prestigious: field medalist: 2-5, abel prize: 2-4
+    \end{itemize}
+
+  \subsection{Kevin Bacon Number}
+
+    \begin{itemize}
+      \item Connection is cocllaboration
+      \item 88\% actors connected
+      \item 98.3\% actors: 4 and less; maximum number is 8
+    \end{itemize}
+
+\section{Triadic Closure}
+
+  \begin{definition}
+    \emph{\Gls{triadic-closure}}: \glsdesc{triadic-closure}
+  \end{definition}
+
+  \begin{itemize}
+    \item \emph{Mark Grannovetter's Hypothesis: strong ties should follow triadic
+    closure property}
+    \item Edge $ e = \left( A, B \right) $ is a local bridge if $ A, B $ have
+    no friends in common; \emph{one of these holds}
+    \begin{itemize}
+      \item B is A's unique strong ties, and A is B's unique strong ties
+      \item A or B violates the strong triadic closure
+      \item B and A form a weak tie
+    \end{itemize}
+  \end{itemize}
+
+\section{Balance}
+
+  \begin{definition}
+    \emph{\Gls{structural-balance}}: \glsdesc{structural-balance}. Sometimes
+    refered to as strong structural balance
+  \end{definition}
+
+  \begin{theorem}
+    A complete graph is balanced iff it can be divided into \emph{two sets, where
+    nodes in the set are mutual friends}, with complete
+    \emph{mutual antagonisms between the set}
+  \end{theorem}
+
+  \subsection{Incomplete Graph}
+
+    \begin{definition}
+      \emph{\Gls{structural-balance-incomplete-graph}}:
+      \glsdesc{structural-balance-incomplete-graph}
+    \end{definition}

@@ -1,0 +1,25 @@
+\chapter{Temporal Difference Methods}
+
+\section{Q-Learning}
+
+  Model free methods try to directly learn value/policy function from data
+
+  \begin{equation}
+    Q\left( s_{t}, a_{t} \right) \leftarrow
+      \left( 1 - a \right) Q\left( s_{t}, a_{t} \right)
+      + \alpha \left( r_{t} + \gamma \max_{a} Q\left( s_{t + 1}, a \right) \right)
+  \end{equation}
+
+  \subsection{Deep Q-Learning}
+
+\section{SARSA (State Action Reward State Action)}
+
+  \begin{equation}
+    Q\left( s_{t}, a_{t} \right) \leftarrow
+      \left( 1 - a \right) Q\left( s_{t}, a_{t} \right)
+      + \alpha \left( r_{t} + \gamma Q\left( s_{t + 1}, a_{t + 1} \right) \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item Safer
+  \end{itemize}

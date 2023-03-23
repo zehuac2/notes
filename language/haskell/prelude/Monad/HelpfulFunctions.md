@@ -1,0 +1,5 @@
+- `mapM :: Monad m => (a -> m b) -> t a -> m (t b) `
+- `mapM_`: similar to `mapM` but returns `m ()`
+  - Very useful to work with `IO` monad for printing
+- `forM`,
+- `forM_`
