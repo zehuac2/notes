@@ -1,0 +1,324 @@
+\chapter{Arithmetic}
+
+\section{Q1}
+
+  A number is a palindrome if it can be written the same backwards and
+  forwards (6336 is an example of a palindrome). What number divides into every
+  4 digit palindrome?
+
+  \begin{enumerate}
+    \item 2
+    \item 3
+    \item 7
+    \item 11
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \say{x divides into y}意思为\say{y被x整除}.
+
+    \begin{align*}
+      xyyx &= 1000x + 100y + 10y + x \\
+      &= 1001x + 110 y
+    \end{align*}
+
+    \textbf{答案: 11}
+
+\section{Q2}
+
+  x is an integer greater than 3
+
+  \begin{center}
+    Quantity A: The number of even factors of $ 2x $ \\
+    Quantity B: The number of odd factors of $ 3x $
+  \end{center}
+
+  \begin{enumerate}
+    \item Quantity A is greater.
+    \item Quantity B is greater.
+    \item The two quantities are equal
+    \item The relationship cannot be determined from the information given.
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \begin{itemize}
+      \item \textbf{Ex.} $ x = 3 $, $ 6 = \left\{ 1, 6, 2, 3 \right\} $,
+      $ 9 = \left\{ 1, 9, 3 \right\} $
+      \item \textbf{Ex.} $ x = 2 $, $ 4 = \left\{ 1, 4, 2 \right\} $,
+      $ 6 6 = \left\{ 1, 6, 2, 3 \right\} $
+    \end{itemize}
+
+    \textbf{答案}: 无法确定
+
+    带一个和\say{2, 3}一样的数为 $ x $
+
+\section{Q3}
+
+  If n and m are positive integers and m is a factor of 2 , what is the
+  greatest possible number of integers that can be equal to both
+  $ 3n $ and $ \frac{2^{6}}{m} $
+
+  \begin{enumerate}
+    \item 0
+    \item 1
+    \item 3
+    \item 4
+    \item 6
+  \end{enumerate}
+
+  \subsection{解析}
+
+    $ 1, 2 $ 满足 $ \frac{2^{6}}{m} $, 但无法满足 $ 3n $. 所以选 $ 0 $
+
+\section{Q4}
+
+  \begin{center}
+    Quantity A: The number of distinct prime factors of $ 20^{6} $ \\
+    Quantity B: The number of distinct prime factors of $ 32^{10} $
+  \end{center}
+
+  \begin{enumerate}
+    \item Quantity A is greater
+    \item Quantity B is greater
+    \item The two quantities are equal.
+    \item The relationship cannot be determined from the information given.
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \begin{align*}
+      20^{6} &= \left( 2 \times 2 \times 5 \right)^{6} \\
+      32^{10} &= \left( 2^{5} \right)^{10}
+    \end{align*}
+
+    由上可得, $ 20^{6} $ 有两个独一无二的质因数; $ 32^{10} $有一个独一无二的质因数;
+    选 A
+
+\section{Q5}
+
+  n is a positive integer, and k is the product of all integers from 1 to n
+  inclusive. If k is a multiple of 1440, then the smallest possible value of n
+  is
+
+  \subsection{解析}
+
+    1440的倍数 分解质因数为 $ 2^{5} \times 3^{2} \times 5 \times x $. $ 1...8 $
+    能凑齐$ 2^{5} \times 3^{2} \times 5 $
+
+\section{Q6}
+
+  If $ a^{2} + b^{2} = c^{2} $ and $ a, b, c $ are all integers. Which of the
+  following CANNOT be the value of $ a + b + c $?
+
+  \begin{enumerate}
+    \item 2
+    \item 1
+    \item -2
+    \item 4
+    \item 6
+  \end{enumerate}
+
+  \subsection{解析}
+
+    如果 $ a, b $ 之中一个数为 $ 0 $, 那么所有even number都行, 选B
+
+    \begin{itemize}
+      \item $ 0^{2} + 2^{2} = 2^{2} $, $ 2 + 2 = 4 $
+      \item $ 0^{2} + 1^{2} = 1^{2} $, $ 1 + 1 = 2 $
+    \end{itemize}
+
+\section{Q7}
+
+  n is an even integer.
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: The number of prime factors of n
+    \item \textbf{Quantity B}: The number of prime factors of n/2
+  \end{itemize}
+
+  \subsection{解析}
+
+    \textbf{D}?
+
+\section{Q8}
+
+  If $ n= 2 \times 3 \times 5 \times 7 \times 11 \times 13 \times 17 $,
+  then which of the following statements must be true?
+
+  \begin{enumerate}
+    \item $ n^{2} $ divisible by 600
+    \item $ n + 19 $ divisible by 19
+    \item $ \frac{n + 4}{2} $ is even
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \textbf{None of the Above}:
+
+    \begin{itemize}
+      \item n's prime number凑不够 $ 600 $
+      \item n必须是19的倍数, 但是n不是
+      \item $ \frac{n + 4}{2} = \frac{n}{2} + 2 $: $ \frac{n}{2} $ 是odd;
+      odd + even 还是odd
+    \end{itemize}
+
+\section{Q9}
+
+  When the even integer n is divided by 7, the remainder is 3.
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: the remainder when n is divided by 14.
+    \item \textbf{Quantity B}: 10
+  \end{itemize}
+
+  \subsection{解析}
+
+    \begin{itemize}
+      \item 本体要注意\say{even}; 如果n要是even, 其中7的数量就必须要是odd
+      \item 14里面有两个7, 把这两个7从n里提出来, 还剩一个7; $ 7 + 3 = 10 $
+    \end{itemize}
+
+\section{Q10}
+
+  x is an integer greater than 1.
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: $ 3^{x + 1} $
+    \item \textbf{Quantity B}: $ 4^{x} $
+  \end{itemize}
+
+  \subsection{解析}
+
+    \begin{align*}
+      3^{x + 1} &\text{ compared to } 4^{x} \\
+      3^{x} 3 &\text{ compared to } 4^{x} \\
+      3 &\text{ compared to } \left( \frac{4}{3} \right)^{x}
+    \end{align*}
+
+    有些x导致$ < 3 $, 有些导致$ > 3 $, \textbf{答案D}
+
+\section{Q10}
+
+  If 2, 4, 6, 9 are the digits of two 2-digit integers, what is the least
+  possible positive difference between the integers?
+
+  \begin{enumerate}
+    \item 27
+    \item 27
+    \item 17
+    \item 13
+    \item 9
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \begin{enumerate}
+      \item 首先排除9, 这四个数字不可能
+      \item 考虑17, 13:
+      \begin{enumerate}
+        \item 十位上两个数字最多差20 (考虑借位); 所以两个数字的十位只有两个组合
+        2 \& 4, 4 \& 6
+        \item 选取十位后尝试剩下的数字, 得到\textbf{答案13}
+      \end{enumerate}
+    \end{enumerate}
+
+\section{Q11}
+
+  If $ \left| z \right| \le 1 $, which of the following statements must be
+  true? Indicate all such statements.
+
+  \begin{enumerate}
+    \item $ z^{2} \le 1 $
+    \item $ z^{2} \le z $
+    \item $ z^{3} \le z $
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \begin{equation*}
+      \left| z \right| \le 1 \to -1 \le z \le 1
+    \end{equation*}
+
+    \begin{enumerate}
+      \item \textbf{正确}: 和题的式子一样
+      \item \textbf{错误}: $ z < 0 $
+      \item \textbf{错误}: $ -1 < z < 0 $
+    \end{enumerate}
+
+\section{Q12}
+
+  $ r, s, t $ are three consecutive odd integers such that $ r < s < t $.
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: $ r + s + 1 $
+    \item \textbf{Quantity B}: $ s + t - 1 $
+  \end{itemize}
+
+  \subsection{解析}
+
+    代$ 1, 3, 5 $, B大
+
+\section{Q13}
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: $ 22\% x $
+    \item \textbf{Quantity B} $ \frac{2}{9}x $
+  \end{itemize}
+
+  \subsection{解析}
+
+    如果x为正数, B大; x为负数, A大; x为0, 一样大
+
+\section{Q14}
+
+  $ n $ is an integer, and $ k $ is not an integer.
+
+  \begin{equation*}
+    0 < k < n < k + 2
+  \end{equation*}
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: $ n $
+    \item \textbf{Quantity B}: $ k + 1 $
+  \end{itemize}
+
+  \subsection{解析}
+
+    \begin{itemize}
+      \item $ k = 0.9, n = 2 $
+      \item $ k = 0.9, n = 1 $
+    \end{itemize}
+
+    \textbf{答案 D}
+
+\section{Q15}
+
+  x is a positive integer. When x is divided by 2, 4, 6 or 8, the remainder
+  is 1.
+
+  \begin{itemize}
+    \item \textbf{Quantity A}: x
+    \item \textbf{Quantity B}: 24
+  \end{itemize}
+
+  \subsection{解析}
+
+    x为24的倍数既符合要求, \textbf{答案 D}
+
+\section{Q16}
+
+  $ x^{a} y^{b} z^{c} $ equals the product of 154 and 56, $ z > y > x $,
+  and $ a > b > c $ then what is the value of $ a^{x} b^{y} c^{z} $?
+
+  \begin{enumerate}
+    \item 1024
+    \item 2048
+    \item 8624
+    \item 22528
+    \item Cannot be determined by the condition given
+  \end{enumerate}
+
+  \subsection{解析}
+
+    \textbf{E}, 没有说$ x,y, z $需为最小值, 所以分解质因数没用
