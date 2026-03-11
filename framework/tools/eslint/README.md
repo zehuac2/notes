@@ -53,10 +53,11 @@ module.exports = {
 
 # Extends
 
-`extends` make the current `.eslintrc.js` an extension of predefined configurations
+`extends` make the current `.eslintrc.js` an extension of predefined
+configurations
 
 ```js
 module.exports = {
-  extends: ["eslint:recommended"]
-}
+  extends: ["eslint:recommended"],
+};
 ```

@@ -24,14 +24,14 @@
    - Start with higher clamping value
    - Try not to clamp direct
 10. Turn off caustics: light patterns resulting from reflection and refraction.
-    Caustics are very expensive to compute. Low sample count might also
-    cause fire flies
+    Caustics are very expensive to compute. Low sample count might also cause
+    fire flies
     - Turn off caustics if they are not necessary
 11. Object Instancing: objects sharing data reduce memory consumption and are
     faster to render
     - **Control + L -> Object Data**: Link object data
     - **Alt + D**: duplicate with linked object data
-12. 
+12.
 
 Source:
 [18 Ways to Speed Up Blender Cycles Rendering](https://www.youtube.com/watch?v=8gSyEpt4-60&list=WL&index=223)

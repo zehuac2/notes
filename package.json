@@ -1,0 +1,15 @@
+{
+  "name": "notes",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/markdown": "7.5.1",
+    "eslint": "9.39.2",
+    "prettier": "3.7.4"
+  }
+}

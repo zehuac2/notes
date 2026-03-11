@@ -4,11 +4,9 @@
 
 - Protocols **cannot have static members**
 - **Protocol extension can have static members**; these members
-
   - Can be **associated with an conforming type**
   - Can be **associated with a protocol using a `Self == X` constraint** and be
     used in
-
     - When the protocol is used as a **generic constraint**
     - When the protocol is used as a type, aka **existential type**
 

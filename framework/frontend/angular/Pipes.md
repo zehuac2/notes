@@ -14,7 +14,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class ArrayEqual implements PipeTransform {
   transform<T>([arrayA, arrayB]: [
     T[] | undefined | null,
-    T[] | undefined | null
+    T[] | undefined | null,
   ]): boolean {
     // both null or both undefined
     if (arrayA === arrayB) {

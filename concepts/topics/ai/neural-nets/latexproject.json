@@ -1,7 +1,4 @@
 {
   "entry": "index.tex",
-  "includes": [
-    "chapters/",
-    "../../../shared/config/"
-  ]
+  "includes": ["chapters/", "../../../shared/config/"]
 }

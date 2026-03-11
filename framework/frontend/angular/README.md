@@ -37,6 +37,7 @@ series of HTML instructions to create and update the DOM in place. This means:
     <editor ng-reflect-model="[object Object]"></editor>
   </app>
   ```
+
   - `model` is a non standard HTML element
 
 ## Advantages

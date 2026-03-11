@@ -10,7 +10,6 @@ Processes typically have IDs (PID)
 - A zombie is a process that is killed, but has not been waited by its parent
   process, thereby causing **its entry in the process table to not be removed**
   (**Killed, but still around**).
-
   - All well-behaving user process would enter this stage shortly after they
     exit, before their parents `wait` them
 

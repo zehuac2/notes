@@ -9,7 +9,7 @@ class Page {
     map((params) => params.get("id")!),
     filter((id) => id !== null),
     distinctUntilChanged(),
-    shareReplay(1)
+    shareReplay(1),
   );
 
   questionIndex$: Observable<number> = this.route.paramMap.pipe(
@@ -17,7 +17,7 @@ class Page {
     filter((question) => Boolean(question)),
     map((question) => Number.parseInt(question)),
     distinctUntilChanged(),
-    shareReplay(1)
+    shareReplay(1),
   );
 
   constructor(private route: ActivatedRoute) {}

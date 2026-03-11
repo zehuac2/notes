@@ -47,7 +47,6 @@
   - Must be internal or public
 - **Optional**: A initializer with the signature resembling
   `init(wrappedValue:, ...)`:
-
   - The initializer can take any number of arguments after the first label
   - If the initializer only takes one parameter, then the enclosing type's
     synthesized initializer would be as if there is no property wrapper
