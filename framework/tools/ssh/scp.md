@@ -1,14 +1,14 @@
-- [`scp`](#scp)
+- [Overview](#overview)
 
 # Overview
 
-```
+```sh
 $ scp <path> user@host:<path>
 ```
 
 Copy from local path to remote path
 
-```
+```sh
 $ scp user@host:<path> <path>
 ```
 

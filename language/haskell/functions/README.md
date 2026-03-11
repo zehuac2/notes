@@ -24,13 +24,13 @@ boo :: Param -> Param -> Return
 In haskell, `->` is right associative. This make the types in the following
 groups equivalent
 
-```
+```text
 A -> B -> C -> D
 A -> B -> (C -> D)
 A -> (B -> (C -> D))
 ```
 
-```
+```text
 (A -> B) -> C -> D
 (A -> B) -> (C -> D)
 ```

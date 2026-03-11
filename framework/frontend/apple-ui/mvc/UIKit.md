@@ -1,6 +1,6 @@
 # View Hierarchy
 
-```
+```text
 UIScreen -> UIWindowScene -> UIWindow -> UIView
 ```
 

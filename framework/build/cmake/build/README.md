@@ -12,7 +12,7 @@
 
 # Creating Build Directory
 
-```
+```text
 cmake -E make_directory <dir>
 ```
 

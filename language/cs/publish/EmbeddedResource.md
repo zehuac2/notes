@@ -12,7 +12,7 @@ MSBuild allows you to embed resources into .dll files
 
 Names of the resources would be formatted as follows
 
-```
+```text
 Namespace.Directories.Filename
 ```
 

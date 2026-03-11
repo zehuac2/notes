@@ -13,7 +13,7 @@ To enable trimming, add the following to the project file
 
 Then build using
 
-```
+```text
 dotnet publish -r <rid> -c Release
 ```
 

@@ -64,13 +64,13 @@ self.view.window?.subtitle = ""
 
 When the top bar has compact height, it would adopt the following look
 
-```
+```text
 title - subtitle
 ```
 
 Otherwise, it would adopt the following look
 
-```
+```text
 title
 subtitle
 ```

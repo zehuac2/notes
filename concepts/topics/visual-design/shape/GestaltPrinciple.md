@@ -29,7 +29,7 @@ Shapes appearing in an enclosure will appear to be in a group
 
 # Principle 4 - Symmetry
 
-```
+```text
 [ ]( ){ }
 ```
 

@@ -2,19 +2,19 @@
 
 Runtime dependent executable for current platform
 
-```
+```text
 dotnet publish
 ```
 
 Runtime dependent executable for a specific platform
 
-```
+```text
 dotnet publish -r <id> --self-contained false
 ```
 
 Self contained executable
 
-```
+```text
 dotnet publish -r <id>
 ```
 

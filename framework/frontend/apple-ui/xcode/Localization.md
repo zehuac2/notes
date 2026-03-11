@@ -12,7 +12,7 @@ to application bundles.
 
 ## `.strings`
 
-```
+```text
 "label" = "text";
 ```
 

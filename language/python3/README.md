@@ -33,7 +33,7 @@ Recommended over `.format(...)`
 
 ### Complex Numbers
 
-```
+```text
 1 + 2j
 ```
 
@@ -113,7 +113,7 @@ Packages are defined to be folders that contain
 
 The following snippet installs python 3.9
 
-```
+```text
 sudo apt update
 sudo apt install software-properties-common
 

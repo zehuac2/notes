@@ -4,6 +4,6 @@
 
 # Cleanup Simulators
 
-```
+```text
 xcrun simctl delete unavailable
 ```

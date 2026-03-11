@@ -73,7 +73,7 @@ Type (\_ var a, var b) =>
 
 # Range
 
-array[^1] grab last one
+`array[^1]` grab last one
 
 # Async
 

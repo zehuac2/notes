@@ -4,7 +4,7 @@
 
 # Web Frontend
 
-```
+```text
 browserslist@latest --update-db
 ```
 

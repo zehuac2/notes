@@ -2,7 +2,7 @@
 
 ## Disable Base Activation
 
-```
+```text
 conda config --set auto_activate_base false
 ```
 

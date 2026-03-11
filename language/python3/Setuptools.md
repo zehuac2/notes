@@ -9,11 +9,11 @@
 package. Package configuration is placed in `setup.py` in the project root
 
 - To install a local package
-  ```
+  ```text
   pip install .
   ```
 - To install a local package for development
-  ```
+  ```text
   pip install -e .
   ```
 
@@ -24,7 +24,7 @@ package. Package configuration is placed in `setup.py` in the project root
 
 # Namespace Packages
 
-```
+```text
 /
   airathon/
     data/

@@ -6,7 +6,7 @@
 [connections in pagination](https://graphql.org/learn/pagination/#end-of-list-counts-and-connections);
 typically have the format
 
-```
+```text
 edges {
   node {
     ...

@@ -15,13 +15,13 @@
 
 ## Create Key
 
-```
+```sh
 $ gpg --full-generate-key
 ```
 
 ## List Keys
 
-```
+```sh
 $ gpg --list-keys
 $ gpg --list-secret-keys
 ```
@@ -32,19 +32,19 @@ $ gpg --list-secret-keys
 
 ### Export Public Key
 
-```
+```sh
 $ gpg --armor --export <key id>
 ```
 
 ### Export Private And Public Key
 
-```
+```sh
 $ gpg --armor --export-secret-keys <key id>
 ```
 
 ## Import Key
 
-```
+```sh
 $ gpg --import <key file>
 ```
 
@@ -53,7 +53,7 @@ private key file already contains the public key
 
 ## Trusting an Imported Key
 
-```
+```sh
 $ gpg --export-ownertrust > trust.txt
 $ gpg --import-ownertrust trust.txt
 ```
@@ -62,7 +62,7 @@ Owner trust is a file that maps key ids to trust values
 
 ## Delete Key
 
-```
+```sh
 $ gpg --delete-secret-key <key id>
 $ gpg --delete-key <key id>
 ```

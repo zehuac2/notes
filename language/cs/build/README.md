@@ -76,7 +76,7 @@ Items are input into the build process
   </PackageReference>
   ```
 - Can have wildcards and exclude items
-  ```
+  ```text
   <Compile Include="*.cs" Exclude="A.cs" >
   ```
 

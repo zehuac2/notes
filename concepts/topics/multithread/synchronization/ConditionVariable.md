@@ -1,6 +1,6 @@
 # Workflows
 
-```
+```text
 lock mutex
 
 while condition

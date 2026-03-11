@@ -2,13 +2,13 @@
 
 ## Export
 
-```
+```sh
 $ conda env export > environment.yml
 ```
 
 ## Update
 
-```
+```sh
 $ conda env update --file environment.yml --prune
 ```
 

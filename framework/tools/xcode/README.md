@@ -22,7 +22,7 @@ After installation, configure active developer directory to Xcode:
 
 ## Command Line Tools
 
-```
+```text
 xcode-select --install
 ```
 

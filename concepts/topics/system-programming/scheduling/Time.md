@@ -2,7 +2,7 @@
 
 The amount of time a process spends in the ready queue.
 
-```
+```text
 wait_time = end_time - arrival_time - run_time
 ```
 

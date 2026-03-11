@@ -7,7 +7,7 @@
 
 # Key Generation
 
-```
+```text
 ssh-keygen -t <algorithm> -b <size> -C <comment>
 ```
 
@@ -15,6 +15,6 @@ ssh-keygen -t <algorithm> -b <size> -C <comment>
 
 # Connection
 
-```
+```text
 ssh -i <key file> <user>@<host>
 ```

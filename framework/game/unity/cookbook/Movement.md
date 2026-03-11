@@ -1,6 +1,6 @@
 # Smooth Rotation, Movement
 
-### Kinematic: `MovePosition`
+## Kinematic: `MovePosition`
 
 ```cs
 void FixedUpdate()

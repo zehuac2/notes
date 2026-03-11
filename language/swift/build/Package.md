@@ -52,7 +52,7 @@ let bundle = Bundle.module
 
 ### Module Map
 
-```
+```text
 module Target {
   umbrella "<path to header>"
   export <files, patterns>

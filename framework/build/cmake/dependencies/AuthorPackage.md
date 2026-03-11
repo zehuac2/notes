@@ -60,7 +60,7 @@ include(CPack)
 
 A hand-written, aka. input configuration file should contain the following
 
-```
+```text
 @PACKAGE_INIT@
 
 include("${CMAKE_CURRENT_LIST_DIR}/FooTargets.cmake")
