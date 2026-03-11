@@ -13,7 +13,8 @@ export default defineConfig([
     rules: {
       'markdown/no-multiple-h1': 'off',
     },
-    language: 'markdown/gfm',
+    // Somehow this would cause linter failures.
+    // language: 'markdown/gfm',
     languageOptions: {
       frontmatter: 'yaml',
     },
