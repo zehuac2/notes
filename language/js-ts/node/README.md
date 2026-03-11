@@ -26,7 +26,7 @@ new Promise((resolve, reject) => {
       response.on('error', (err) => {
         reject(err);
       });
-    }
+    },
   );
 });
 ```

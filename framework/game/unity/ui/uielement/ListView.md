@@ -1,6 +1,5 @@
 # `ListView`
 
-makeItem
-bindItem
+makeItem bindItem
 
 itemSource

@@ -2,8 +2,8 @@
 
 Tasks are functions that do either of the following
 
-- Takes a callback as parameter: the callback would be used to either
-  indicate the completion of the task or to report errors
+- Takes a callback as parameter: the callback would be used to either indicate
+  the completion of the task or to report errors
 - Returns a stream
 
 ```js

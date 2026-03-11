@@ -8,8 +8,8 @@ The compiler manage assets through `xAsset(...)` methods
 
 ```ts
 interface Source {
-  source: () => string,
-  size: () => number
+  source: () => string;
+  size: () => number;
 }
 ```
 

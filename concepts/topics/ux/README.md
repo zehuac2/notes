@@ -130,13 +130,13 @@ Every time there is an action, there should be feedback.
 
 ## Problems Around Feedback
 
-| Situation                               | Feeling     | Action                                                |
-| --------------------------------------- | ----------- | ----------------------------------------------------- |
-| **No feedback**                         | confusion   | more energy is spent on accomplishing the goal        |
-| **Too little feedback**                 | frustration | more energy is spent on accomplishing the goal        |
-| **Too much feedback**                   | annoyed     | all feedbacks are ignored                             |
-| **Feedback too late**                   | uncertain   | find another way to accomplish the goal               |
-| **Feedback not continuous**             | uncertain   | frequently ask the system for feedback                |
+| Situation                               | Feeling     | Action                                                    |
+| --------------------------------------- | ----------- | --------------------------------------------------------- |
+| **No feedback**                         | confusion   | more energy is spent on accomplishing the goal            |
+| **Too little feedback**                 | frustration | more energy is spent on accomplishing the goal            |
+| **Too much feedback**                   | annoyed     | all feedbacks are ignored                                 |
+| **Feedback too late**                   | uncertain   | find another way to accomplish the goal                   |
+| **Feedback not continuous**             | uncertain   | frequently ask the system for feedback                    |
 | **Feedback does not communicate state** | no closure  | user continues performing actions from the previous state |
 
 ## Direct Manipulation

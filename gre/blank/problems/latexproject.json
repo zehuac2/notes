@@ -2,7 +2,5 @@
   "latex": "xelatex",
   "bin": "bin",
   "entry": "index.tex",
-  "includes": [
-    "sources/"
-  ]
+  "includes": ["sources/"]
 }

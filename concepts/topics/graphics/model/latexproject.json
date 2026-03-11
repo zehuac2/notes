@@ -3,7 +3,5 @@
   "bin": "bin",
   "entry": "index.tex",
   "bib": "none",
-  "includes": [
-    "topics/"
-  ]
+  "includes": ["topics/"]
 }

@@ -3,7 +3,8 @@
 ```scss
 @use '@material/theme' with (
   $primary: black
-) body {
+)
+  body {
   background: theme.$primary;
 }
 ```

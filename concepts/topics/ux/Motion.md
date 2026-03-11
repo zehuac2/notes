@@ -31,15 +31,15 @@ task.
 Two useful tuning inputs are `perceptualDuration` and `bounce`.
 
 ```tsx
-mass = 1
-stiffness = (2 * Math.PI / perceptualDuration) ** 2
-damping = ((1 - bounce) * 4 * Math.PI) / perceptualDuration, bounce >= 0
-damping = 4 * Math.PI / (perceptualDuration * (1 + bounce)), bounce < 0
+mass = 1;
+stiffness = ((2 * Math.PI) / perceptualDuration) ** 2;
+((damping = ((1 - bounce) * 4 * Math.PI) / perceptualDuration), bounce >= 0);
+((damping = (4 * Math.PI) / (perceptualDuration * (1 + bounce))), bounce < 0);
 ```
 
 - `perceptualDuration` is measured in seconds
-- Derived from [Effortless UI Spring Animation: A Two Parameter
-  Approach](https://www.kvin.me/posts/effortless-ui-spring-animations)
+- Derived from
+  [Effortless UI Spring Animation: A Two Parameter Approach](https://www.kvin.me/posts/effortless-ui-spring-animations)
 
 # References
 

@@ -15,8 +15,8 @@
 - Use the squint test to verify hierarchy; users should be able to tell the
   information hierarchy even in items they are not focusing on
 - **Groups of information that are more important** appear higher in the
-  information tree: users notice more important items first as they are
-  building their tree-like mental representation
+  information tree: users notice more important items first as they are building
+  their tree-like mental representation
 
 # Information Foraging Theory
 

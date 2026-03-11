@@ -69,7 +69,6 @@ Swift UI views (recreated each update) with the same identity points to the same
 backing view.
 
 - **Types of Identity**
-
   - **Explicit Identity**:
     - Pointers; not available for Swift UI views, which are value types
     - `id: ` parameter in `ForEach`
@@ -80,14 +79,12 @@ backing view.
     - `AnyView` does not preserve identities due to lack of type information
 
 - **Identity Stability**:
-
   - **Explicit identities** should be stable and unique
     - **Stable**: identities should not change between updates (avoid **random
       identifiers and indices**)
     - **Unique**: identity of one object must be different from that of another
       object (**names** are sometimes not unique)
   - **Implicit Identities**:
-
     - Avoid unnecessary branches
     - Tightly scope dependent code
 

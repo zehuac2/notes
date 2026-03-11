@@ -8,6 +8,8 @@
 }
 
 .multiple {
-  transition: property time function, property time function;
+  transition:
+    property time function,
+    property time function;
 }
 ```

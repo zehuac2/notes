@@ -2,8 +2,5 @@
   "latex": "xelatex",
   "bin": "bin",
   "entry": "index.tex",
-  "includes": [
-    "areas/",
-    "images/"
-  ]
+  "includes": ["areas/", "images/"]
 }

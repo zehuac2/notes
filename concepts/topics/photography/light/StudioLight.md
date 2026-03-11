@@ -12,5 +12,5 @@ has an infinite background
 
 - Use point light
 - Remove ambient light, i.e. make it black
-- Use "L" shaped plane to make the "infinite" background and use bazel
-  modifier to smooth out the 90 degree angle
+- Use "L" shaped plane to make the "infinite" background and use bazel modifier
+  to smooth out the 90 degree angle

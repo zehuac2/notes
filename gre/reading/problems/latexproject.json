@@ -1,8 +1,5 @@
 {
   "latex": "xelatex",
   "entry": "index.tex",
-  "includes": [
-    "sources/",
-    "../../shared/config"
-  ]
+  "includes": ["sources/", "../../shared/config"]
 }
