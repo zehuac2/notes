@@ -1,5 +1,5 @@
-# Overview
+# Grid
 
-From Bauhaus School of Design
+Grids have roots in the Bauhaus school of design.
 
 - Grids can be nested

@@ -5,26 +5,25 @@
 
 # Overview
 
-- Info hierarchy: Information should be grouped
+- Information hierarchy: information should be grouped
   - People look for interesting things
   - People retain hierarchical information better
   - Guide attention at a high level
-- **Info foraging theory**: people will follow visual and textual cues to know
+- **Information foraging theory**: people follow visual and textual cues to know
   that they are on the right track
-- Users have an attention like a spotlight, rather than focus on everything at
-  once
-- Use squint test to verify hierarchy; users should be able to tell information
-  hierarchy even in the items that they are not focusing on
-- **Group of information that are more "important"** will appear higher in the
-  information tree: user will notice more important items first as they are
+- Users attend like a spotlight rather than focusing on everything at once
+- Use the squint test to verify hierarchy; users should be able to tell the
+  information hierarchy even in items they are not focusing on
+- **Groups of information that are more important** appear higher in the
+  information tree: users notice more important items first as they are
   building their tree-like mental representation
 
 # Information Foraging Theory
 
-- The way you display information dicatates what people will pay most attention
-  to
-- Display info to accomplish goals; **have to know the goals of users** to help
-  them
+- The way you display information dictates what people will pay the most
+  attention to
+- Display information to accomplish goals; **you have to know the users' goals**
+  to help them
 - When the scent stops getting stronger, users will move to a different
   information source
 - Caveats:
@@ -35,11 +34,11 @@
 
 # Tools to Convey Importance
 
-Ordered by impact
+Ordered by impact:
 
 1. Conceptual grouping
    - A few high level visual groups
-   - Items in group are related
+   - Items in a group are related
    - Visually distinct
 2. Location: top and left are more important
 3. Whitespace helps separate groups
@@ -54,7 +53,7 @@ Ordered by impact
 
 # Caveats
 
-- Obvious data don't need labels
+- Obvious data does not need labels
 - Use familiar icons
-- Icons are useful when user don't know the word for subjects
-- Aestheitcs matter to finding the information
+- Icons are useful when users do not know the word for a subject
+- Aesthetics matter when people are trying to find information
