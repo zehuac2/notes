@@ -12,7 +12,7 @@ For complete information, go to
 
 When parameters are not set, the default values would be used. For example,
 
-```
+```text
 \033[n;m H]
 ```
 

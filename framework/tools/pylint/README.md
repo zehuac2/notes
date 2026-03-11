@@ -2,7 +2,7 @@
 
 ## Configuration
 
-```
+```sh
 $ pylint --generate-rcfile > .pylintrc
 ```
 

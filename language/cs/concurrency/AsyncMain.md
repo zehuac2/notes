@@ -16,7 +16,7 @@ site, like what would happen in a non-async main function
 
 When the above program is executed, the following would be printed
 
-```
+```text
 Output of Sleep()
 Main returns
 ```

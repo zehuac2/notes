@@ -1,12 +1,12 @@
 # Install
 
-```
+```sh
 $ conda install notebook
 ```
 
 Using conda
 
-```
+```sh
 $ pip install notebook
 ```
 

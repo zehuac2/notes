@@ -20,9 +20,9 @@
 
 # Checklist for New Topics
 
-- [ ] Features
-- [ ] Modularization
-- [ ] Testing
+- Features
+- Modularization
+- Testing
 
 # Conventions
 

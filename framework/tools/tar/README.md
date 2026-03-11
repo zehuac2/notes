@@ -11,19 +11,19 @@
 - `-z`: compress `.tar` using gzip
 - `-C work_dir`: change working directory to path before starting
 
-```
+```text
 tar -c paths... > file.tar
 ```
 
 `tar` will output the content of the tar file to stdout
 
-```
+```text
 tar -cf file.tar paths...
 ```
 
 Write output to `file.tar`
 
-```
+```text
 tar -cf file.tar -C pathA paths...
 ```
 
@@ -31,7 +31,7 @@ Change working directory to `pathA` before packaging
 
 # Extracting `.tar`
 
-```
+```text
 tar -xf file.tar
 ```
 

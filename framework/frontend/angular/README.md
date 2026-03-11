@@ -31,6 +31,7 @@ series of HTML instructions to create and update the DOM in place. This means:
 
 - Attributes and properties defined in templates are directly stored in DOM
 - Component selectors will be directly put in DOM
+
   ```html
   <app title="My App">
     <h1>Hello</h1>

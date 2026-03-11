@@ -5,7 +5,7 @@
 Password caching configurations are stored in the configuration file
 `~/.gnupg/gpg-agent.conf`
 
-```
+```text
 default-cache-ttl 600
 max-cache-ttl 7200
 ```

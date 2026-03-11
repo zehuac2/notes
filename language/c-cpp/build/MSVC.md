@@ -23,6 +23,6 @@ are enabled
 
 # Sanitizers
 
-```
+```text
 clang /fsanitize=address
 ```

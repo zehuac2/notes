@@ -52,7 +52,7 @@ location pointed to by pointers
   bigger than `x`**, then the string variable is **not considered to be
   successfully parsed**;
 
-```
+```text
 scanf(...)
 ```
 

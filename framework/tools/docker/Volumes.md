@@ -2,7 +2,7 @@
 
 Volume can be bound to a container using
 
-```
+```text
 docker run -v <absolute path in host>:<absolute path in container> <container>
 ```
 

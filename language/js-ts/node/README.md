@@ -35,7 +35,7 @@ new Promise((resolve, reject) => {
 
 - Put a `.nvmrc` file in repo root to let know which version of node you are
   using
-  ```
+  ```text
   node --version > .nvmrc
   nvm use
   ```

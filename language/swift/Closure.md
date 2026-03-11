@@ -25,7 +25,7 @@ printer()
 - Variables don't have to be captured by a capture list in order to be
   referenced; **values not captured will be**:
   - **Mutable**
-  - **Kept alive **as long as the closure is alive
+  - **Kept alive** as long as the closure is alive
 - **Capture list**: `{ [capture list...] parameters... in }`: variables in
   capture lists are **associated, i.e. copied, with the closure at the time of
   the closure's creation**

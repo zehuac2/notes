@@ -1,6 +1,6 @@
 # Disable Runtime Checks
 
-```
+```text
 -Ounchecked
 ```
 

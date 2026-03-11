@@ -26,4 +26,4 @@
 
 # Hosted on Notion
 
-- [https://zehua-chen-personal.notion.site/Programming-Languages-1d966db1409243b3860de5482a045994]
+- <https://zehua-chen-personal.notion.site/Programming-Languages-1d966db1409243b3860de5482a045994>

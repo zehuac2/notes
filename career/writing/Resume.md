@@ -47,7 +47,7 @@
 ## Header
 
 - Name is the largest and boldest: First Last
-  ```
+  ```text
   <Preferred Name> <First Name> <Last Name>
   ```
 - Phone with **voice mail setup**; format: `(123) 456-7890`
@@ -126,7 +126,7 @@
 
 ### Multiple Positions
 
-```
+```text
 Company
 Title 1 (Date)
 - A

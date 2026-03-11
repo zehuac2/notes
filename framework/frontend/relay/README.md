@@ -15,7 +15,7 @@ Relay is a graphql client for react
 
 1. Download the schema
 2. To run the compiler on the schema
-   ```
+   ```text
    relay-compiler --src ./src --schema ./schema.public.graphql
    ```
    After the command is executed, `__generated__` folders would appear

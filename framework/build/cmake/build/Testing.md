@@ -15,13 +15,13 @@ add_test(NAME test COMMAND test)
 
 To run the test
 
-```
+```text
 ninja test
 ```
 
 or
 
-```
+```text
 ctest
 ```
 
@@ -43,7 +43,7 @@ Testing can be run using
 
 ### Output Failure Messages
 
-```
+```text
 ctest --output-on-failure
 ```
 

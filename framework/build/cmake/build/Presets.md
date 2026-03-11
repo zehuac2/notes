@@ -99,7 +99,7 @@ Define process environment variables.
 
 ## Build Presets
 
-```
+```text
 cmake --build <dir> --preset <preset>
 ```
 
@@ -107,7 +107,7 @@ Build presets are intended for using with `cmake --build <dir>` command
 
 ## Test Presets
 
-```
+```text
 ctest --test-dir build --preset <preset>
 ```
 

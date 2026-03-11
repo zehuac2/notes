@@ -19,7 +19,7 @@
 
 ## Single Responsibility
 
-> There should never be more than one reason for a class to change."[5] In other
+> There should never be more than one reason for a class to change." In other
 > words, every class should have only one responsibility
 
 ## Closed

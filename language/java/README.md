@@ -37,14 +37,14 @@
 
 ### Create a Library `.jar`
 
-```
+```text
 jar --create --file lib.jar A.class B.class
 jar --update --file lib.jar A.class B.class
 ```
 
 ### Create an Executable `.jar`
 
-```
+```text
 jar --create --file lib.jar --manifest Manifest.mf App.class B.class
 jar --create --file lib.jar --main-class=App App.class B.class
 jar --update --file lib.jar --manifest Manifest.mf App.class B.class
@@ -52,7 +52,7 @@ jar --update --file lib.jar --manifest Manifest.mf App.class B.class
 
 Below is an example of a manifest
 
-```
+```text
 Manifest-Version: 1.0
 Main-Class: App
 ```

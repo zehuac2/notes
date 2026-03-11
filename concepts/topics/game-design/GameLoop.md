@@ -9,7 +9,7 @@
 
 ## Loop
 
-```
+```text
 Action -> Reward -> Expansion -> (Loop)
 ```
 

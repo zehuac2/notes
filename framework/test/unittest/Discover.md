@@ -1,6 +1,6 @@
 # Discover
 
-```
+```text
 python -m unittest discover -s tests/
 ```
 

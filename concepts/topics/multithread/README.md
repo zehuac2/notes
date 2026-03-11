@@ -14,7 +14,7 @@
 
 ## Amdahl's Law
 
-```
+```text
 S = 1 / ((1 - P) + P / N)
 ```
 

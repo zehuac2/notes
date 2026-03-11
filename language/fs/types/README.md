@@ -6,7 +6,7 @@ There are three types of types
 - [Discriminated Union](DiscriminatedUnion.ipynb)
 - [Class](Class.md)
 
-```
+```text
 
 ```
 

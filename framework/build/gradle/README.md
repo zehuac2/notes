@@ -23,7 +23,7 @@
 
 # Upgrade Gradle Wrapper
 
-```
+```text
 ./gradlew wrapper --gradle-version=7.1.1 --distribution-type=bin
 ```
 

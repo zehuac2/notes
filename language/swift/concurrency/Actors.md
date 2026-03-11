@@ -61,7 +61,7 @@ Global actors have executors. Executors can run jobs
 
 - If a **function is marked** with a global actor, the function will be
   **executed on the actor's executor**
-  - **Properties and closures are considered to be special functions** -** Call
+  - **Properties and closures are considered to be special functions**. **Calls
     outside of the context** of the marking actor **must be marked with
     `await`**
 - If a **class is marked** with a global actor, then **all properties and

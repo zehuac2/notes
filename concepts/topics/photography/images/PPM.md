@@ -2,7 +2,7 @@
 
 `.ppm` stands for **portable pixmap format**. It uses strings as contents
 
-```
+```text
 P3
 3 2
 255

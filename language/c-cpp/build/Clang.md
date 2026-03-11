@@ -4,7 +4,7 @@ Clang is compatibile with GCC unless otherwise specified
 
 # Target
 
-```
+```text
 clang main.c -o app_x86 -target x86_64-apple-macos10.12
 clang main.c -o app_arm -target arm64-apple-macos11
 ```
@@ -62,6 +62,6 @@ optimization settings**
 
 ## Address Sanitizer
 
-```
+```text
 clang -fsanitize=address
 ```

@@ -20,7 +20,7 @@ Workspace is defined by a root `package.json` with the following fields
 
 A `script` of a `workspace` can be run using
 
-```
+```text
 yarn workspace script
 ```
 

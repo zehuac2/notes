@@ -1,4 +1,4 @@
-# `[features]
+# `[features]`
 
 Features can be used to conditionally
 

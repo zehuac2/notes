@@ -237,7 +237,7 @@ class FooComponent {
 
 ## `@ViewChild`
 
-```
+```text
 @ViewChild(selector, { read, static })
 ```
 

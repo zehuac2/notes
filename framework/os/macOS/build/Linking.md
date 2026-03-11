@@ -1,6 +1,6 @@
 # Universal Binaries
 
-```
+```text
 lipo -create -output universal_app x86_app arm_app
 ```
 
