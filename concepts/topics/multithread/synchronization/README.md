@@ -1,9 +1,30 @@
-- [Mutex vs Atomic](#mutex-vs-atomic)
-- [Synchronization Primitives](#synchronization-primitives)
-  - [Semaphores](#semaphores)
-    - [Usage](#usage)
-  - [Barriers](#barriers)
-  - [Condition Variables](#condition-variables)
+# Issues
+
+TODO: read https://www.baeldung.com/java-volatile#bd-cache-coherence-challenges
+
+## Instruction Reordering
+
+Instructions can often times be reordered so long as the single-threaded 
+behavior remains the same.
+
+```txt
+allocate memory to local variable a
+initialize local variable a
+assign a to instance variable b
+```
+
+Can be reordered to become
+
+```txt
+allocate memory to local variable a
+assign a to instance variable b
+initialize instance variable b
+```
+
+In a multi-threaded environment, this can lead to bugs. See 
+[double Checked Locking](patterns/double-check-lock.md).
+
+## Visibility
 
 # Mutex vs Atomic
 
@@ -16,32 +37,11 @@
 
 # Synchronization Primitives
 
-## Semaphores
+- [Semaphores](primitives/semaphores.md)
+- [Condition Variables](primitives/condition-variables.md)
+- [Synchronized Block](primitives/synchronized-block.md)
+- TODO: barriers
 
-Semaphores are counters where
+# Patterns
 
-- `post`, `release` increase the counter's value
-- `wait` decrease the counter's value
-  - Won't block if the value in the semaphore before decrease is bigger than 0
-  - Block if the value in the semaphore is already 0
-
-### Usage
-
-- Ensure unique access to resource, when the semaphore is initialized to 1
-
-  ```cs
-  async ValueTask Foo()
-  {
-    await _semaphore.WaitAsync();
-
-    Console.WriteLine("foo");
-
-    _semaphore.Release();
-  }
-  ```
-
-## Barriers
-
-## Condition Variables
-
-[Condition Variables](ConditionVariable.md)
+- [Double Checked Locking](patterns/double-check-lock.md)
