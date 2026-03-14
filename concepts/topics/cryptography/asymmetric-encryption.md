@@ -1,4 +1,4 @@
-# Asymmetric Encryptions
+# Asymmetric Encryption
 
 ## Key Structure
 
