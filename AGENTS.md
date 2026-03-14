@@ -26,3 +26,7 @@ Always
 
 - Run `typst compile <file>` to make sure the file compiles
 - Run `typstyle --check <file>` to lint typst files
+
+## Markdown
+
+Beside the README file, Markdown files should be named using kebab cases.
