@@ -4,7 +4,7 @@ TODO: read https://www.baeldung.com/java-volatile#bd-cache-coherence-challenges
 
 ## Instruction Reordering
 
-Instructions can often times be reordered so long as the single-threaded 
+Instructions can often times be reordered so long as the single-threaded
 behavior remains the same.
 
 ```txt
@@ -21,7 +21,7 @@ assign a to instance variable b
 initialize instance variable b
 ```
 
-In a multi-threaded environment, this can lead to bugs. See 
+In a multi-threaded environment, this can lead to bugs. See
 [double Checked Locking](patterns/double-check-lock.md).
 
 ## Visibility
