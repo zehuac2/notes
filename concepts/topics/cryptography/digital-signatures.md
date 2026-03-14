@@ -6,7 +6,7 @@ with).
 ## Creating a Signature
 
 1. **Decrypt** the message using the private key to get the signature
-2. **Encrypt** the signature using the public key (given to the receiver)
+2. **Send** the signature using the public key (given to the receiver)
 3. The result from step 2 should equal the original message if integrity is
    maintained
 
