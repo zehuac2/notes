@@ -43,8 +43,8 @@ Click on the checkbox at
 
 ### Tabs
 
-- Setting ``NSWindow.tabbingMode` to `.preferred` so that the tab bar will
-  always be visible
+- Setting `NSWindow.tabbingMode` to `.preferred` so that the tab bar will always
+  be visible
 - Invoke `NSWindow.addTabbedWindow(_:ordered:)` to add tabs
 
 [TODO:](https://christiantietze.de/posts/2019/01/programmatically-add-nswindow-tabs/)

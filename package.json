@@ -8,8 +8,8 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@eslint/markdown": "7.5.1",
-    "eslint": "^10.0.3",
-    "prettier": "3.7.4"
+    "@eslint/markdown": "8.0.3",
+    "eslint": "10.7.0",
+    "prettier": "3.9.5"
   }
 }
