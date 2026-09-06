@@ -22,3 +22,19 @@
 ## Interactive
 
 `-it`
+
+# Image Creation Tools
+
+- [`Microsoft.NET.Build.Containers`](https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/)
+
+# Image Creation Tools
+
+- [`Microsoft.NET.Build.Containers`](https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/)
+
+# Image Creation Tools
+
+- [`Microsoft.NET.Build.Containers`](https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/)
+
+# Image Creation Tools
+
+- [`Microsoft.NET.Build.Containers`](https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/)

@@ -26,6 +26,22 @@ module.exports = {
 Only the entry file is needed to generate a chunk. Imports would be resolved
 automatically.
 
+Webpack's runtime coordinates modules. Configure
+`optimization.runtimeChunk: 'single'` to emit one runtime chunk, and reference
+that chunk explicitly from the page.
+
+Webpack's runtime coordinates modules. Configure
+`optimization.runtimeChunk: 'single'` to emit one runtime chunk, and reference
+that chunk explicitly from the page.
+
+Webpack's runtime coordinates modules. Configure
+`optimization.runtimeChunk: 'single'` to emit one runtime chunk, and reference
+that chunk explicitly from the page.
+
+Webpack's runtime coordinates modules. Configure
+`optimization.runtimeChunk: 'single'` to emit one runtime chunk, and reference
+that chunk explicitly from the page.
+
 ## Output
 
 ```js

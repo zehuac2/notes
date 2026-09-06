@@ -30,7 +30,7 @@
     - Cheap
     - Can be pruned away by the framework
     - Uses:
-      - [Life cycle](LifeCycle.md)
+      - [Life cycle](life-cycle/README.md)
       - [Focus](Focus.md)
 - **Scenes**: a presentation of views in distinct regions, i.e. windows on
   macOS; scenes can be presented as tabs
@@ -39,7 +39,7 @@
   - `WindowGroup`
   - `Settings` (macOS only)
   - **When appropriate**: the system may create new scenes using
-    - [Universal Links](life-cycle/UniversalLink.md)
+    - [Universal Links](life-cycle/universal-link.md)
 - **Commands**: commands are realized differently on different platforms
   - **macOS**: menus + keyboard shortcut
   - **iPadOS**: keyboard shortcut
@@ -117,7 +117,39 @@ backing view.
   - View states lifetime are tied to that of views (i.e. the life time of the
     backing views)
 
+# Rendering
+
+- The `.drawingGroup()` modifier draws the view into an image before presenting
+  it. Some views, such as `Button`, cannot be rendered this way by default.
+- [Explore SwiftUI Animation](https://developer.apple.com/videos/play/wwdc2023/10156)
+
+# Rendering
+
+- The `.drawingGroup()` modifier draws the view into an image before presenting
+  it. Some views, such as `Button`, cannot be rendered this way by default.
+- [Explore SwiftUI Animation](https://developer.apple.com/videos/play/wwdc2023/10156)
+
+# Rendering
+
+- The `.drawingGroup()` modifier draws the view into an image before presenting
+  it. Some views, such as `Button`, cannot be rendered this way by default.
+- [Explore SwiftUI Animation](https://developer.apple.com/videos/play/wwdc2023/10156)
+
+# Rendering
+
+- The `.drawingGroup()` modifier draws the view into an image before presenting
+  it. Some views, such as `Button`, cannot be rendered this way by default.
+- [Explore SwiftUI Animation](https://developer.apple.com/videos/play/wwdc2023/10156)
+
 # Resources
 
 - [AppKit is Done](https://kean.blog/post/appkit-is-done)
 - [WWDC 2021: Demystify SwiftUI](https://developer.apple.com/videos/play/wwdc2021/10022/)
+
+- [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture)
+
+- [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture)
+
+- [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture)
+
+- [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture)

@@ -1,4 +1,10 @@
 # Notes
 
-Notes here is being moved over to
-[Notion](https://zehua-chen-personal.notion.site/Programming-2c4dcd1466c74752b39b7f4ff96690a2)
+Personal notes organized by subject.
+
+- [Blender](blender/README.md)
+- [Career](career/README.md)
+- [Concepts](concepts/README.md)
+- [Programming Frameworks](framework/README.md)
+- [GRE](gre/README.md)
+- [Programming Languages](language/README.md)

@@ -1,3 +1,83 @@
+# Windows
+
+# Development
+
+[https://learn.microsoft.com/en-us/windows/dev-home/](https://learn.microsoft.com/en-us/windows/dev-home/)
+
+[https://learn.microsoft.com/en-us/windows/dev-drive/](https://learn.microsoft.com/en-us/windows/dev-drive/)
+
+# System File Checker (SFC)
+
+```powershell
+sfc /scannow
+```
+
+# DISM
+
+# Apps
+
+- [TreeSize Free](https://apps.microsoft.com/detail/xp9m26rsclnt88): disk map
+
+# Windows
+
+# Development
+
+[https://learn.microsoft.com/en-us/windows/dev-home/](https://learn.microsoft.com/en-us/windows/dev-home/)
+
+[https://learn.microsoft.com/en-us/windows/dev-drive/](https://learn.microsoft.com/en-us/windows/dev-drive/)
+
+# System File Checker (SFC)
+
+```powershell
+sfc /scannow
+```
+
+# DISM
+
+# Apps
+
+- [TreeSize Free](https://apps.microsoft.com/detail/xp9m26rsclnt88): disk map
+
+# Windows
+
+# Development
+
+[https://learn.microsoft.com/en-us/windows/dev-home/](https://learn.microsoft.com/en-us/windows/dev-home/)
+
+[https://learn.microsoft.com/en-us/windows/dev-drive/](https://learn.microsoft.com/en-us/windows/dev-drive/)
+
+# System File Checker (SFC)
+
+```powershell
+sfc /scannow
+```
+
+# DISM
+
+# Apps
+
+- [TreeSize Free](https://apps.microsoft.com/detail/xp9m26rsclnt88): disk map
+
+# Windows
+
+# Development
+
+[https://learn.microsoft.com/en-us/windows/dev-home/](https://learn.microsoft.com/en-us/windows/dev-home/)
+
+[https://learn.microsoft.com/en-us/windows/dev-drive/](https://learn.microsoft.com/en-us/windows/dev-drive/)
+
+# System File Checker (SFC)
+
+```powershell
+sfc /scannow
+```
+
+# DISM
+
+# Apps
+
+- [TreeSize Free](https://apps.microsoft.com/detail/xp9m26rsclnt88): disk map
+
 - [COM](#com)
   - [Instantiation](#instantiation)
   - [Object and Interface](#object-and-interface)

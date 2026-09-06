@@ -1,3 +1,31 @@
+# Google Cloud
+
+# Services
+
+- Compute Engine: virtual machine
+- App Engine: auto-managed containerized web apps (ex. Python Flask app)
+
+# Google Cloud
+
+# Services
+
+- Compute Engine: virtual machine
+- App Engine: auto-managed containerized web apps (ex. Python Flask app)
+
+# Google Cloud
+
+# Services
+
+- Compute Engine: virtual machine
+- App Engine: auto-managed containerized web apps (ex. Python Flask app)
+
+# Google Cloud
+
+# Services
+
+- Compute Engine: virtual machine
+- App Engine: auto-managed containerized web apps (ex. Python Flask app)
+
 # SSH
 
 1. Go to "Compute Engine > Metadata" and add public ssh key

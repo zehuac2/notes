@@ -1,4 +1,19 @@
-# Fields
+# Programming Frameworks
+
+## Fields
+
+- [Backend](backend/README.md)
+- [Build Systems](build/README.md)
+- [Cloud](cloud/README.md)
+- [Databases](database/README.md)
+- [Frontend](frontend/README.md)
+- [Game Development](game/README.md)
+- [Graphics](graphics/README.md)
+- [Operating Systems](os/README.md)
+- [Reactive Programming](reactive/README.md)
+- [Scientific Computing](scientific/README.md)
+- [Testing](test/README.md)
+- [Tools](tools/README.md)
 
 ## Apple Platform Development
 
@@ -6,39 +21,30 @@
 - [Apple's UI Libraries](frontend/apple-ui/README.md)
 - [GameplayKit](game/GameplayKit/README.md)
 - [Metal](graphics/metal/README.md)
-- [OS](os/macOS/README.md)
+- [macOS](os/macOS/README.md)
 - [Combine](reactive/combine/README.md)
 - [XCTest](test/xctest/README.md)
 
-## Game Development
-
-- [Unity](game/unity/README.md)
-- [Unreal](game/unreal/README.md)
-- [DirectX](graphics/directx/README.md)
-- [Metal](graphics/metal/README.md)
-- [WebGL](graphics/webgl/README.md)
-
-# Checklist for New Topics
+## Checklist for New Topics
 
 - Features
 - Modularization
 - Testing
 
-# Conventions
+## Conventions
 
-## File
+### Files
 
-- Markdown files should be named according to Pascal naming convention
-  `NameOfTheFile.md`
+Markdown files use kebab-case names, except for topic landing pages named
+`README.md`.
 
-## Headings
+### Headings
 
-- Markdown file name should be consdiered as the title of the name, i.e. there
-  can be more than one level 1 headings in one file
+The Markdown filename is considered the title, so a file may contain more than
+one level-one heading.
 
-## Resources
+### Resources
 
-- Resources on the topic in one file should be placed inside the "Resources"
-  section at the end of a file
-- Resources on a files in a folder should be placed inside the "Resource"
-  section at the end of the `README` of the folder
+- Resources for a topic in one file belong in a `Resources` section at the end
+  of that file.
+- Resources for a folder belong in the `Resources` section of its `README.md`.

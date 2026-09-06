@@ -34,12 +34,20 @@ $ gpg --list-secret-keys
 
 ```sh
 $ gpg --armor --export <key id>
+$ gpg --output public.pgp --armor --export <identity>
+$ gpg --output public.pgp --armor --export <identity>
+$ gpg --output public.pgp --armor --export <identity>
+$ gpg --output public.pgp --armor --export <identity>
 ```
 
 ### Export Private And Public Key
 
 ```sh
 $ gpg --armor --export-secret-keys <key id>
+$ gpg --output private.pgp --armor --export-secret-keys <identity>
+$ gpg --output private.pgp --armor --export-secret-keys <identity>
+$ gpg --output private.pgp --armor --export-secret-keys <identity>
+$ gpg --output private.pgp --armor --export-secret-keys <identity>
 ```
 
 ## Import Key
